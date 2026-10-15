@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Mail, Phone } from 'lucide-react';
+import { MapPin, Mail, Phone, MessageSquare } from 'lucide-react';
 import Logo from '../ui/Logo';
+import { CONTACT_NUMBERS } from '../../utils/contact';
 
 export default function Footer() {
   return (
@@ -17,18 +18,46 @@ export default function Footer() {
               A verified property directory for Jaipur, Rajasthan. Covering residential apartments, independent villas, pre-leased commercial assets, and heritage stays.
             </p>
 
-            <div className="space-y-2 text-stone-400">
+            <div className="space-y-3 text-stone-400">
               <div className="flex items-start gap-2">
                 <MapPin size={14} className="text-stone-500 shrink-0 mt-0.5" />
                 <span>Civil Lines & C-Scheme, Jaipur, Rajasthan 302001</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={14} className="text-stone-500 shrink-0" />
-                <span>inquiries@jaipurestates.in</span>
+                <a href="mailto:inquiries@jaipurestates.in" className="hover:text-stone-200 transition-colors">
+                  inquiries@jaipurestates.in
+                </a>
               </div>
-              <div className="flex items-center gap-2">
-                <Phone size={14} className="text-stone-500 shrink-0" />
-                <span>+91 141 281 9000 (Mon–Sat, 9:30 AM – 6:30 PM IST)</span>
+
+              <div className="pt-2 border-t border-stone-800/80">
+                <span className="text-[10px] font-mono text-terracotta-400 uppercase tracking-wider block mb-2">
+                  Direct Calling Lines · Mon–Sat, 9:30 AM – 6:30 PM
+                </span>
+                <div className="space-y-2">
+                  {CONTACT_NUMBERS.map(({ number, tel, whatsapp, shortLabel }) => (
+                    <div key={number} className="flex items-center justify-between text-xs pr-2">
+                      <div className="flex items-center gap-2">
+                        <Phone size={12} className="text-terracotta-500 shrink-0" />
+                        <a href={tel} className="text-stone-200 hover:text-white font-mono transition-colors">
+                          {number}
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] text-stone-500">{shortLabel}</span>
+                        <a
+                          href={whatsapp}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-stone-500 hover:text-emerald-400 transition-colors"
+                          title="Message on WhatsApp"
+                        >
+                          <MessageSquare size={12} />
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

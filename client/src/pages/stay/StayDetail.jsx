@@ -467,6 +467,26 @@ export default function StayDetail() {
                   </p>
                 </form>
               )}
+
+              {/* Direct Stays Desk */}
+              <div className="mt-4 p-3 bg-stone-50 border border-stone-200 rounded-lg text-xs">
+                <span className="text-[11px] font-semibold text-stone-700 block mb-1">
+                  Heritage Stays &amp; Haveli Reservation Line
+                </span>
+                <div className="flex items-center justify-between">
+                  <a href="tel:+916376312638" className="font-mono font-bold text-rose-700 hover:underline">
+                    +91 63763 12638
+                  </a>
+                  <a
+                    href="https://wa.me/916376312638?text=Hello%20Jaipur%20Estates%2C%20inquiry%20regarding%20heritage%20stay"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-700 font-medium hover:underline text-[11px]"
+                  >
+                    WhatsApp Desk →
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -375,6 +375,26 @@ export default function PropertyDetail() {
                   </p>
                 </form>
               )}
+
+              {/* Direct Call Desk */}
+              <div className="mt-4 p-3 bg-stone-50 border border-stone-200 rounded-lg text-xs">
+                <span className="text-[11px] font-semibold text-stone-700 block mb-1">
+                  Prefer direct phone assistance?
+                </span>
+                <div className="flex items-center justify-between">
+                  <a href="tel:+917737213615" className="font-mono font-bold text-terracotta-700 hover:underline">
+                    +91 77372 13615
+                  </a>
+                  <a
+                    href="https://wa.me/917737213615?text=Hello%20Jaipur%20Estates%2C%20inquiry%20regarding%20listing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-700 font-medium hover:underline text-[11px]"
+                  >
+                    WhatsApp Desk →
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

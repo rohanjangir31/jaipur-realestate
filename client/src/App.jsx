@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ProtectedRoute from './components/layout/ProtectedRoute';
+import QuickContact from './components/ui/QuickContact';
 
 // Pages
 import Home from './pages/Home';
@@ -100,6 +101,7 @@ export default function App() {
             </Routes>
           </main>
           <Footer />
+          <QuickContact />
         </div>
       </AuthProvider>
     </BrowserRouter>

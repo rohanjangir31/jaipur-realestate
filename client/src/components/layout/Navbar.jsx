@@ -7,9 +7,12 @@ import {
   LogOut,
   User,
   Plus,
+  Phone,
+  ChevronDown,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import Logo from '../ui/Logo';
+import { CONTACT_NUMBERS } from '../../utils/contact';
 
 const NAV_LINKS = [
   { to: '/buy',    label: 'Buy Properties' },
@@ -20,11 +23,13 @@ const NAV_LINKS = [
 export default function Navbar() {
   const { isAuthenticated, user, logout, hasRole } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [phoneMenuOpen, setPhoneMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     setMenuOpen(false);
+    setPhoneMenuOpen(false);
   }, [location.pathname]);
 
   const handleLogout = async () => {
@@ -62,6 +67,42 @@ export default function Navbar() {
 
           {/* Desktop Right Action Area */}
           <div className="hidden md:flex items-center gap-3 text-sm">
+            {/* Direct Calling Desk Popover */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setPhoneMenuOpen(!phoneMenuOpen)}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium text-stone-200 bg-stone-800/80 hover:bg-stone-800 border border-stone-700/80 transition-colors"
+                title="Direct Phone Lines"
+              >
+                <Phone size={12} className="text-terracotta-400" />
+                <span>Call Bureau</span>
+                <ChevronDown size={11} className={`transition-transform duration-200 ${phoneMenuOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {phoneMenuOpen && (
+                <div className="absolute right-0 mt-2 w-72 bg-[#161513] border border-stone-800 rounded-xl shadow-2xl p-3 z-50 space-y-2">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-terracotta-400 uppercase tracking-wider px-1">
+                    <span>Direct Bureau Lines</span>
+                    <span className="text-emerald-400 font-sans">Active</span>
+                  </div>
+                  {CONTACT_NUMBERS.map(({ number, tel, shortLabel, role }) => (
+                    <a
+                      key={number}
+                      href={tel}
+                      className="block p-2 rounded-lg bg-stone-900/90 hover:bg-stone-800 border border-stone-800/80 transition-colors group"
+                    >
+                      <div className="flex items-center justify-between text-xs font-mono font-medium text-white group-hover:text-terracotta-400">
+                        <span>{number}</span>
+                        <span className="text-[10px] text-stone-400 font-sans">{shortLabel}</span>
+                      </div>
+                      <p className="text-[10px] text-stone-500 mt-0.5 leading-tight">{role}</p>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {isAuthenticated ? (
               <div className="flex items-center gap-3">
                 {hasRole('admin', 'super_admin') && (
@@ -205,6 +246,28 @@ export default function Navbar() {
                 </Link>
               </div>
             )}
+
+            {/* Mobile Calling Lines */}
+            <div className="pt-3 border-t border-stone-800">
+              <span className="text-[10px] font-mono text-terracotta-400 uppercase tracking-wider block px-3 mb-2">
+                Direct Bureau Calling Lines
+              </span>
+              <div className="space-y-1.5 px-2">
+                {CONTACT_NUMBERS.map(({ number, tel, shortLabel }) => (
+                  <a
+                    key={number}
+                    href={tel}
+                    className="flex items-center justify-between p-2 rounded bg-stone-900 border border-stone-800 text-xs font-mono text-stone-200"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Phone size={12} className="text-terracotta-500" />
+                      {number}
+                    </span>
+                    <span className="text-[11px] font-sans text-stone-400">{shortLabel}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       )}
