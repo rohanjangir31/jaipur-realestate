@@ -27,7 +27,7 @@ export default function Poster() {
   };
 
   const whatsappShareText = encodeURIComponent(
-    '🏛️ JAIPUR ESTATES — Direct Real Estate & Airbnb Advisory, Jaipur\n\n✦ Standard 1% Transparent Commission (No Hidden Markups)\n\n• BUY & SELL: Villas, Apartments, Plots · Direct Owner Deals\n• RENT & LEASE: Offices, Retail Showrooms, Pre-Leased Spaces\n• AIRBNB MANAGEMENT: Buy Turnkey Stays · Full Hosting Operations\n\nEstimated Market Pricing (Est. ₹) · Accompanied Site Visits\n\nOpen All 7 Days (Mon–Sun, 9:00 AM – 8:00 PM IST)\nDirect Calling Lines:\n• +91 77372 13615\n• +91 96642 47662\n• +91 63763 12638'
+    '🏛️ JAIPUR ESTATES — Direct Real Estate & Airbnb Advisory, Jaipur\n\n✦ Direct Owner Connections · Verified Listings\n\n• BUY & SELL: Villas, Apartments, Plots · Direct Owner Deals\n• RENT & LEASE: Offices, Retail Showrooms, Pre-Leased Spaces\n• AIRBNB MANAGEMENT: Buy Turnkey Stays · Full Hosting Operations\n\nEstimated Market Pricing (Est. ₹) · Accompanied Site Visits\n\nOpen All 7 Days (Mon–Sun, 9:00 AM – 8:00 PM IST)\nDirect Calling Lines:\n• +91 77372 13615\n• +91 96642 47662\n• +91 63763 12638'
   );
 
   return (
@@ -129,43 +129,43 @@ export default function Poster() {
 
       {/* ── VIEW 2: Interactive Card View (EXACT SCREENSHOT LAYOUT IN WEBSITE PALETTE) ── */}
       <div
-        className={`poster-card w-full max-w-lg bg-[#161513] text-stone-100 rounded-3xl shadow-2xl p-6 sm:p-8 border border-[#3D3A37] flex flex-col items-center text-center relative overflow-hidden print:border-none print:shadow-none print:rounded-none ${
+        className={`poster-card w-full max-w-lg bg-[#161513] text-stone-100 rounded-3xl shadow-2xl p-6 sm:p-8 border border-stone-800 flex flex-col items-center text-center relative overflow-hidden print:border-none print:shadow-none print:rounded-none ${
           activeView === 'graphic' ? 'hidden print:flex' : 'flex'
         }`}
       >
         {/* Subtle warm glow background accent */}
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-80 bg-[#C86241]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-80 bg-[#994126]/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* 1. Minimalist Royal Jharokha Arch Logo */}
         <div className="mb-3 relative">
           <svg className="w-12 h-12 text-[#E3A857]" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 40V24C12 16 18 10 24 6C30 10 36 16 36 24V40" stroke="#E3A857" />
-            <path d="M18 40V26C18 22 20 18 24 15C28 18 30 22 30 26V40" stroke="#C86241" strokeWidth="1.5" />
+            <path d="M18 40V26C18 22 20 18 24 15C28 18 30 22 30 26V40" stroke="#994126" strokeWidth="1.5" />
             <line x1="8" y1="40" x2="40" y2="40" stroke="#E3A857" strokeWidth="2" />
             <polygon points="24,2 26,5 24,7 22,5" fill="#E3A857" />
           </svg>
         </div>
 
         {/* 2. Header Brand Title */}
-        <h1 className="text-3xl sm:text-4xl font-serif font-bold tracking-tight text-white leading-none">
-          JAIPUR <span className="text-[#C86241]">ESTATES</span>
+        <h1 className="text-3xl sm:text-4xl font-serif font-bold tracking-tight text-[#FAF8F5] leading-none">
+          JAIPUR <span className="text-[#B65332]">ESTATES</span>
         </h1>
         <p className="text-xs sm:text-sm font-sans text-[#D7C4AC] mt-1.5 tracking-wide">
           Direct Real Estate &amp; Airbnb Advisory · Jaipur, Rajasthan
         </p>
 
-        {/* 3. Prominent Pill Badge */}
-        <div className="mt-4 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#994126]/90 to-[#C86241]/90 border border-[#E3A857]/70 text-white text-xs font-mono font-bold tracking-wide shadow-md">
+        {/* 3. Prominent Trust Badge (Direct Connections - NO COMMISSION MARKS) */}
+        <div className="mt-4 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#1E1C1A] border border-[#994126]/60 text-white text-xs font-mono tracking-wide shadow-sm">
           <Sparkles size={12} className="text-[#E3A857]" />
-          <span>Standard 1% Transparent Commission</span>
-          <span className="text-[#FAF8F5]/90 font-normal hidden sm:inline">(No Hidden Markups)</span>
+          <span className="text-[#FAF8F5] font-semibold">Direct Owner Connections</span>
+          <span className="text-[#D7C4AC] font-normal hidden sm:inline">· Verified Listings</span>
         </div>
 
         {/* 4. Three Stacked Cards (Exact Format) */}
         <div className="w-full mt-6 space-y-3">
           {/* Box 1: BUY & SELL */}
-          <div className="w-full bg-[#1C1A18] rounded-2xl p-4 border border-[#C86241]/40 hover:border-[#C86241] transition-colors text-center shadow-sm">
-            <h2 className="text-lg font-serif font-bold text-white tracking-wide">
+          <div className="w-full bg-[#1E1C1A] rounded-2xl p-4 border border-[#994126]/30 hover:border-[#994126] transition-colors text-center shadow-sm">
+            <h2 className="text-lg font-serif font-bold text-[#FAF8F5] tracking-wide">
               BUY &amp; SELL
             </h2>
             <p className="text-xs text-[#D7C4AC] mt-0.5">
@@ -174,8 +174,8 @@ export default function Poster() {
           </div>
 
           {/* Box 2: RENT & LEASE */}
-          <div className="w-full bg-[#1C1A18] rounded-2xl p-4 border border-[#C86241]/40 hover:border-[#C86241] transition-colors text-center shadow-sm">
-            <h2 className="text-lg font-serif font-bold text-white tracking-wide">
+          <div className="w-full bg-[#1E1C1A] rounded-2xl p-4 border border-[#994126]/30 hover:border-[#994126] transition-colors text-center shadow-sm">
+            <h2 className="text-lg font-serif font-bold text-[#FAF8F5] tracking-wide">
               RENT &amp; LEASE
             </h2>
             <p className="text-xs text-[#D7C4AC] mt-0.5">
@@ -184,8 +184,8 @@ export default function Poster() {
           </div>
 
           {/* Box 3: AIRBNB MANAGEMENT */}
-          <div className="w-full bg-[#1C1A18] rounded-2xl p-4 border border-[#C86241]/40 hover:border-[#C86241] transition-colors text-center shadow-sm">
-            <h2 className="text-lg font-serif font-bold text-white tracking-wide">
+          <div className="w-full bg-[#1E1C1A] rounded-2xl p-4 border border-[#994126]/30 hover:border-[#994126] transition-colors text-center shadow-sm">
+            <h2 className="text-lg font-serif font-bold text-[#FAF8F5] tracking-wide">
               AIRBNB MANAGEMENT
             </h2>
             <p className="text-xs text-[#D7C4AC] mt-0.5">
@@ -200,20 +200,20 @@ export default function Poster() {
         </div>
 
         {/* 6. Bottom Contact Box */}
-        <div className="w-full mt-4 p-4 rounded-2xl border border-[#C86241]/50 bg-[#1C1A18]/80 text-center">
+        <div className="w-full mt-4 p-4 rounded-2xl border border-[#994126]/50 bg-[#1E1C1A]/90 text-center">
           <div className="text-[11px] font-mono text-[#E3A857] font-semibold tracking-wide uppercase mb-1">
             Open All 7 Days (Mon–Sun, 9 AM – 8 PM)
           </div>
           <div className="font-mono text-xs sm:text-sm font-bold text-white flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-            <a href="tel:+917737213615" className="hover:text-[#C86241] transition-colors">
+            <a href="tel:+917737213615" className="hover:text-[#B65332] transition-colors">
               +91 77372 13615
             </a>
-            <span className="text-[#C86241]">·</span>
-            <a href="tel:+919664247662" className="hover:text-[#C86241] transition-colors">
+            <span className="text-[#994126]">·</span>
+            <a href="tel:+919664247662" className="hover:text-[#B65332] transition-colors">
               +91 96642 47662
             </a>
-            <span className="text-[#C86241]">·</span>
-            <a href="tel:+916376312638" className="hover:text-[#C86241] transition-colors">
+            <span className="text-[#994126]">·</span>
+            <a href="tel:+916376312638" className="hover:text-[#B65332] transition-colors">
               +91 63763 12638
             </a>
           </div>
