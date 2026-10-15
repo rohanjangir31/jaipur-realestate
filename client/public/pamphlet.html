@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jaipur Estates — 1-Glance Executive Pamphlet</title>
+  <title>Jaipur Estates — 1-Glance Executive Brief</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
-    .font-cinzel { font-family: 'Cinzel', serif; }
     .font-sans-clean { font-family: 'Inter', sans-serif; }
     .font-mono-code { font-family: 'Space Grotesk', monospace; }
 
@@ -33,212 +32,168 @@
     }
   </style>
 </head>
-<body class="bg-[#0E0D0C] text-stone-100 min-h-screen font-sans-clean antialiased p-4 sm:p-8 flex flex-col items-center">
+<body class="bg-[#0E0D0C] text-stone-100 min-h-screen font-sans-clean antialiased p-3 sm:p-6 flex flex-col items-center justify-center">
 
-  <!-- Action Bar (Hidden on Print) -->
-  <div class="no-print w-full max-w-4xl mb-4 flex items-center justify-between gap-4 p-3 rounded-xl bg-[#1A1917] border border-stone-800 text-xs">
+  <!-- Top Action Bar (Print only, zero website links) -->
+  <div class="no-print w-full max-w-2xl mb-4 flex items-center justify-between gap-3 p-3 rounded-2xl bg-[#1A1917] border border-stone-800 text-xs">
     <div class="flex items-center gap-2">
-      <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-      <span class="font-medium text-stone-200">1-Glance Executive Pamphlet</span>
-      <span class="text-stone-500 hidden sm:inline">• Immediate 3-Second Client Comprehension</span>
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+      <span class="font-medium text-stone-200">1-Glance Executive Brief</span>
     </div>
-    <div class="flex items-center gap-2">
-      <button onclick="window.print()" class="bg-[#C86241] hover:bg-[#B55434] text-white font-semibold px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 shadow transition-colors">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
-        </svg>
-        <span>Print / Save PDF</span>
-      </button>
-      <a href="https://client-five-delta-81.vercel.app" target="_blank" rel="noopener noreferrer" class="bg-stone-800 hover:bg-stone-700 text-stone-200 px-3 py-1.5 rounded-lg border border-stone-700 transition-colors">
-        Live Site ↗
-      </a>
-    </div>
+    <button onclick="window.print()" class="bg-[#C86241] hover:bg-[#B35233] text-white font-medium px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors shadow">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+      </svg>
+      <span>Print / Save PDF</span>
+    </button>
   </div>
 
   <!-- SINGLE-PAGE HIGH-IMPACT FLYER -->
-  <div class="single-page-flyer w-full max-w-4xl bg-[#FAF8F5] text-stone-900 rounded-2xl shadow-2xl overflow-hidden border border-stone-300">
+  <div class="single-page-flyer w-full max-w-2xl bg-[#FAF8F5] text-stone-900 rounded-2xl shadow-2xl overflow-hidden border border-stone-300">
     
     <!-- Top Header Banner -->
-    <div class="bg-[#161513] text-stone-100 p-6 sm:p-8 border-b border-stone-800">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div class="bg-[#161513] text-stone-100 p-5 sm:p-7 border-b border-stone-800">
+      <div class="flex items-center justify-between gap-3">
         
         <!-- Logo & Identity -->
-        <div class="flex items-center gap-3.5">
-          <svg class="w-11 h-11 shrink-0" viewBox="0 0 120 120" fill="none">
-            <line x1="16" y1="104" x2="104" y2="104" stroke="#C86241" stroke-width="6" stroke-linecap="round"/>
-            <line x1="26" y1="99" x2="94" y2="99" stroke="#E3A857" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M44 99V58C44 58 44 42 60 30C76 42 76 58 76 58V99" stroke="#FAF8F5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M50 99V62C50 56 54 48 60 42C66 48 70 56 70 62V99" stroke="#C86241" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M22 99V70C22 70 22 58 33 50C44 58 44 70 44 70V99" stroke="#D4A373" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M76 99V70C76 70 76 58 87 50C98 58 98 70 98 99" stroke="#D4A373" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <polygon points="60,16 65,23 60,30 55,23" fill="#E3A857"/>
-          </svg>
-          <div>
-            <div class="font-serif-luxury text-2xl font-bold tracking-tight text-white leading-none">
-              JAIPUR<span class="text-[#C86241] font-normal ml-1">ESTATES</span>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#C86241] to-[#E3A857] p-0.5 flex items-center justify-center shrink-0 shadow-md">
+            <div class="w-full h-full bg-[#161513] rounded-[9px] flex items-center justify-center">
+              <svg class="w-5 h-5 text-[#E3A857]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h1M14 10h1M9 14h1M14 14h1M9 18h1M14 18h1"/>
+              </svg>
             </div>
-            <div class="text-[10px] font-mono-code uppercase tracking-[0.22em] text-[#E3A857] mt-1 font-semibold">
+          </div>
+          <div>
+            <div class="font-serif-luxury text-xl sm:text-2xl font-bold tracking-tight text-white leading-tight">
+              JAIPUR<span class="text-[#C86241] ml-1">ESTATES</span>
+            </div>
+            <div class="text-[10px] font-mono-code uppercase tracking-[0.2em] text-[#E3A857] font-medium">
               Direct Property &amp; Airbnb Advisory
             </div>
           </div>
         </div>
 
         <!-- 1% Commission Badge -->
-        <div class="text-left sm:text-right">
-          <span class="inline-block px-3 py-1 rounded bg-[#C86241] text-white text-xs font-mono-code font-bold shadow">
-            ✦ 1% Listing Commission
+        <div class="shrink-0 text-right">
+          <span class="inline-block px-3 py-1 rounded bg-[#C86241] text-white text-[11px] font-mono-code font-bold shadow">
+            ✦ 1% Commission
           </span>
-          <div class="text-[10px] text-stone-400 mt-1 font-mono-code">Open All 7 Days · Mon–Sun</div>
+          <div class="text-[10px] text-stone-400 mt-0.5 font-mono-code">Open All 7 Days</div>
         </div>
       </div>
 
       <!-- 1-Glance Mission Statement -->
-      <div class="mt-6 pt-5 border-t border-stone-800 flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div>
-          <h2 class="font-serif-luxury text-2xl sm:text-3xl text-white font-normal leading-tight">
-            What We Do: <span class="text-[#E3A857] italic">Buy &amp; Sell · Rent &amp; Lease · Airbnb Management</span>
-          </h2>
-          <p class="text-xs sm:text-sm text-stone-300 mt-1.5 max-w-2xl leading-relaxed">
-            A read-only property directory connecting clients directly with genuine buyers, sellers, corporate tenants, and turnkey Airbnb vacation homes across Jaipur.
-          </p>
-        </div>
-
-        <div class="flex items-center gap-2 shrink-0">
-          <span class="px-2.5 py-1 rounded bg-stone-800 text-stone-200 text-[11px] font-mono-code">
-            ✔ Est. Pricing
-          </span>
-          <span class="px-2.5 py-1 rounded bg-stone-800 text-stone-200 text-[11px] font-mono-code">
-            ✔ Direct Owners
-          </span>
-        </div>
+      <div class="mt-4 pt-3.5 border-t border-stone-800">
+        <h1 class="font-serif-luxury text-lg sm:text-xl text-white font-normal leading-snug">
+          Buy &amp; Sell · Rent &amp; Lease · Airbnb Management
+        </h1>
+        <p class="text-xs text-stone-300 mt-1 leading-relaxed">
+          Direct client introductions with genuine property owners, corporate tenants, and turnkey Airbnb vacation homes across Jaipur. Zero broker chains.
+        </p>
       </div>
     </div>
 
     <!-- THE 3 PILLARS -->
-    <div class="p-6 sm:p-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        <!-- Buy & Sell -->
-        <div class="bg-white rounded-xl p-5 border border-stone-200 shadow-sm flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-mono-code uppercase tracking-wider text-[#C86241] font-bold">Residential</span>
-              <span class="text-[10px] font-mono-code bg-stone-100 px-2 py-0.5 rounded text-stone-600">1% Fee</span>
-            </div>
-            <h3 class="font-serif-luxury text-xl font-bold text-stone-900 mb-2">Buy &amp; Sell</h3>
-            <p class="text-xs text-stone-600 leading-relaxed mb-4">
-              Apartments, luxury builder floors, duplex villas, and plots across Jaipur. We display estimated market prices and connect buyers directly with owners.
-            </p>
-            <ul class="text-xs text-stone-700 space-y-1.5 border-t border-stone-100 pt-3">
-              <li>✓ Estimated market valuations (Est. ₹)</li>
-              <li>✓ Direct owner meetings &amp; site visits</li>
-              <li>✓ Zero upfront fees to list for sale</li>
-            </ul>
+    <div class="p-5 sm:p-7 space-y-3.5">
+      
+      <!-- Buy & Sell -->
+      <div class="bg-white rounded-xl p-4 border border-stone-200 shadow-sm flex items-center justify-between gap-3">
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-[#C86241] shrink-0 mt-0.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
           </div>
-          <div class="mt-4 pt-3 border-t border-stone-100 text-[11px] font-mono-code text-stone-500">
-            Vaishali Nagar · C-Scheme · Jagatpura
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="font-serif-luxury text-base font-bold text-stone-900">Buy &amp; Sell</h2>
+              <span class="text-[10px] font-mono-code bg-stone-100 px-1.5 py-0.5 rounded text-stone-600">Residential</span>
+            </div>
+            <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">
+              Apartments, duplex villas &amp; plots in Vaishali Nagar, C-Scheme &amp; Jagatpura. Direct owner meetings.
+            </p>
           </div>
         </div>
-
-        <!-- Rent & Lease -->
-        <div class="bg-white rounded-xl p-5 border border-stone-200 shadow-sm flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-mono-code uppercase tracking-wider text-[#C86241] font-bold">Commercial</span>
-              <span class="text-[10px] font-mono-code bg-stone-100 px-2 py-0.5 rounded text-stone-600">1% Fee</span>
-            </div>
-            <h3 class="font-serif-luxury text-xl font-bold text-stone-900 mb-2">Rent &amp; Lease</h3>
-            <p class="text-xs text-stone-600 leading-relaxed mb-4">
-              Pre-leased commercial bank branches, Grade-A IT office plates, high-street retail showrooms, and industrial warehousing leases.
-            </p>
-            <ul class="text-xs text-stone-700 space-y-1.5 border-t border-stone-100 pt-3">
-              <li>✓ Verified commercial lease benchmarks</li>
-              <li>✓ Retail spaces on prime Tonk &amp; Ajmer Road</li>
-              <li>✓ Clear lease deeds with escalation terms</li>
-            </ul>
-          </div>
-          <div class="mt-4 pt-3 border-t border-stone-100 text-[11px] font-mono-code text-stone-500">
-            Tonk Road · Malviya Nagar · Sitapura
-          </div>
-        </div>
-
-        <!-- Airbnb Management -->
-        <div class="bg-white rounded-xl p-5 border border-stone-200 shadow-sm flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[10px] font-mono-code uppercase tracking-wider text-[#C86241] font-bold">Turnkey Hospitality</span>
-              <span class="text-[10px] font-mono-code bg-stone-100 px-2 py-0.5 rounded text-stone-600">Turnkey</span>
-            </div>
-            <h3 class="font-serif-luxury text-xl font-bold text-stone-900 mb-2">Airbnb Management</h3>
-            <p class="text-xs text-stone-600 leading-relaxed mb-4">
-              Purchase high-occupancy courtyard havelis, luxury villas, or studio flats ready for Airbnb. Or let our team manage your existing Jaipur property.
-            </p>
-            <ul class="text-xs text-stone-700 space-y-1.5 border-t border-stone-100 pt-3">
-              <li>✓ Turnkey properties ready for Airbnb</li>
-              <li>✓ Full hosting: guest check-in &amp; cleaning</li>
-              <li>✓ Dynamic nightly rate optimization</li>
-            </ul>
-          </div>
-          <div class="mt-4 pt-3 border-t border-stone-100 text-[11px] font-mono-code text-stone-500">
-            Walled City · Bani Park · Civil Lines
-          </div>
-        </div>
-
+        <div class="font-mono-code text-[11px] text-[#C86241] font-bold shrink-0">1% Fee</div>
       </div>
 
-      <!-- 3-Step Flow -->
-      <div class="mt-6 p-4 rounded-xl bg-stone-100 border border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-        <div class="font-serif-luxury font-bold text-stone-900">How It Works:</div>
-        <div class="flex items-center gap-2 text-stone-700 font-medium flex-wrap">
-          <span><strong class="text-[#C86241]">1.</strong> Browse Online</span>
-          <span>→</span>
-          <span><strong class="text-[#C86241]">2.</strong> 1-Click WhatsApp Inquiry</span>
-          <span>→</span>
-          <span><strong class="text-[#C86241]">3.</strong> Site Visit &amp; 1% Closing</span>
+      <!-- Rent & Lease -->
+      <div class="bg-white rounded-xl p-4 border border-stone-200 shadow-sm flex items-center justify-between gap-3">
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-700 shrink-0 mt-0.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="font-serif-luxury text-base font-bold text-stone-900">Rent &amp; Lease</h2>
+              <span class="text-[10px] font-mono-code bg-stone-100 px-1.5 py-0.5 rounded text-stone-600">Commercial</span>
+            </div>
+            <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">
+              Grade-A office plates &amp; retail showrooms on Tonk Road &amp; Sitapura. Direct lease deeds.
+            </p>
+          </div>
         </div>
+        <div class="font-mono-code text-[11px] text-[#C86241] font-bold shrink-0">1% Fee</div>
       </div>
+
+      <!-- Airbnb Management -->
+      <div class="bg-white rounded-xl p-4 border border-stone-200 shadow-sm flex items-center justify-between gap-3">
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-600 shrink-0 mt-0.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="font-serif-luxury text-base font-bold text-stone-900">Airbnb Management</h2>
+              <span class="text-[10px] font-mono-code bg-stone-100 px-1.5 py-0.5 rounded text-stone-600">Turnkey</span>
+            </div>
+            <p class="text-xs text-stone-600 mt-0.5 leading-relaxed">
+              Buy turnkey havelis, luxury villas &amp; studio apartments. Full host operations: check-in &amp; housekeeping.
+            </p>
+          </div>
+        </div>
+        <div class="font-mono-code text-[11px] text-[#C86241] font-bold shrink-0">Turnkey</div>
+      </div>
+
     </div>
 
-    <!-- Contact Lines Banner -->
-    <div class="bg-[#161513] text-stone-100 p-6 sm:p-8 border-t border-stone-800">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-stone-800">
+    <!-- Contact Lines Banner (Zero Web Links) -->
+    <div class="bg-[#161513] text-stone-100 p-5 sm:p-6 border-t border-stone-800">
+      <div class="flex items-center justify-between gap-3 mb-3">
         <div>
           <span class="text-[10px] font-mono-code uppercase tracking-wider text-emerald-400 font-bold block">
-            ● Direct Calling Lines · Open All 7 Days (9:00 AM – 8:00 PM IST)
+            ● Direct Calling Lines · Open All 7 Days (9 AM – 8 PM)
           </span>
-          <div class="font-serif-luxury text-lg text-white">Call or WhatsApp Our Jaipur Coordinators Directly</div>
+          <div class="text-sm font-medium text-white">Call or WhatsApp Directly</div>
         </div>
-        <a href="https://client-five-delta-81.vercel.app" class="text-xs font-mono-code text-[#E3A857] hover:underline">
-          client-five-delta-81.vercel.app ↗
-        </a>
+        <span class="text-[10px] font-mono-code text-stone-400">Jaipur, Rajasthan</span>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div class="bg-stone-900 p-3 rounded-lg border border-stone-800 flex items-center justify-between">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+        <div class="bg-stone-900 p-2.5 rounded-lg border border-stone-800 flex items-center justify-between">
           <div>
-            <div class="text-[9px] font-mono-code text-stone-400">Direct Line 1</div>
-            <a href="tel:+917737213615" class="font-mono-code text-sm font-bold text-white hover:text-[#C86241]">+91 77372 13615</a>
+            <div class="text-[9px] font-mono-code text-stone-400">Line 1</div>
+            <a href="tel:+917737213615" class="font-mono-code text-xs font-bold text-white hover:text-[#C86241]">+91 77372 13615</a>
           </div>
-          <a href="https://wa.me/917737213615" target="_blank" class="text-[10px] px-2 py-1 bg-emerald-950 text-emerald-400 rounded border border-emerald-900">WhatsApp</a>
+          <a href="https://wa.me/917737213615" target="_blank" class="text-[10px] px-2 py-0.5 bg-emerald-950 text-emerald-400 rounded border border-emerald-900">WA</a>
         </div>
-        <div class="bg-stone-900 p-3 rounded-lg border border-stone-800 flex items-center justify-between">
+        <div class="bg-stone-900 p-2.5 rounded-lg border border-stone-800 flex items-center justify-between">
           <div>
-            <div class="text-[9px] font-mono-code text-stone-400">Direct Line 2</div>
-            <a href="tel:+919664247662" class="font-mono-code text-sm font-bold text-white hover:text-[#C86241]">+91 96642 47662</a>
+            <div class="text-[9px] font-mono-code text-stone-400">Line 2</div>
+            <a href="tel:+919664247662" class="font-mono-code text-xs font-bold text-white hover:text-[#C86241]">+91 96642 47662</a>
           </div>
-          <a href="https://wa.me/919664247662" target="_blank" class="text-[10px] px-2 py-1 bg-emerald-950 text-emerald-400 rounded border border-emerald-900">WhatsApp</a>
+          <a href="https://wa.me/919664247662" target="_blank" class="text-[10px] px-2 py-0.5 bg-emerald-950 text-emerald-400 rounded border border-emerald-900">WA</a>
         </div>
-        <div class="bg-stone-900 p-3 rounded-lg border border-stone-800 flex items-center justify-between">
+        <div class="bg-stone-900 p-2.5 rounded-lg border border-stone-800 flex items-center justify-between">
           <div>
-            <div class="text-[9px] font-mono-code text-stone-400">Direct Line 3</div>
-            <a href="tel:+916376312638" class="font-mono-code text-sm font-bold text-white hover:text-[#C86241]">+91 63763 12638</a>
+            <div class="text-[9px] font-mono-code text-stone-400">Line 3</div>
+            <a href="tel:+916376312638" class="font-mono-code text-xs font-bold text-white hover:text-[#C86241]">+91 63763 12638</a>
           </div>
-          <a href="https://wa.me/916376312638" target="_blank" class="text-[10px] px-2 py-1 bg-emerald-950 text-emerald-400 rounded border border-emerald-900">WhatsApp</a>
+          <a href="https://wa.me/916376312638" target="_blank" class="text-[10px] px-2 py-0.5 bg-emerald-950 text-emerald-400 rounded border border-emerald-900">WA</a>
         </div>
       </div>
 
-      <div class="mt-4 pt-3 border-t border-stone-800/80 text-[10px] text-stone-400 text-center sm:text-left">
-        <strong>Advisory Notice:</strong> Read-only property showcase directory. All prices are estimated benchmarks ("Est. ₹"). Standard 1% brokerage / listing commission applies on closing. No future commitments are guaranteed.
+      <div class="mt-3 pt-2 border-t border-stone-800/80 text-[10px] text-stone-400 text-center sm:text-left">
+        Estimated market pricing benchmark ("Est. ₹"). Standard 1% commission on closing.
       </div>
     </div>
 
