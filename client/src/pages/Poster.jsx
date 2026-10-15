@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Printer,
   Share2,
   ExternalLink,
+  Download,
+  Image as ImageIcon,
+  FileText,
   Phone,
   MessageSquare,
   Sparkles,
@@ -25,12 +28,14 @@ export default function Poster() {
       'Executive client overview of Jaipur Estates. Buy & Sell, Rent & Lease, and Airbnb Management with transparent 1% commission.',
   });
 
+  const [activeView, setActiveView] = useState('graphic'); // 'graphic' or 'document'
+
   const handlePrint = () => {
     window.print();
   };
 
   const whatsappShareText = encodeURIComponent(
-    'Explore Jaipur Estates — Buy & Sell, Rent & Lease, and Airbnb Management in Jaipur with transparent 1% commission.\n\nView Website: https://client-five-delta-81.vercel.app\nView Client Poster: https://client-five-delta-81.vercel.app/poster.html\n\nDirect Phone Lines (Open All 7 Days):\n• +91 77372 13615\n• +91 96642 47662\n• +91 63763 12638'
+    'Explore Jaipur Estates — Buy & Sell, Rent & Lease, and Airbnb Management in Jaipur with transparent 1% commission.\n\nView Website: https://client-five-delta-81.vercel.app\nView Client Poster: https://client-five-delta-81.vercel.app/poster.html\nDownload Poster Image: https://client-five-delta-81.vercel.app/poster.jpg\n\nDirect Phone Lines (Open All 7 Days):\n• +91 77372 13615\n• +91 96642 47662\n• +91 63763 12638'
   );
 
   return (
@@ -39,10 +44,21 @@ export default function Poster() {
       <div className="w-full max-w-4xl mb-6 flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-2xl bg-[#181715] border border-stone-800 text-xs print:hidden shadow-lg">
         <div className="flex items-center gap-2.5">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="font-medium text-stone-200">Client Marketing Poster</span>
+          <span className="font-medium text-stone-200">Marketing Poster</span>
           <span className="text-stone-500 hidden sm:inline">· 1-Glance Business Overview</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Download JPG button */}
+          <a
+            href="/poster.jpg"
+            download="JaipurEstates_Marketing_Poster.jpg"
+            className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 text-xs font-medium transition-colors"
+          >
+            <Download size={13} />
+            <span>Download Poster (.JPG)</span>
+          </a>
+
+          {/* Print PDF */}
           <button
             type="button"
             onClick={handlePrint}
@@ -51,6 +67,8 @@ export default function Poster() {
             <Printer size={13} />
             <span>Print / Save PDF</span>
           </button>
+
+          {/* Share WhatsApp */}
           <a
             href={`https://wa.me/?text=${whatsappShareText}`}
             target="_blank"
@@ -60,20 +78,81 @@ export default function Poster() {
             <Share2 size={13} />
             <span>Share on WhatsApp</span>
           </a>
+
+          {/* Standalone HTML link */}
           <a
             href="/poster.html"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 py-1.5 px-3 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 text-xs transition-colors"
+            className="inline-flex items-center gap-1 py-1.5 px-3 rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-300 border border-stone-800 text-xs transition-colors"
           >
-            <span>Raw HTML</span>
+            <span>Clean Link</span>
             <ExternalLink size={11} />
           </a>
         </div>
       </div>
 
-      {/* Main Poster Container */}
-      <div className="w-full max-w-4xl bg-[#FAF8F5] text-stone-900 rounded-3xl shadow-2xl overflow-hidden border border-stone-300 print:border-none print:shadow-none print:rounded-none">
+      {/* View Switcher Tabs (Hidden when printing) */}
+      <div className="w-full max-w-4xl mb-6 flex items-center justify-center gap-2 print:hidden">
+        <button
+          type="button"
+          onClick={() => setActiveView('graphic')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium transition-all ${
+            activeView === 'graphic'
+              ? 'bg-terracotta-700 text-white shadow-md'
+              : 'bg-[#181715] text-stone-400 hover:text-white border border-stone-800'
+          }`}
+        >
+          <ImageIcon size={14} />
+          <span>Graphic Poster (WhatsApp / Social Media)</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveView('document')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium transition-all ${
+            activeView === 'document'
+              ? 'bg-terracotta-700 text-white shadow-md'
+              : 'bg-[#181715] text-stone-400 hover:text-white border border-stone-800'
+          }`}
+        >
+          <FileText size={14} />
+          <span>Interactive Document (Printable A4)</span>
+        </button>
+      </div>
+
+      {/* ── VIEW 1: Graphic Poster Image Card ── */}
+      {activeView === 'graphic' && (
+        <div className="w-full max-w-2xl bg-[#161513] border border-stone-800 rounded-3xl p-4 sm:p-6 shadow-2xl flex flex-col items-center">
+          <div className="relative group w-full overflow-hidden rounded-2xl border border-stone-800 shadow-2xl">
+            <img
+              src="/poster.jpg"
+              alt="Jaipur Estates Marketing Poster"
+              className="w-full h-auto object-cover rounded-2xl"
+            />
+          </div>
+
+          <div className="w-full mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-stone-800">
+            <div className="text-stone-400 text-xs">
+              <span className="text-white font-medium">Resolution:</span> 1080×1440 HD · Optimized for WhatsApp, Status &amp; Social Circulation
+            </div>
+            <a
+              href="/poster.jpg"
+              download="JaipurEstates_Marketing_Poster.jpg"
+              className="btn-terracotta text-xs !py-2 !px-4 flex items-center gap-1.5 shadow"
+            >
+              <Download size={14} />
+              <span>Download Image (.JPG)</span>
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* ── VIEW 2: Interactive Printable A4 Canvas ── */}
+      <div
+        className={`w-full max-w-4xl bg-[#FAF8F5] text-stone-900 rounded-3xl shadow-2xl overflow-hidden border border-stone-300 print:border-none print:shadow-none print:rounded-none ${
+          activeView === 'graphic' ? 'hidden print:block' : 'block'
+        }`}
+      >
         {/* Top Dark Header */}
         <div className="bg-[#161513] text-stone-100 p-6 sm:p-10 border-b border-stone-800">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
@@ -283,7 +362,7 @@ export default function Poster() {
           </div>
         </div>
 
-        {/* Contact Footer (Clean Numbers Only, Direct Call & WhatsApp) */}
+        {/* Contact Footer */}
         <div className="bg-[#161513] text-stone-100 p-6 sm:p-10 border-t border-stone-800">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-stone-800">
             <div>
