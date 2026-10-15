@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Background Badge for High Contrast in Browser Tabs -->
+  <rect width="120" height="120" rx="26" fill="#161513"/>
+  
+  <!-- Outer Ground Plinth -->
+  <line x1="20" y1="98" x2="100" y2="98" stroke="#C86241" stroke-width="6" stroke-linecap="round"/>
+  <line x1="28" y1="92" x2="92" y2="92" stroke="#E3A857" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Central Grand Arch (Stay / Haveli Sovereign Realm) -->
+  <path d="M44 92V54C44 54 44 38 60 26C76 38 76 54 76 54V92" stroke="#FAF8F5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Left Wing Arch (Buy / Residential Foundation) -->
+  <path d="M24 92V66C24 66 24 54 34 46C44 54 44 66 44 66V92" stroke="#D4A373" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Right Wing Arch (Invest / Commercial Capital) -->
+  <path d="M76 92V66C76 66 76 54 86 46C96 54 96 66 96 92" stroke="#D4A373" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- The Suryavanshi Keystone / Golden Apex -->
+  <polygon points="60,12 66,19 60,26 54,19" fill="#E3A857"/>
+  <circle cx="60" cy="19" r="2" fill="#FAF8F5"/>
+</svg>

@@ -9,6 +9,7 @@ import {
   Plus,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import Logo from '../ui/Logo';
 
 const NAV_LINKS = [
   { to: '/buy',    label: 'Buy Properties' },
@@ -35,14 +36,9 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-[#161513] text-stone-200 border-b border-stone-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Brand Logo - Editorial & Confident */}
-          <Link to="/" className="flex items-center gap-3">
-            <span className="font-serif text-xl tracking-tight font-semibold text-stone-100">
-              Jaipur<span className="text-terracotta-400 font-normal ml-0.5">Estates</span>
-            </span>
-            <span className="hidden sm:inline-block text-[11px] font-sans text-stone-400 pl-3 border-l border-stone-700 tracking-wide">
-              Rajasthan Property & Hospitality Bureau
-            </span>
+          {/* Brand Logo - Official Vector Identity */}
+          <Link to="/" className="flex items-center">
+            <Logo variant="dark" />
           </Link>
 
           {/* Desktop Navigation Links - Natural, human labels */}

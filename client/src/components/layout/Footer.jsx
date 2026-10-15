@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Mail, Phone } from 'lucide-react';
+import Logo from '../ui/Logo';
 
 export default function Footer() {
   return (
@@ -9,10 +10,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Column 1: Bureau Identity */}
           <div className="lg:col-span-2">
-            <Link to="/" className="inline-block mb-3">
-              <span className="font-serif text-lg font-semibold tracking-tight text-white">
-                Jaipur<span className="text-terracotta-400 font-normal ml-0.5">Estates</span>
-              </span>
+            <Link to="/" className="inline-block mb-4">
+              <Logo variant="dark" />
             </Link>
             <p className="text-stone-400 text-xs leading-relaxed max-w-sm mb-5">
               A verified property directory for Jaipur, Rajasthan. Covering residential apartments, independent villas, pre-leased commercial assets, and heritage stays.
