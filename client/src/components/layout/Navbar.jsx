@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
   Menu,
@@ -15,15 +15,16 @@ import Logo from '../ui/Logo';
 import { CONTACT_NUMBERS } from '../../utils/contact';
 
 const NAV_LINKS = [
-  { to: '/buy',    label: 'Buy Properties' },
-  { to: '/invest', label: 'Commercial & Land' },
-  { to: '/stay',   label: 'Heritage Stays' },
+  { to: '/buy', shortLabel: 'Buy', fullLabel: 'Buy Properties' },
+  { to: '/invest', shortLabel: 'Invest', fullLabel: 'Commercial & Land' },
+  { to: '/stay', shortLabel: 'Stay', fullLabel: 'Heritage Stays' },
 ];
 
 export default function Navbar() {
   const { isAuthenticated, user, logout, hasRole } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [phoneMenuOpen, setPhoneMenuOpen] = useState(false);
+  const phoneMenuRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -31,6 +32,19 @@ export default function Navbar() {
     setMenuOpen(false);
     setPhoneMenuOpen(false);
   }, [location.pathname]);
+
+  // Close phone popover on click outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (phoneMenuRef.current && !phoneMenuRef.current.contains(e.target)) {
+        setPhoneMenuOpen(false);
+      }
+    };
+    if (phoneMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [phoneMenuOpen]);
 
   const handleLogout = async () => {
     await logout();
@@ -40,48 +54,52 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-[#161513] text-stone-200 border-b border-stone-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 gap-3 lg:gap-6">
           {/* Brand Logo - Official Vector Identity */}
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center shrink-0">
             <Logo variant="dark" />
           </Link>
 
-          {/* Desktop Navigation Links - Natural, human labels */}
-          <nav className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map(({ to, label }) => (
+          {/* Desktop Navigation Links - Single line, responsive text, perfect vertical alignment */}
+          <nav className="hidden md:flex items-center gap-1 shrink-0">
+            {NAV_LINKS.map(({ to, shortLabel, fullLabel }) => (
               <NavLink
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `px-3.5 py-1.5 rounded text-sm transition-colors ${
+                  `h-9 inline-flex items-center px-3 lg:px-3.5 rounded-lg text-xs lg:text-sm font-medium whitespace-nowrap transition-colors ${
                     isActive
-                      ? 'text-white font-medium bg-stone-800/80'
-                      : 'text-stone-300 hover:text-white hover:bg-stone-800/40'
+                      ? 'text-white bg-stone-800/90 shadow-sm'
+                      : 'text-stone-300 hover:text-white hover:bg-stone-800/50'
                   }`
                 }
               >
-                {label}
+                <span className="lg:hidden">{shortLabel}</span>
+                <span className="hidden lg:inline">{fullLabel}</span>
               </NavLink>
             ))}
           </nav>
 
-          {/* Desktop Right Action Area */}
-          <div className="hidden md:flex items-center gap-3 text-sm">
+          {/* Desktop Right Action Area - Clean, single-line, perfectly aligned */}
+          <div className="hidden md:flex items-center gap-2 lg:gap-2.5 shrink-0 text-sm">
             {/* Direct Calling Desk Popover */}
-            <div className="relative">
+            <div className="relative" ref={phoneMenuRef}>
               <button
                 type="button"
                 onClick={() => setPhoneMenuOpen(!phoneMenuOpen)}
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium text-stone-200 bg-stone-800/80 hover:bg-stone-800 border border-stone-700/80 transition-colors"
+                className="h-9 inline-flex items-center gap-1.5 px-3 rounded-lg text-xs font-medium text-stone-200 bg-stone-800/80 hover:bg-stone-800 border border-stone-700/80 transition-colors whitespace-nowrap"
                 title="Direct Phone Lines"
               >
-                <Phone size={12} className="text-terracotta-400" />
+                <Phone size={12} className="text-terracotta-400 shrink-0" />
                 <span>Call Bureau</span>
-                <ChevronDown size={11} className={`transition-transform duration-200 ${phoneMenuOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown
+                  size={12}
+                  className={`transition-transform duration-200 text-stone-400 ${phoneMenuOpen ? 'rotate-180' : ''}`}
+                />
               </button>
 
               {phoneMenuOpen && (
-                <div className="absolute right-0 mt-2 w-72 bg-[#161513] border border-stone-800 rounded-xl shadow-2xl p-3 z-50 space-y-2">
+                <div className="absolute right-0 mt-2 w-72 bg-[#161513] border border-stone-800 rounded-xl shadow-2xl p-3 z-50 space-y-2 animate-in fade-in slide-in-from-top-1 duration-150">
                   <div className="flex items-center justify-between text-[10px] font-mono text-terracotta-400 uppercase tracking-wider px-1">
                     <span>Direct Bureau Lines</span>
                     <span className="text-emerald-400 font-sans">Active</span>
@@ -103,44 +121,44 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* 1-Glance Prospectus */}
+            {/* 1-Glance Prospectus (Available on wide screens) */}
             <a
               href="/pamphlet.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:inline-flex items-center gap-1 text-xs text-terracotta-400 hover:text-terracotta-300 font-medium px-2 py-1 rounded border border-stone-700/60 hover:border-terracotta-600/60 transition-colors"
+              className="hidden xl:inline-flex h-9 items-center gap-1.5 text-xs text-terracotta-400 hover:text-terracotta-300 font-medium px-2.5 rounded-lg border border-stone-700/60 hover:border-terracotta-600/60 transition-colors whitespace-nowrap"
               title="1-Glance Business Prospectus / Pamphlet"
             >
               <span>Prospectus</span>
-              <span className="text-[9px] bg-terracotta-900/60 text-terracotta-300 px-1 rounded">1-Pg</span>
+              <span className="text-[9px] bg-terracotta-900/60 text-terracotta-300 px-1 py-0.5 rounded font-mono">1-Pg</span>
             </a>
 
             {isAuthenticated ? (
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 {hasRole('admin', 'super_admin') && (
                   <Link
                     to="/admin"
-                    className="flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium text-amber-300 bg-amber-950/60 border border-amber-800/60 hover:bg-amber-900/60 transition-colors"
+                    className="h-9 inline-flex items-center gap-1.5 px-3 rounded-lg text-xs font-medium text-amber-300 bg-amber-950/60 border border-amber-800/60 hover:bg-amber-900/60 transition-colors whitespace-nowrap"
                   >
-                    <LayoutDashboard size={14} />
-                    Admin Portal
+                    <LayoutDashboard size={13} />
+                    <span>Admin</span>
                   </Link>
                 )}
 
                 <Link
                   to={hasRole('host') ? '/stay/host/submit' : '/buy/submit'}
-                  className="flex items-center gap-1 text-xs text-stone-300 hover:text-white px-2.5 py-1 rounded border border-stone-700 hover:border-stone-500 transition-colors"
+                  className="hidden lg:inline-flex h-9 items-center gap-1 text-xs text-stone-300 hover:text-white px-2.5 rounded-lg border border-stone-700 hover:border-stone-500 transition-colors whitespace-nowrap"
                 >
                   <Plus size={13} />
                   <span>List Property</span>
                 </Link>
 
                 {/* User Info */}
-                <div className="flex items-center gap-2 pl-2">
+                <div className="flex items-center gap-2 pl-1">
                   <div className="w-7 h-7 rounded-full bg-stone-800 border border-stone-700 flex items-center justify-center text-xs text-stone-200 font-medium">
                     {user?.name?.[0]?.toUpperCase() || 'U'}
                   </div>
-                  <span className="text-xs text-stone-300 max-w-[120px] truncate">
+                  <span className="hidden xl:inline text-xs text-stone-300 max-w-[100px] truncate">
                     {user?.name}
                   </span>
                 </div>
@@ -148,28 +166,28 @@ export default function Navbar() {
                 <button
                   onClick={handleLogout}
                   title="Sign out"
-                  className="text-stone-400 hover:text-stone-200 p-1.5 transition-colors"
+                  className="h-9 w-9 inline-flex items-center justify-center text-stone-400 hover:text-stone-200 rounded-lg hover:bg-stone-800 transition-colors"
                 >
-                  <LogOut size={16} />
+                  <LogOut size={15} />
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-1.5 lg:gap-2">
                 <Link
                   to="/buy/submit"
-                  className="text-xs text-stone-300 hover:text-white px-3 py-1.5 rounded transition-colors"
+                  className="hidden lg:inline-flex h-9 items-center text-xs text-stone-300 hover:text-white px-3 rounded-lg hover:bg-stone-800/40 transition-colors whitespace-nowrap"
                 >
                   List a Property
                 </Link>
                 <Link
                   to="/auth/login"
-                  className="text-xs text-stone-300 hover:text-white px-3 py-1.5 rounded transition-colors"
+                  className="h-9 inline-flex items-center text-xs text-stone-300 hover:text-white px-3 rounded-lg hover:bg-stone-800/40 transition-colors whitespace-nowrap"
                 >
                   Sign In
                 </Link>
                 <Link
                   to="/auth/register"
-                  className="btn-terracotta text-xs !py-1.5 !px-3.5 !rounded"
+                  className="h-9 inline-flex items-center justify-center text-xs font-medium text-white bg-terracotta-600 hover:bg-terracotta-700 px-3.5 rounded-lg transition-colors shadow-sm whitespace-nowrap"
                 >
                   Create Account
                 </Link>
@@ -181,7 +199,7 @@ export default function Navbar() {
           <div className="flex md:hidden items-center">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="p-2 text-stone-400 hover:text-white"
+              className="p-2 text-stone-400 hover:text-white rounded-lg hover:bg-stone-800"
               aria-label="Toggle navigation"
             >
               {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -194,17 +212,17 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden border-t border-stone-800 bg-[#161513] px-4 py-4 space-y-3">
           <nav className="space-y-1">
-            {NAV_LINKS.map(({ to, label }) => (
+            {NAV_LINKS.map(({ to, fullLabel }) => (
               <NavLink
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `block px-3 py-2 rounded text-sm ${
-                    isActive ? 'bg-stone-800 text-white font-medium' : 'text-stone-300'
+                  `block px-3 py-2 rounded-lg text-sm ${
+                    isActive ? 'bg-stone-800 text-white font-medium' : 'text-stone-300 hover:bg-stone-800/50'
                   }`
                 }
               >
-                {label}
+                {fullLabel}
               </NavLink>
             ))}
           </nav>
@@ -218,26 +236,26 @@ export default function Navbar() {
                 {hasRole('admin', 'super_admin') && (
                   <Link
                     to="/admin"
-                    className="block px-3 py-1.5 text-xs text-amber-300 hover:bg-stone-800 rounded"
+                    className="block px-3 py-1.5 text-xs text-amber-300 hover:bg-stone-800 rounded-lg"
                   >
                     Admin Dashboard
                   </Link>
                 )}
                 <Link
                   to="/buy/submit"
-                  className="block px-3 py-1.5 text-xs text-stone-300 hover:bg-stone-800 rounded"
+                  className="block px-3 py-1.5 text-xs text-stone-300 hover:bg-stone-800 rounded-lg"
                 >
                   Post a Property for Sale
                 </Link>
                 <Link
                   to="/stay/host/submit"
-                  className="block px-3 py-1.5 text-xs text-stone-300 hover:bg-stone-800 rounded"
+                  className="block px-3 py-1.5 text-xs text-stone-300 hover:bg-stone-800 rounded-lg"
                 >
                   List a Stay or Haveli
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-3 py-1.5 text-xs text-red-400 hover:bg-stone-800 rounded"
+                  className="w-full text-left px-3 py-1.5 text-xs text-red-400 hover:bg-stone-800 rounded-lg"
                 >
                   Sign Out
                 </button>
@@ -261,7 +279,7 @@ export default function Navbar() {
 
             {/* Mobile Calling Lines */}
             <div className="pt-3 border-t border-stone-800">
-              <span className="text-[10px] font-mono text-terracotta-400 uppercase tracking-wider block px-3 mb-2">
+              <span className="text-[10px] font-mono text-terracotta-400 uppercase tracking-wider block px-3 mb-2 font-medium">
                 Direct Bureau Calling Lines
               </span>
               <div className="space-y-1.5 px-2">
@@ -269,7 +287,7 @@ export default function Navbar() {
                   <a
                     key={number}
                     href={tel}
-                    className="flex items-center justify-between p-2 rounded bg-stone-900 border border-stone-800 text-xs font-mono text-stone-200"
+                    className="flex items-center justify-between p-2 rounded-lg bg-stone-900 border border-stone-800 text-xs font-mono text-stone-200"
                   >
                     <span className="flex items-center gap-2">
                       <Phone size={12} className="text-terracotta-500" />
