@@ -37,7 +37,7 @@ export default function Footer() {
 
               <div className="pt-3 border-t border-stone-800/80 mt-4">
                 <span className="text-[10px] font-mono text-terracotta-400 uppercase tracking-wider block mb-2 font-medium">
-                  Direct Calling Lines · Open All 7 Days (9 AM – 8 PM)
+                  Direct Calling Lines · Open All 7 Days (9 AM – 6 PM)
                 </span>
                 <div className="space-y-2">
                   {CONTACT_NUMBERS.map(({ number, tel, whatsapp }, index) => (

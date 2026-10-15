@@ -27,7 +27,7 @@ export default function Poster() {
   };
 
   const whatsappShareText = encodeURIComponent(
-    '🏛️ JAIPUR ESTATES — Direct Real Estate & Airbnb Advisory, Jaipur\n\n✦ Direct Owner Connections · Verified Listings\n\n• BUY & SELL: Villas, Apartments, Plots · Direct Owner Deals\n• RENT & LEASE: Offices, Retail Showrooms, Pre-Leased Spaces\n• AIRBNB MANAGEMENT: Buy Turnkey Stays · Full Hosting Operations\n\nEstimated Market Pricing (Est. ₹) · Accompanied Site Visits\n\nOpen All 7 Days (Mon–Sun, 9:00 AM – 8:00 PM IST)\nDirect Calling Lines:\n• +91 77372 13615\n• +91 96642 47662\n• +91 63763 12638'
+    '🏛️ JAIPUR ESTATES — Direct Real Estate & Airbnb Advisory, Jaipur\n\n✦ Direct Owner Connections · Verified Listings\n\n• BUY & SELL: Villas, Apartments, Plots · Direct Owner Deals\n• RENT & LEASE: Offices, Retail Showrooms, Pre-Leased Spaces\n• AIRBNB MANAGEMENT: Buy Turnkey Stays · Full Hosting Operations\n\nEstimated Market Pricing (Est. ₹) · Accompanied Site Visits\n\nOpen All 7 Days (Mon–Sun, 9:00 AM – 6:00 PM IST)\nDirect Calling Lines:\n• +91 77372 13615\n• +91 96642 47662\n• +91 63763 12638'
   );
 
   return (
@@ -202,7 +202,7 @@ export default function Poster() {
         {/* 6. Bottom Contact Box */}
         <div className="w-full mt-4 p-4 rounded-2xl border border-[#994126]/30 bg-[#FAF7F2] text-center">
           <div className="text-[11px] font-mono text-[#994126] font-semibold tracking-wide uppercase mb-1">
-            Open All 7 Days (Mon–Sun, 9 AM – 8 PM)
+            Open All 7 Days (Mon–Sun, 9 AM – 6 PM)
           </div>
           <div className="font-mono text-xs sm:text-sm font-bold text-stone-900 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             <a href="tel:+917737213615" className="hover:text-[#994126] transition-colors">

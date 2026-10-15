@@ -451,7 +451,7 @@ export default function Home() {
                 Click "Inquire Now" on any property to connect directly with our local Jaipur coordinators on WhatsApp or phone. No bots, no wait time.
               </p>
               <div className="text-[11px] font-mono text-stone-500 pt-3 border-t border-stone-800">
-                ✓ Open All 7 Days (9 AM – 8 PM)
+                ✓ Open All 7 Days (9 AM – 6 PM)
               </div>
             </div>
 

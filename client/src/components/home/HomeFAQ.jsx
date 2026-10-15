@@ -30,7 +30,7 @@ const FAQS = [
   {
     question: 'How do I schedule a site visit or speak with your team?',
     answer:
-      'Our direct calling lines and WhatsApp are open all 7 days of the week from 9:00 AM to 8:00 PM IST. Click "Inquire Now" on any property or call us directly to schedule a convenient viewing time.',
+      'Our direct calling lines and WhatsApp are open all 7 days of the week from 9:00 AM to 6:00 PM IST. Click "Inquire Now" on any property or call us directly to schedule a convenient viewing time.',
   },
 ];
 
