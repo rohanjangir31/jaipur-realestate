@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jaipur Estates — Official Marketing Pamphlet & Prospectus</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-sans-clean { font-family: 'Inter', -apple-system, sans-serif; }
+    .font-mono-code { font-family: 'Space Grotesk', monospace; }
+
+    /* Print Styles for A4 / Letter PDF Generation */
+    @media print {
+      body {
+        background: #FAF8F5 !important;
+        color: #161513 !important;
+        padding: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .pamphlet-sheet {
+        box-shadow: none !important;
+        border: none !important;
+        page-break-after: always;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+      }
+      .print-invert {
+        background-color: #161513 !important;
+        color: #FAF8F5 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* Subtle texture and layout accents */
+    .border-gold { border-color: #E3A857; }
+    .bg-sandstone { background-color: #FAF8F5; }
+    .text-terracotta { color: #994126; }
+    .border-terracotta { border-color: #994126; }
+  </style>
+</head>
+<body class="bg-[#121110] text-stone-200 min-h-screen font-sans-clean antialiased p-4 sm:p-8 flex flex-col items-center">
+
+  <!-- Interactive Action Bar (Hidden on Print) -->
+  <div class="no-print w-full max-w-5xl mb-6 flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-[#1A1917] border border-stone-800 shadow-xl">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-[#C86241] flex items-center justify-center text-white font-bold text-xs">
+        🏛️
+      </div>
+      <div>
+        <h1 class="text-sm font-semibold text-stone-100">Jaipur Estates · Official Bureau Pamphlet</h1>
+        <p class="text-xs text-stone-400">Print-ready A4 landscape prospectus for client circulation</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <button onclick="window.print()" class="inline-flex items-center gap-2 bg-[#994126] hover:bg-[#B85335] text-white text-xs font-semibold px-4 py-2 rounded-lg shadow transition-all duration-200">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+        </svg>
+        <span>Print / Save as PDF</span>
+      </button>
+      <a href="https://client-five-delta-81.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-stone-800 hover:bg-stone-700 text-stone-200 text-xs font-medium px-3.5 py-2 rounded-lg border border-stone-700 transition-colors">
+        <span>Open Live Website</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- PAGE 1: EXTERIOR / COVER & BUREAU MANDATE (A4 LANDSCAPE)     -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="pamphlet-sheet w-full max-w-5xl bg-[#FAF8F5] text-stone-900 rounded-2xl shadow-2xl overflow-hidden border border-stone-300 mb-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[580px]">
+
+      <!-- Left Column: Prestigious Charcoal Brand Cover (5 cols) -->
+      <div class="lg:col-span-5 bg-[#161513] text-stone-200 p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden print-invert">
+        <div class="absolute -right-16 -top-16 w-56 h-56 bg-[#C86241]/15 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute -left-16 -bottom-16 w-56 h-56 bg-[#E3A857]/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <!-- Cover Header -->
+        <div class="space-y-6 relative z-10">
+          <!-- Vector Architectural Logo -->
+          <div class="flex items-center gap-3">
+            <svg class="w-12 h-12 shrink-0 drop-shadow-md" viewBox="0 0 120 120" fill="none">
+              <line x1="16" y1="104" x2="104" y2="104" stroke="#C86241" stroke-width="5" stroke-linecap="round"/>
+              <line x1="26" y1="99" x2="94" y2="99" stroke="#E3A857" stroke-width="2" stroke-linecap="round" stroke-opacity="0.8"/>
+              <path d="M44 99V58C44 58 44 42 60 30C76 42 76 58 76 58V99" stroke="#FAF8F5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M50 99V62C50 56 54 48 60 42C66 48 70 56 70 62V99" stroke="#C86241" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 99V70C22 70 22 58 33 50C44 58 44 70 44 70V99" stroke="#D4A373" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M76 99V70C76 70 76 58 87 50C98 58 98 70 98 99" stroke="#D4A373" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <polygon points="60,16 65,23 60,30 55,23" fill="#E3A857"/>
+            </svg>
+            <div>
+              <div class="font-serif-luxury text-xl font-bold tracking-tight text-white leading-none">
+                JAIPUR<span class="text-[#C86241] font-normal ml-1">ESTATES</span>
+              </div>
+              <div class="text-[9px] font-mono-code uppercase tracking-[0.2em] text-stone-400 mt-1">
+                Rajasthan Property &amp; Hospitality Bureau
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-stone-800">
+            <span class="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono-code uppercase tracking-widest text-[#E3A857] bg-[#E3A857]/10 border border-[#E3A857]/20 mb-3">
+              Institutional Prospectus
+            </span>
+            <h2 class="font-serif-luxury text-2xl sm:text-3xl text-white font-normal leading-tight">
+              A Verified Directory for Rajasthan Real Estate.
+            </h2>
+            <p class="text-xs text-stone-300 mt-3 leading-relaxed">
+              Transparent acquisition of residential villas, pre-leased commercial assets, and heritage haveli stays. Zero broker chains. Grounded legal due diligence.
+            </p>
+          </div>
+        </div>
+
+        <!-- Cover Footer -->
+        <div class="pt-6 border-t border-stone-800 relative z-10 space-y-3">
+          <div class="flex items-center justify-between text-[11px] text-stone-400 font-mono-code">
+            <span>OFFICE: CIVIL LINES &amp; C-SCHEME</span>
+            <span>JAIPUR 302001</span>
+          </div>
+          <div class="text-[10px] text-stone-500 leading-tight">
+            Title checks cross-referenced with RERA Rajasthan and municipal land registries.
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: The 3 Core Verticals (7 cols) -->
+      <div class="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-between space-y-6 bg-white">
+        
+        <div>
+          <span class="text-[10px] font-mono-code uppercase tracking-widest text-[#994126] font-bold block mb-1">
+            Three Core Business Verticals
+          </span>
+          <h3 class="font-serif-luxury text-2xl text-stone-900 font-medium">
+            Architectural Curation Across Every Segment
+          </h3>
+          <p class="text-xs text-stone-600 mt-1">
+            One unified bureau serving discerning homeowners, institutional investors, and heritage travellers.
+          </p>
+        </div>
+
+        <!-- 3 Pillars Row -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          
+          <!-- Pillar 1: BUY -->
+          <div class="p-4 rounded-xl bg-[#FAF8F5] border border-stone-200 flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-[#994126]/10 text-[#994126] flex items-center justify-center font-bold text-xs mb-3">
+                01
+              </div>
+              <h4 class="font-serif-luxury text-base font-bold text-stone-900 mb-1">BUY</h4>
+              <span class="text-[10px] font-mono-code text-[#994126] uppercase tracking-wider block mb-2">
+                Residential &amp; Land
+              </span>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                Independent luxury villas, builder floors, and clear-title plots in Civil Lines, C-Scheme, Vaishali Nagar, and Jagatpura.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-stone-200 mt-3 text-[10px] text-stone-500 font-medium">
+              ✔ 100% Title Audits
+            </div>
+          </div>
+
+          <!-- Pillar 2: INVEST -->
+          <div class="p-4 rounded-xl bg-[#FAF8F5] border border-stone-200 flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-emerald-950/10 text-emerald-800 flex items-center justify-center font-bold text-xs mb-3">
+                02
+              </div>
+              <h4 class="font-serif-luxury text-base font-bold text-stone-900 mb-1">INVEST</h4>
+              <span class="text-[10px] font-mono-code text-emerald-700 uppercase tracking-wider block mb-2">
+                Commercial Capital
+              </span>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                Pre-leased bank branches, corporate showrooms, and industrial plots along Sitapura and Ring Road corridors with proven yields.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-stone-200 mt-3 text-[10px] text-stone-500 font-medium">
+              ✔ 6.5% – 9.2% Proven Yields
+            </div>
+          </div>
+
+          <!-- Pillar 3: STAY -->
+          <div class="p-4 rounded-xl bg-[#FAF8F5] border border-stone-200 flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-rose-950/10 text-rose-800 flex items-center justify-center font-bold text-xs mb-3">
+                03
+              </div>
+              <h4 class="font-serif-luxury text-base font-bold text-stone-900 mb-1">STAY</h4>
+              <span class="text-[10px] font-mono-code text-rose-700 uppercase tracking-wider block mb-2">
+                Heritage Havelis
+              </span>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                Carefully preserved 19th-century havelis, boutique palace suites, and serviced apartments for memorable stays in the Pink City.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-stone-200 mt-3 text-[10px] text-stone-500 font-medium">
+              ✔ Authentic Hospitality
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Four Principles Bar -->
+        <div class="p-4 rounded-xl bg-[#161513] text-stone-200 border border-stone-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="text-terracotta font-bold">•</span>
+            <span>Zero Broker Clutter</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[#E3A857] font-bold">•</span>
+            <span>Direct Owner Facilitation</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-400 font-bold">•</span>
+            <span>RERA Verification</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-stone-400 font-bold">•</span>
+            <span>Spatial Photography</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- PAGE 2: DIRECT ADVISORY DESKS & ACCESS PORTAL               -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="pamphlet-sheet w-full max-w-5xl bg-[#FAF8F5] text-stone-900 rounded-2xl shadow-2xl overflow-hidden border border-stone-300">
+    <div class="p-8 sm:p-10 space-y-8">
+
+      <!-- Section Title -->
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-stone-300 pb-5 gap-4">
+        <div>
+          <span class="text-[10px] font-mono-code uppercase tracking-widest text-[#994126] font-bold block mb-1">
+            Official Directory &amp; Direct Desks
+          </span>
+          <h3 class="font-serif-luxury text-2xl sm:text-3xl font-medium text-stone-900">
+            Dedicated Advisory &amp; Calling Lines
+          </h3>
+          <p class="text-xs text-stone-600 mt-1">
+            Direct access to specialized division leads. Mon–Sat, 9:30 AM – 6:30 PM IST.
+          </p>
+        </div>
+
+        <div class="text-right">
+          <span class="inline-block px-3 py-1 rounded bg-[#161513] text-white text-xs font-mono-code font-medium">
+            Jaipur, Rajasthan
+          </span>
+        </div>
+      </div>
+
+      <!-- 3 Direct Phone Desks Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Desk 1: Advisory -->
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-mono-code uppercase tracking-wider text-[#994126] bg-[#994126]/10 px-2 py-0.5 rounded font-bold">
+                Desk 01
+              </span>
+              <span class="text-[10px] text-stone-500 font-mono-code">Primary Line</span>
+            </div>
+            <h4 class="font-serif-luxury text-lg font-bold text-stone-900 mb-1">Primary Advisory Desk</h4>
+            <p class="text-xs text-stone-600 mb-4 leading-relaxed">
+              General client inquiries, legal due diligence overview, RERA guidance, and platform support.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-stone-100 space-y-2">
+            <div class="text-xs text-stone-500 font-mono-code">Direct Telephone:</div>
+            <a href="tel:+917737213615" class="block font-mono-code text-xl font-bold text-stone-900 hover:text-[#994126] transition-colors">
+              +91 77372 13615
+            </a>
+            <div class="text-[11px] text-stone-500">Available for Voice &amp; WhatsApp</div>
+          </div>
+        </div>
+
+        <!-- Desk 2: Commercial & Investment -->
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-mono-code uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded font-bold">
+                Desk 02
+              </span>
+              <span class="text-[10px] text-stone-500 font-mono-code">Commercial Assets</span>
+            </div>
+            <h4 class="font-serif-luxury text-lg font-bold text-stone-900 mb-1">Commercial &amp; Land Desk</h4>
+            <p class="text-xs text-stone-600 mb-4 leading-relaxed">
+              Pre-leased retail showrooms, bank branches, industrial warehousing, and highway growth parcels.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-stone-100 space-y-2">
+            <div class="text-xs text-stone-500 font-mono-code">Direct Telephone:</div>
+            <a href="tel:+919664247662" class="block font-mono-code text-xl font-bold text-emerald-900 hover:text-emerald-700 transition-colors">
+              +91 96642 47662
+            </a>
+            <div class="text-[11px] text-stone-500">Available for Voice &amp; WhatsApp</div>
+          </div>
+        </div>
+
+        <!-- Desk 3: Residential & Havelis -->
+        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-mono-code uppercase tracking-wider text-rose-800 bg-rose-100 px-2 py-0.5 rounded font-bold">
+                Desk 03
+              </span>
+              <span class="text-[10px] text-stone-500 font-mono-code">Havelis &amp; Homes</span>
+            </div>
+            <h4 class="font-serif-luxury text-lg font-bold text-stone-900 mb-1">Residential &amp; Stays Desk</h4>
+            <p class="text-xs text-stone-600 mb-4 leading-relaxed">
+              Family residences, independent kothis, restored havelis, and luxury homestay reservations.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-stone-100 space-y-2">
+            <div class="text-xs text-stone-500 font-mono-code">Direct Telephone:</div>
+            <a href="tel:+916376312638" class="block font-mono-code text-xl font-bold text-rose-900 hover:text-rose-700 transition-colors">
+              +91 63763 12638
+            </a>
+            <div class="text-[11px] text-stone-500">Available for Voice &amp; WhatsApp</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Live Digital Portal Callout & Verified QR Code -->
+      <div class="p-6 sm:p-8 rounded-2xl bg-[#161513] text-stone-200 border border-stone-800 flex flex-col md:flex-row items-center justify-between gap-6 print-invert">
+        
+        <div class="space-y-2 max-w-lg">
+          <div class="inline-flex items-center gap-2 text-[10px] font-mono-code uppercase tracking-wider text-[#E3A857]">
+            <span>Live Digital Portal</span>
+            <span>•</span>
+            <span class="text-emerald-400">24/7 Verified Directory</span>
+          </div>
+          <h4 class="font-serif-luxury text-2xl text-white font-medium">
+            Explore active listings online
+          </h4>
+          <p class="text-xs text-stone-300 leading-relaxed">
+            Scan the QR code or visit our platform directly to filter residential listings by locality, review verified commercial yield projections, or book heritage haveli stays.
+          </p>
+          <div class="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono-code text-stone-400">
+            <span class="text-stone-300">🌐 client-five-delta-81.vercel.app</span>
+            <span>✉️ inquiries@jaipurestates.in</span>
+          </div>
+        </div>
+
+        <!-- High-Precision Vector QR Code -->
+        <div class="p-4 bg-white rounded-xl shadow-lg shrink-0 flex flex-col items-center">
+          <svg class="w-28 h-28" viewBox="0 0 100 100" fill="#161513">
+            <!-- Corner Finder 1 (Top-Left) -->
+            <rect x="10" y="10" width="28" height="28" rx="2" fill="#161513"/>
+            <rect x="14" y="14" width="20" height="20" rx="1" fill="#FFFFFF"/>
+            <rect x="18" y="18" width="12" height="12" rx="1" fill="#161513"/>
+
+            <!-- Corner Finder 2 (Top-Right) -->
+            <rect x="62" y="10" width="28" height="28" rx="2" fill="#161513"/>
+            <rect x="66" y="14" width="20" height="20" rx="1" fill="#FFFFFF"/>
+            <rect x="70" y="18" width="12" height="12" rx="1" fill="#161513"/>
+
+            <!-- Corner Finder 3 (Bottom-Left) -->
+            <rect x="10" y="62" width="28" height="28" rx="2" fill="#161513"/>
+            <rect x="14" y="66" width="20" height="20" rx="1" fill="#FFFFFF"/>
+            <rect x="18" y="70" width="12" height="12" rx="1" fill="#161513"/>
+
+            <!-- QR Code Data Matrix Pattern -->
+            <rect x="42" y="12" width="6" height="6" fill="#161513"/>
+            <rect x="52" y="12" width="6" height="6" fill="#161513"/>
+            <rect x="42" y="24" width="6" height="6" fill="#161513"/>
+            <rect x="52" y="30" width="6" height="6" fill="#161513"/>
+            <rect x="12" y="44" width="6" height="6" fill="#161513"/>
+            <rect x="24" y="44" width="6" height="6" fill="#161513"/>
+            <rect x="36" y="44" width="6" height="6" fill="#161513"/>
+            <rect x="46" y="44" width="8" height="8" fill="#994126"/>
+            <rect x="60" y="44" width="6" height="6" fill="#161513"/>
+            <rect x="72" y="44" width="6" height="6" fill="#161513"/>
+            <rect x="84" y="44" width="6" height="6" fill="#161513"/>
+            <rect x="42" y="58" width="6" height="6" fill="#161513"/>
+            <rect x="52" y="64" width="6" height="6" fill="#161513"/>
+            <rect x="62" y="58" width="6" height="6" fill="#161513"/>
+            <rect x="76" y="62" width="6" height="6" fill="#161513"/>
+            <rect x="84" y="72" width="6" height="6" fill="#161513"/>
+            <rect x="62" y="76" width="8" height="8" fill="#994126"/>
+            <rect x="76" y="84" width="6" height="6" fill="#161513"/>
+            <rect x="44" y="80" width="6" height="6" fill="#161513"/>
+            <rect x="54" y="84" width="6" height="6" fill="#161513"/>
+          </svg>
+          <span class="text-[9px] font-mono-code text-stone-600 uppercase tracking-widest mt-1">Scan for Portal</span>
+        </div>
+
+      </div>
+
+      <!-- Legal & Bureau Footnote -->
+      <div class="pt-4 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-2 text-[10px] text-stone-500">
+        <div>
+          © 2026 Jaipur Estates Bureau · Civil Lines &amp; C-Scheme, Jaipur, Rajasthan 302001
+        </div>
+        <div>
+          Inquiry &amp; Verification Directory · Bilateral Deeds Subject to Legal Counsel
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

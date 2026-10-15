@@ -159,6 +159,9 @@ export default function Footer() {
         <div className="mt-10 pt-6 border-t border-stone-800/80 flex flex-col sm:flex-row items-center justify-between text-stone-500 text-[11px] gap-3">
           <p>© {new Date().getFullYear()} JaipurEstates. Verified property listings across Rajasthan.</p>
           <div className="flex items-center gap-5">
+            <a href="/pamphlet.html" target="_blank" rel="noopener noreferrer" className="text-terracotta-400 hover:text-terracotta-300 font-medium">
+              Marketing Pamphlet (PDF) ↗
+            </a>
             <Link to="/buy" className="hover:text-stone-300">Buy</Link>
             <Link to="/invest" className="hover:text-stone-300">Invest</Link>
             <Link to="/stay" className="hover:text-stone-300">Stay</Link>
