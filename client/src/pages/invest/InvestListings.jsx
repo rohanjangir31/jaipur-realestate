@@ -72,6 +72,15 @@ export default function InvestListings() {
     }
   };
 
+  // Sync state with URL search params whenever URL changes (e.g. from footer links or browser navigation)
+  useEffect(() => {
+    setAssetClass(searchParams.get('assetClass') || '');
+    setRiskCategory(searchParams.get('riskCategory') || '');
+    setLocality(searchParams.get('locality') || '');
+    setMaxTicket(searchParams.get('maxTicket') || '');
+    setSortBy(searchParams.get('sortBy') || 'ticketAsc');
+  }, [searchParams]);
+
   useEffect(() => {
     fetchAssets();
   }, [assetClass, riskCategory, locality, maxTicket, sortBy]);

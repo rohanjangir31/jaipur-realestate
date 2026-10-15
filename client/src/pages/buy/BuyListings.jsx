@@ -77,6 +77,17 @@ export default function BuyListings() {
     }
   };
 
+  // Sync state with URL search params whenever URL changes (e.g. from footer links or browser navigation)
+  useEffect(() => {
+    setLocality(searchParams.get('locality') || '');
+    setPropertyType(searchParams.get('propertyType') || '');
+    setBhk(searchParams.get('bhk') || '');
+    setMinPrice(searchParams.get('minPrice') || '');
+    setMaxPrice(searchParams.get('maxPrice') || '');
+    setReraOnly(searchParams.get('reraOnly') === 'true');
+    setSortBy(searchParams.get('sortBy') || 'createdAt');
+  }, [searchParams]);
+
   useEffect(() => {
     fetchProperties();
   }, [locality, propertyType, bhk, minPrice, maxPrice, reraOnly, sortBy]);

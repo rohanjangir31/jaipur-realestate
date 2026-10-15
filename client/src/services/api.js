@@ -98,10 +98,18 @@ export const buyApi = {
       // Resilient local filter
       let filtered = [...VERIFIED_BUY_PROPERTIES];
       if (params.locality) {
-        filtered = filtered.filter(p => p.locality.toLowerCase().includes(params.locality.toLowerCase()));
+        const queryLoc = params.locality.toLowerCase().trim();
+        filtered = filtered.filter(p => {
+          const loc = (p.locality || '').toLowerCase();
+          return loc === queryLoc || loc.includes(queryLoc) || queryLoc.includes(loc);
+        });
       }
       if (params.propertyType) {
-        filtered = filtered.filter(p => p.propertyType === params.propertyType);
+        const queryType = params.propertyType.toLowerCase().trim();
+        filtered = filtered.filter(p => {
+          const pt = (p.propertyType || '').toLowerCase();
+          return pt === queryType || pt.includes(queryType) || queryType.includes(pt);
+        });
       }
       if (params.bhk !== undefined && params.bhk !== '') {
         filtered = filtered.filter(p => p.bhk === Number(params.bhk));
@@ -164,10 +172,18 @@ export const stayApi = {
     } catch {
       let filtered = [...VERIFIED_STAY_LISTINGS];
       if (params.locality) {
-        filtered = filtered.filter(s => s.locality.toLowerCase().includes(params.locality.toLowerCase()));
+        const queryLoc = params.locality.toLowerCase().trim();
+        filtered = filtered.filter(s => {
+          const loc = (s.locality || '').toLowerCase();
+          return loc === queryLoc || loc.includes(queryLoc) || queryLoc.includes(loc);
+        });
       }
       if (params.stayType) {
-        filtered = filtered.filter(s => s.stayType === params.stayType);
+        const queryType = params.stayType.toLowerCase().trim();
+        filtered = filtered.filter(s => {
+          const st = (s.stayType || '').toLowerCase();
+          return st === queryType || st.includes(queryType) || queryType.includes(st);
+        });
       }
       if (params.guests) {
         filtered = filtered.filter(s => s.maxGuests >= Number(params.guests));
@@ -219,10 +235,18 @@ export const investApi = {
     } catch {
       let filtered = [...VERIFIED_INVESTMENT_ASSETS];
       if (params.locality) {
-        filtered = filtered.filter(a => a.locality.toLowerCase().includes(params.locality.toLowerCase()));
+        const queryLoc = params.locality.toLowerCase().trim();
+        filtered = filtered.filter(a => {
+          const loc = (a.locality || '').toLowerCase();
+          return loc === queryLoc || loc.includes(queryLoc) || queryLoc.includes(loc);
+        });
       }
       if (params.assetClass) {
-        filtered = filtered.filter(a => a.assetClass === params.assetClass);
+        const queryClass = params.assetClass.toLowerCase().trim();
+        filtered = filtered.filter(a => {
+          const ac = (a.assetClass || '').toLowerCase();
+          return ac === queryClass || ac.includes(queryClass) || queryClass.includes(ac);
+        });
       }
       return {
         data: {

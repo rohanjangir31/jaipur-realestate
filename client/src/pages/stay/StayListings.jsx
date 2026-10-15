@@ -75,6 +75,17 @@ export default function StayListings() {
     }
   };
 
+  // Sync state with URL search params whenever URL changes (e.g. from footer links or browser navigation)
+  useEffect(() => {
+    setLocality(searchParams.get('locality') || '');
+    setStayType(searchParams.get('stayType') || '');
+    setGuests(searchParams.get('guests') || '1');
+    setCheckIn(searchParams.get('checkIn') || '');
+    setCheckOut(searchParams.get('checkOut') || '');
+    setMaxPrice(searchParams.get('maxPrice') || '');
+    setSortBy(searchParams.get('sortBy') || 'createdAt');
+  }, [searchParams]);
+
   useEffect(() => {
     fetchStays();
   }, [locality, stayType, guests, checkIn, checkOut, maxPrice, sortBy]);
