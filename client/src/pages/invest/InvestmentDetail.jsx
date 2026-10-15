@@ -16,10 +16,14 @@ import {
   FileCheck2,
   Layers,
   Percent,
+  MessageSquare,
+  Phone,
+  ExternalLink,
 } from 'lucide-react';
 import { investApi, inquiryApi } from '../../services/api';
 import { formatINR } from '../../utils/formatters';
 import { useAuth } from '../../context/AuthContext';
+import { usePageMeta } from '../../utils/usePageMeta';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import FormError from '../../components/ui/FormError';
 
@@ -41,6 +45,11 @@ export default function InvestmentDetail() {
   const [inquirySuccess, setInquirySuccess] = useState(false);
   const [inquiryError, setInquiryError] = useState('');
   const [activeImage, setActiveImage] = useState('');
+
+  usePageMeta({
+    title: asset ? `${asset.title} in ${asset.locality}` : 'Commercial Investment Opportunity',
+    description: asset?.description || 'Pre-leased commercial real estate and growth land in Jaipur.',
+  });
 
   const {
     register,
@@ -143,7 +152,17 @@ export default function InvestmentDetail() {
                 <span className="badge bg-emerald-100 text-emerald-800 font-semibold">{asset.assetClass}</span>
                 <span className="badge-blue">{asset.riskCategory}</span>
                 {asset.jdaApproved && <span className="badge-green">JDA Approved</span>}
-                {asset.reraRegistered && <span className="badge-green">RERA Registered</span>}
+                {asset.reraRegistered && (
+                  <a
+                    href="https://rera.rajasthan.gov.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Click to cross-check on official Rajasthan RERA portal"
+                    className="badge-green hover:bg-green-200 transition-colors inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <ShieldCheck size={13} /> RERA: {asset.reraId || 'Registered'} <ExternalLink size={10} />
+                  </a>
+                )}
               </div>
               <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900">{asset.title}</h1>
               <p className="flex items-center gap-1.5 text-sm text-gray-500 mt-2">
@@ -269,20 +288,53 @@ export default function InvestmentDetail() {
           <div className="space-y-6">
             <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm sticky top-24">
               <h3 className="text-xl font-serif font-bold text-gray-900 mb-1">Express Investment Interest</h3>
-              <p className="text-gray-500 text-xs mb-5">
+              <p className="text-gray-500 text-xs mb-4">
                 Submit an inquiry to receive full legal title packs, tenant lease copies, and schedule a private briefing.
               </p>
 
+              {/* Instant WhatsApp to Commercial Desk */}
+              <a
+                href={`https://wa.me/919664247662?text=${encodeURIComponent(`Hello Jaipur Estates Commercial Desk, I would like to review the due diligence docket and lease agreement for "${asset.title}" (Ref: ${asset._id || id}) in ${asset.locality}.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full mb-4 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-medium text-xs transition-colors shadow-sm"
+              >
+                <MessageSquare size={15} />
+                <span>WhatsApp Commercial Desk</span>
+              </a>
+
+              <div className="relative flex py-1 items-center mb-4">
+                <div className="flex-grow border-t border-gray-200"></div>
+                <span className="flex-shrink mx-2 text-[10px] text-gray-400 uppercase tracking-wider">or request docket below</span>
+                <div className="flex-grow border-t border-gray-200"></div>
+              </div>
+
               {inquirySuccess ? (
-                <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-5 rounded-lg text-center space-y-2">
+                <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-5 rounded-lg text-center space-y-3">
                   <ShieldCheck size={32} className="mx-auto text-emerald-600" />
-                  <h4 className="font-semibold text-sm">Inquiry Logged</h4>
-                  <p className="text-xs leading-relaxed">
-                    Thank you. Our institutional investment desk will share the due diligence docket with you.
+                  <h4 className="font-semibold text-sm">Due Diligence Request Logged</h4>
+                  <p className="text-xs leading-relaxed text-emerald-800">
+                    Thank you. Our institutional investment desk will share the due diligence docket for <strong>{asset.title}</strong> within 24 business hours.
                   </p>
+                  <div className="pt-2 border-t border-emerald-200 flex flex-col gap-2">
+                    <a
+                      href={`https://wa.me/919664247662?text=${encodeURIComponent(`Hello, I just registered an expression of interest for "${asset.title}" (Ref: ${asset._id || id}). Looking forward to the legal diligence pack.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-medium transition-colors"
+                    >
+                      <MessageSquare size={13} /> Open in WhatsApp Desk
+                    </a>
+                    <a
+                      href="tel:+919664247662"
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-stone-900 hover:bg-stone-800 text-white text-xs font-medium transition-colors"
+                    >
+                      <Phone size={13} /> Call Commercial Desk (+91 96642 47662)
+                    </a>
+                  </div>
                   <button
                     onClick={() => setInquirySuccess(false)}
-                    className="text-xs text-emerald-800 underline font-medium mt-2"
+                    className="text-xs text-stone-500 underline hover:text-stone-800 mt-2 block"
                   >
                     Submit another expression of interest
                   </button>

@@ -12,6 +12,7 @@ import {
 import { buyApi } from '../../services/api';
 import { formatINR, JAIPUR_LOCALITIES } from '../../utils/formatters';
 import { useAuth } from '../../context/AuthContext';
+import { usePageMeta } from '../../utils/usePageMeta';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 
 const PROPERTY_TYPES = [
@@ -33,6 +34,11 @@ const QUICK_LOCALITIES = [
 ];
 
 export default function BuyListings() {
+  usePageMeta({
+    title: 'Buy Property in Jaipur | Verified Apartments, Villas & Plots',
+    description: 'Search verified apartments in Vaishali Nagar, villas in Jagatpura, and plots in Jaipur with genuine RERA verification.',
+  });
+
   const [searchParams, setSearchParams] = useSearchParams();
   const { isAuthenticated, hasRole } = useAuth();
 

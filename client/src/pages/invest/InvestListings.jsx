@@ -12,6 +12,7 @@ import {
 import { investApi } from '../../services/api';
 import { formatINR, JAIPUR_LOCALITIES } from '../../utils/formatters';
 import { useAuth } from '../../context/AuthContext';
+import { usePageMeta } from '../../utils/usePageMeta';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 
 const ASSET_CLASSES = [
@@ -32,6 +33,11 @@ const RISK_CATEGORIES = [
 ];
 
 export default function InvestListings() {
+  usePageMeta({
+    title: 'Commercial Property & Land Investment in Jaipur | High Yields',
+    description: 'Pre-leased bank branches, high-street retail showrooms, and industrial land in Jaipur with verified lease deeds.',
+  });
+
   const [searchParams, setSearchParams] = useSearchParams();
   const { isAuthenticated } = useAuth();
 

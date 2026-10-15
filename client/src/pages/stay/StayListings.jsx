@@ -11,6 +11,7 @@ import {
 import { stayApi } from '../../services/api';
 import { formatINR, JAIPUR_LOCALITIES } from '../../utils/formatters';
 import { useAuth } from '../../context/AuthContext';
+import { usePageMeta } from '../../utils/usePageMeta';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 
 const STAY_TYPES = [
@@ -31,6 +32,11 @@ const QUICK_STAY_TYPES = [
 ];
 
 export default function StayListings() {
+  usePageMeta({
+    title: 'Heritage Stays & Havelis in Jaipur | Boutique Homestays & Villas',
+    description: 'Restored 19th-century Rajputana havelis in Bani Park, boutique homestays in C-Scheme, and private luxury villas in Jaipur.',
+  });
+
   const [searchParams, setSearchParams] = useSearchParams();
   const { isAuthenticated, hasRole } = useAuth();
 

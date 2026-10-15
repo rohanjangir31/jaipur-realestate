@@ -103,6 +103,18 @@ export default function Navbar() {
               )}
             </div>
 
+            {/* 1-Glance Prospectus */}
+            <a
+              href="/pamphlet.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:inline-flex items-center gap-1 text-xs text-terracotta-400 hover:text-terracotta-300 font-medium px-2 py-1 rounded border border-stone-700/60 hover:border-terracotta-600/60 transition-colors"
+              title="1-Glance Business Prospectus / Pamphlet"
+            >
+              <span>Prospectus</span>
+              <span className="text-[9px] bg-terracotta-900/60 text-terracotta-300 px-1 rounded">1-Pg</span>
+            </a>
+
             {isAuthenticated ? (
               <div className="flex items-center gap-3">
                 {hasRole('admin', 'super_admin') && (

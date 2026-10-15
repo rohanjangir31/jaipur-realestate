@@ -15,10 +15,14 @@ import {
   Bath,
   ArrowLeft,
   Send,
+  MessageSquare,
+  Phone,
+  ExternalLink,
 } from 'lucide-react';
 import { buyApi, inquiryApi } from '../../services/api';
 import { formatINR } from '../../utils/formatters';
 import { useAuth } from '../../context/AuthContext';
+import { usePageMeta } from '../../utils/usePageMeta';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import FormError from '../../components/ui/FormError';
 
@@ -40,6 +44,11 @@ export default function PropertyDetail() {
   const [inquirySuccess, setInquirySuccess] = useState(false);
   const [inquiryError, setInquiryError] = useState('');
   const [activeImage, setActiveImage] = useState('');
+
+  usePageMeta({
+    title: property ? `${property.title} in ${property.locality}` : 'Property Details',
+    description: property?.description || 'Verified residential property listing in Jaipur.',
+  });
 
   const {
     register,
@@ -139,9 +148,15 @@ export default function PropertyDetail() {
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <span className="badge-blue">{property.propertyType}</span>
                 {property.reraRegistered && (
-                  <span className="badge-green">
-                    <ShieldCheck size={13} /> RERA ID: {property.reraId || 'Verified'}
-                  </span>
+                  <a
+                    href="https://rera.rajasthan.gov.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Click to cross-check on official Rajasthan RERA portal"
+                    className="badge-green hover:bg-green-200 transition-colors inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <ShieldCheck size={13} /> RERA ID: {property.reraId || 'Verified'} <ExternalLink size={10} />
+                  </a>
                 )}
                 {property.titleVerified && (
                   <span className="badge-green">Title Deed Verified</span>
@@ -237,6 +252,17 @@ export default function PropertyDetail() {
                   <span className="text-xs text-gray-500 block">Ownership Type</span>
                   <span className="font-semibold text-gray-900">{property.ownershipType}</span>
                 </div>
+
+                {property.carpetAreaSqFt && property.superAreaSqFt && (
+                  <div className="bg-amber-50/70 border border-amber-200/80 p-3 rounded-lg col-span-2 sm:col-span-4 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-amber-900">
+                    <span>
+                      <strong>Carpet Area Efficiency: {((property.carpetAreaSqFt / property.superAreaSqFt) * 100).toFixed(0)}%</strong> (Net usable carpet space: {property.carpetAreaSqFt} sq.ft vs {property.superAreaSqFt} sq.ft super built-up)
+                    </span>
+                    <span className="text-[11px] font-semibold text-amber-800">
+                      Rajasthan RERA Carpet Compliant
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -266,20 +292,53 @@ export default function PropertyDetail() {
           <div className="space-y-6">
             <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm sticky top-24">
               <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">Interested in this Property?</h3>
-              <p className="text-gray-500 text-xs mb-5">
-                Send an inquiry to schedule a verified property visit or connect with the representative.
+              <p className="text-gray-500 text-xs mb-4">
+                Send an inquiry to schedule a verified property visit or connect directly with our advisory desk.
               </p>
 
+              {/* Instant WhatsApp Inquiry */}
+              <a
+                href={`https://wa.me/917737213615?text=${encodeURIComponent(`Hello Jaipur Estates, I would like to inquire about "${property.title}" (ID: ${property._id || id}) in ${property.locality}. Please share verified documents and arrange a visit.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full mb-4 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs transition-colors shadow-sm"
+              >
+                <MessageSquare size={15} />
+                <span>Instant WhatsApp Inquiry</span>
+              </a>
+
+              <div className="relative flex py-1 items-center mb-4">
+                <div className="flex-grow border-t border-gray-200"></div>
+                <span className="flex-shrink mx-2 text-[10px] text-gray-400 uppercase tracking-wider">or submit visit request</span>
+                <div className="flex-grow border-t border-gray-200"></div>
+              </div>
+
               {inquirySuccess ? (
-                <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-5 rounded-lg text-center space-y-2">
+                <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-5 rounded-lg text-center space-y-3">
                   <CheckCircle2 size={32} className="mx-auto text-emerald-600" />
-                  <h4 className="font-semibold text-sm">Inquiry Received</h4>
-                  <p className="text-xs leading-relaxed">
-                    Thank you! Our Jaipur properties team will connect with you via phone or email shortly.
+                  <h4 className="font-semibold text-sm">Inquiry Logged with Jaipur Advisory</h4>
+                  <p className="text-xs leading-relaxed text-emerald-700">
+                    Your request for <strong>{property.title}</strong> has been registered. An advisor will reach out within 24 business hours.
                   </p>
+                  <div className="pt-2 border-t border-emerald-200 flex flex-col gap-2">
+                    <a
+                      href={`https://wa.me/917737213615?text=${encodeURIComponent(`Hello, I just submitted an inquiry on Jaipur Estates for "${property.title}" (Ref: ${property._id || id}). Looking forward to details.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium transition-colors"
+                    >
+                      <MessageSquare size={13} /> Open in WhatsApp Desk
+                    </a>
+                    <a
+                      href="tel:+917737213615"
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-stone-900 hover:bg-stone-800 text-white text-xs font-medium transition-colors"
+                    >
+                      <Phone size={13} /> Call Primary Desk (+91 77372 13615)
+                    </a>
+                  </div>
                   <button
                     onClick={() => setInquirySuccess(false)}
-                    className="text-xs text-emerald-700 underline font-medium mt-2"
+                    className="text-xs text-stone-500 underline hover:text-stone-800 mt-2 block"
                   >
                     Submit another inquiry
                   </button>

@@ -16,10 +16,13 @@ import {
   Send,
   Sparkles,
   Info,
+  MessageSquare,
+  Phone,
 } from 'lucide-react';
 import { stayApi, inquiryApi } from '../../services/api';
 import { formatINR } from '../../utils/formatters';
 import { useAuth } from '../../context/AuthContext';
+import { usePageMeta } from '../../utils/usePageMeta';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import FormError from '../../components/ui/FormError';
 
@@ -45,6 +48,11 @@ export default function StayDetail() {
   const [activeImage, setActiveImage] = useState('');
   const [inquirySuccess, setInquirySuccess] = useState(false);
   const [inquiryError, setInquiryError] = useState('');
+
+  usePageMeta({
+    title: stay ? `${stay.title} in ${stay.locality}` : 'Heritage Stay in Jaipur',
+    description: stay?.description || 'Boutique heritage stays, private villas, and havelis across Jaipur.',
+  });
 
   const initialCheckIn = searchParams.get('checkIn') || '';
   const initialCheckOut = searchParams.get('checkOut') || '';
@@ -324,16 +332,49 @@ export default function StayDetail() {
                 Inquiry-based reservation. Our team verifies host availability and coordinates directly.
               </p>
 
+              {/* Instant WhatsApp to Stays Desk */}
+              <a
+                href={`https://wa.me/916376312638?text=${encodeURIComponent(`Hello Jaipur Estates Stays Desk, I would like to inquire about booking "${stay.title}" (Ref: ${stay._id || id}) in ${stay.locality} for dates: ${watchedCheckIn || 'flexible'} to ${watchedCheckOut || 'flexible'}.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full mb-4 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-medium text-xs transition-colors shadow-sm"
+              >
+                <MessageSquare size={15} />
+                <span>WhatsApp Stays Desk</span>
+              </a>
+
+              <div className="relative flex py-1 items-center mb-4">
+                <div className="flex-grow border-t border-gray-200"></div>
+                <span className="flex-shrink mx-2 text-[10px] text-gray-400 uppercase tracking-wider">or submit dates below</span>
+                <div className="flex-grow border-t border-gray-200"></div>
+              </div>
+
               {inquirySuccess ? (
-                <div className="bg-rose-50 border border-rose-200 text-rose-900 p-5 rounded-lg text-center space-y-2">
+                <div className="bg-rose-50 border border-rose-200 text-rose-900 p-5 rounded-lg text-center space-y-3">
                   <CheckCircle2 size={32} className="mx-auto text-rose-600" />
                   <h4 className="font-semibold text-sm">Stay Request Sent</h4>
                   <p className="text-xs leading-relaxed">
-                    We have received your dates inquiry. The host will confirm availability shortly.
+                    We have received your dates inquiry for <strong>{stay.title}</strong>. The host will confirm availability shortly.
                   </p>
+                  <div className="pt-2 border-t border-rose-200 flex flex-col gap-2">
+                    <a
+                      href={`https://wa.me/916376312638?text=${encodeURIComponent(`Hello, I just sent a booking inquiry for "${stay.title}" (Ref: ${stay._id || id}) from ${watchedCheckIn} to ${watchedCheckOut}.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium transition-colors"
+                    >
+                      <MessageSquare size={13} /> Open in WhatsApp Desk
+                    </a>
+                    <a
+                      href="tel:+916376312638"
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-stone-900 hover:bg-stone-800 text-white text-xs font-medium transition-colors"
+                    >
+                      <Phone size={13} /> Call Stays Desk (+91 63763 12638)
+                    </a>
+                  </div>
                   <button
                     onClick={() => setInquirySuccess(false)}
-                    className="text-xs text-rose-700 underline font-medium mt-2"
+                    className="text-xs text-stone-500 underline hover:text-stone-800 mt-2 block"
                   >
                     Submit another request
                   </button>

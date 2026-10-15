@@ -14,9 +14,15 @@ import {
   Phone,
   MessageSquare,
   Clock,
+  FileText,
 } from 'lucide-react';
 import { JAIPUR_LOCALITIES } from '../utils/formatters';
 import { CONTACT_NUMBERS, OFFICE_HOURS, OFFICE_ADDRESS } from '../utils/contact';
+import { usePageMeta } from '../utils/usePageMeta';
+import FeaturedShowcase from '../components/home/FeaturedShowcase';
+import PropertyCalculator from '../components/tools/PropertyCalculator';
+import SLATrustBanner from '../components/home/SLATrustBanner';
+import HomeFAQ from '../components/home/HomeFAQ';
 
 const LOCALITIES = [
   {
@@ -52,6 +58,12 @@ const LOCALITIES = [
 ];
 
 export default function Home() {
+  usePageMeta({
+    title: 'Verified Properties, Commercial Investments & Heritage Stays in Jaipur',
+    description:
+      'Explore verified residential flats in Vaishali Nagar, duplex villas in Jagatpura, pre-leased commercial assets on Tonk Road, and heritage stays in Jaipur.',
+  });
+
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('buy');
   const [locality, setLocality] = useState('');
@@ -94,7 +106,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Search Box - Built like an architectural tool */}
+          {/* Search Box */}
           <div className="mt-10 max-w-4xl bg-white text-stone-900 rounded-xl p-4 sm:p-5 shadow-elevated border border-stone-200">
             {/* Tabs */}
             <div className="flex border-b border-stone-200 pb-3 gap-6 text-sm font-medium">
@@ -234,12 +246,24 @@ export default function Home() {
             </span>
             <span>Direct owner contact — no commission markups</span>
             <span>Dedicated site inspection support</span>
+            <a
+              href="/pamphlet.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-terracotta-400 hover:text-terracotta-300 underline flex items-center gap-1"
+            >
+              <FileText size={12} />
+              <span>1-Glance Prospectus</span>
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ── 2. The Three Modules (Editorial Grid) ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      {/* ── 2. Curated Featured Opportunities (Immediate Real Inventory) ── */}
+      <FeaturedShowcase />
+
+      {/* ── 3. The Three Modules (Editorial Grid) ── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-2xl mb-12">
           <span className="section-label">Three Verticals</span>
           <h2 className="section-title">Built for buyers, investors, and travelers.</h2>
@@ -371,7 +395,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 3. Jaipur Neighborhood Guide ── */}
+      {/* ── 4. Interactive Rajasthan Stamp Duty & Yield Calculator ── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <PropertyCalculator />
+      </section>
+
+      {/* ── 5. Jaipur Neighborhood Guide ── */}
       <section className="bg-[#F4EFE8] border-y border-stone-200 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -418,7 +447,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 4. How the Process Works (Honest, Real-World Steps) ── */}
+      {/* ── 6. How the Process Works ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-2xl mb-14">
           <span className="section-label">Process</span>
@@ -463,7 +492,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 5. Owner & Host Submission Callout ── */}
+      {/* ── 7. Client Protection & SLA Commitment Banner ── */}
+      <SLATrustBanner />
+
+      {/* ── 8. Owner & Host Submission Callout ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <div className="bg-[#1C1A18] text-stone-200 rounded-xl p-8 sm:p-12 border border-stone-800">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -496,7 +528,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 6. Direct Bureau Calling Desks ── */}
+      {/* ── 9. Direct Bureau Calling Desks ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <div className="border border-stone-200 bg-white rounded-2xl p-8 sm:p-10 shadow-sm">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-6 border-b border-stone-100">
@@ -563,7 +595,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 7. Honest Regulatory & Legal Notice ── */}
+      {/* ── 10. Buyer & Investor FAQ Accordion ── */}
+      <HomeFAQ />
+
+      {/* ── 11. Honest Regulatory & Legal Notice ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="border border-stone-200 bg-white rounded-lg p-5 text-xs text-stone-600 leading-relaxed">
           <strong className="text-stone-900 block font-semibold mb-1">
