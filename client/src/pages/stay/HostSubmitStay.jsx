@@ -10,12 +10,11 @@ import FormError from '../../components/ui/FormError';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 
 const STAY_TYPES = [
-  'Heritage Haveli',
-  'Boutique Homestay',
-  'Luxury Villa',
-  'Studio Apartment',
-  'Guesthouse',
-  'Service Apartment',
+  'Airbnb Haveli',
+  'Airbnb Homestay',
+  'Airbnb Luxury Villa',
+  'Airbnb Studio Apartment',
+  'Airbnb Vacation Home',
 ];
 
 const AMENITY_OPTIONS = [
@@ -194,11 +193,11 @@ export default function HostSubmitStay() {
         <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
           <div className="border-b border-gray-100 pb-5 mb-6">
             <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 mb-2">
-              <Sparkles size={12} /> Host in Jaipur
+              <Sparkles size={12} /> Airbnb Management &amp; Hosting
             </div>
-            <h1 className="text-2xl font-serif font-bold text-gray-900">List Your Accommodation</h1>
+            <h1 className="text-2xl font-serif font-bold text-gray-900">List Your Place for Airbnb Hosting</h1>
             <p className="text-gray-500 text-sm mt-1">
-              Add your heritage villa, homestay, or serviced apartment. Listings are verified before publishing.
+              List your courtyard haveli, luxury villa, or studio flat for Airbnb turnkey hosting or acquisition in Jaipur. Standard 1% commission.
             </p>
           </div>
 

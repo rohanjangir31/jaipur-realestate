@@ -147,20 +147,10 @@ export default function PropertyDetail() {
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <span className="badge-blue">{property.propertyType}</span>
-                {property.reraRegistered && (
-                  <a
-                    href="https://rera.rajasthan.gov.in/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="Click to cross-check on official Rajasthan RERA portal"
-                    className="badge-green hover:bg-green-200 transition-colors inline-flex items-center gap-1 cursor-pointer"
-                  >
-                    <ShieldCheck size={13} /> RERA ID: {property.reraId || 'Verified'} <ExternalLink size={10} />
-                  </a>
-                )}
-                {property.titleVerified && (
-                  <span className="badge-green">Title Deed Verified</span>
-                )}
+                <span className="badge-green inline-flex items-center gap-1">
+                  1% Listing Commission
+                </span>
+                <span className="text-xs text-stone-500 font-mono">Market Estimate</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900">{property.title}</h1>
               <p className="flex items-center gap-1.5 text-sm text-gray-500 mt-2">
@@ -259,7 +249,7 @@ export default function PropertyDetail() {
                       <strong>Carpet Area Efficiency: {((property.carpetAreaSqFt / property.superAreaSqFt) * 100).toFixed(0)}%</strong> (Net usable carpet space: {property.carpetAreaSqFt} sq.ft vs {property.superAreaSqFt} sq.ft super built-up)
                     </span>
                     <span className="text-[11px] font-semibold text-amber-800">
-                      Rajasthan RERA Carpet Compliant
+                      Usable Carpet Area Disclosed
                     </span>
                   </div>
                 )}

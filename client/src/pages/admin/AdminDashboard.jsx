@@ -359,7 +359,7 @@ export default function AdminDashboard() {
           <div className="card p-5">
             <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Pending Buy Properties</div>
             <div className="text-2xl font-bold text-amber-600 mt-2">{stats?.pendingProperties ?? 0}</div>
-            <div className="text-xs text-gray-500 mt-1">Awaiting RERA & JDA review</div>
+            <div className="text-xs text-gray-500 mt-1">Awaiting coordinator review</div>
           </div>
           <div className="card p-5">
             <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Pending Accommodations</div>
@@ -493,10 +493,7 @@ export default function AdminDashboard() {
                               ? item.stayType
                               : item.assetClass}
                           </span>
-                          {item.jdaApproved && <span className="badge-green text-xs">JDA Approved</span>}
-                          {item.reraRegistered && (
-                            <span className="badge-green text-xs">RERA: {item.reraId || 'Yes'}</span>
-                          )}
+                          <span className="badge-stone text-xs">Direct Verification</span>
                         </div>
                         <h4 className="text-base font-bold text-gray-900">{item.title}</h4>
                         <p className="text-xs text-gray-500 mt-1">
@@ -933,7 +930,7 @@ export default function AdminDashboard() {
               <textarea
                 rows={3}
                 className="input-field text-xs mb-4 resize-none"
-                placeholder="e.g. Missing title deed, invalid RERA registration number, or incomplete pricing breakdown..."
+                placeholder="e.g. Missing ownership documents, unverified contact information, or incomplete pricing breakdown..."
                 value={rejectionReason}
                 onChange={(e) => setRejectionReason(e.target.value)}
               />

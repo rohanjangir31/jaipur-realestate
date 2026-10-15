@@ -120,9 +120,6 @@ export const buyApi = {
       if (params.maxPrice) {
         filtered = filtered.filter(p => p.price <= Number(params.maxPrice));
       }
-      if (params.reraOnly) {
-        filtered = filtered.filter(p => p.reraRegistered === true);
-      }
       if (params.sortBy === 'price_asc') {
         filtered.sort((a, b) => a.price - b.price);
       } else if (params.sortBy === 'price_desc') {

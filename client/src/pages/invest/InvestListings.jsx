@@ -3,43 +3,36 @@ import { Link, useSearchParams } from 'react-router-dom';
 import {
   MapPin,
   Building2,
-  FileCheck2,
   RotateCcw,
   SlidersHorizontal,
   ArrowRight,
-  ShieldAlert,
+  MessageSquare,
+  Sparkles,
 } from 'lucide-react';
 import { investApi } from '../../services/api';
 import { formatINR, JAIPUR_LOCALITIES } from '../../utils/formatters';
 import { useAuth } from '../../context/AuthContext';
 import { usePageMeta } from '../../utils/usePageMeta';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
+import { CONTACT_NUMBERS } from '../../utils/contact';
 
 const ASSET_CLASSES = [
   'Pre-Leased Commercial',
-  'High-Growth Land',
-  'Serviced Apartment',
-  'Serviced Apartments',
-  'Industrial Warehouse',
-  'Mixed Use Development',
-];
-
-const RISK_CATEGORIES = [
-  'Conservative (Cash Flow)',
-  'Moderate (Balanced)',
-  'Balanced (Hybrid)',
-  'Growth (Capital Appreciation)',
-  'Aggressive (High Growth)',
+  'Commercial Office Lease',
+  'Retail Showroom Lease',
+  'Industrial Lease',
+  'Commercial Land Lease',
 ];
 
 export default function InvestListings() {
   usePageMeta({
-    title: 'Commercial Property & Land Investment in Jaipur | High Yields',
-    description: 'Pre-leased bank branches, high-street retail showrooms, and industrial land in Jaipur with verified lease deeds.',
+    title: 'Rent & Lease Commercial Real Estate in Jaipur | Offices & Shops',
+    description: 'Pre-leased bank branches, high-street retail showrooms, and office spaces for rent and lease in Jaipur. 1% listing commission.',
   });
 
   const [searchParams, setSearchParams] = useSearchParams();
   const { isAuthenticated } = useAuth();
+  const primaryPhone = CONTACT_NUMBERS[0];
 
   const [assets, setAssets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,7 +40,6 @@ export default function InvestListings() {
 
   // Filters initialized from URL
   const [assetClass, setAssetClass] = useState(searchParams.get('assetClass') || '');
-  const [riskCategory, setRiskCategory] = useState(searchParams.get('riskCategory') || '');
   const [locality, setLocality] = useState(searchParams.get('locality') || '');
   const [maxTicket, setMaxTicket] = useState(searchParams.get('maxTicket') || '');
   const [sortBy, setSortBy] = useState(searchParams.get('sortBy') || 'ticketAsc');
@@ -58,7 +50,6 @@ export default function InvestListings() {
       setError('');
       const params = {
         assetClass: assetClass || undefined,
-        riskCategory: riskCategory || undefined,
         locality: locality || undefined,
         maxTicket: maxTicket || undefined,
         sortBy,
@@ -66,16 +57,15 @@ export default function InvestListings() {
       const res = await investApi.getAssets(params);
       setAssets(res.data.data.assets || []);
     } catch (err) {
-      setError(err.response?.data?.message || 'Unable to retrieve investment assets at this time.');
+      setError(err.response?.data?.message || 'Unable to retrieve commercial listings at this time.');
     } finally {
       setLoading(false);
     }
   };
 
-  // Sync state with URL search params whenever URL changes (e.g. from footer links or browser navigation)
+  // Sync state with URL search params whenever URL changes
   useEffect(() => {
     setAssetClass(searchParams.get('assetClass') || '');
-    setRiskCategory(searchParams.get('riskCategory') || '');
     setLocality(searchParams.get('locality') || '');
     setMaxTicket(searchParams.get('maxTicket') || '');
     setSortBy(searchParams.get('sortBy') || 'ticketAsc');
@@ -83,15 +73,19 @@ export default function InvestListings() {
 
   useEffect(() => {
     fetchAssets();
-  }, [assetClass, riskCategory, locality, maxTicket, sortBy]);
+  }, [assetClass, locality, maxTicket, sortBy]);
 
   const handleResetFilters = () => {
     setAssetClass('');
-    setRiskCategory('');
     setLocality('');
     setMaxTicket('');
     setSortBy('ticketAsc');
     setSearchParams({});
+  };
+
+  const getWhatsAppLink = (title, loc) => {
+    const text = encodeURIComponent(`Hello Jaipur Estates, I would like to inquire about "${title}" in ${loc} for Rent / Lease.`);
+    return `https://wa.me/${primaryPhone.cleanNumber}?text=${text}`;
   };
 
   return (
@@ -100,91 +94,60 @@ export default function InvestListings() {
         {/* Top Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div>
-            <span className="section-label">Commercial & Land Assets</span>
-            <h1 className="section-title">Commercial Real Estate in Jaipur</h1>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="section-label">Commercial &amp; Retail</span>
+              <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-terracotta-50 text-terracotta-800 border border-terracotta-200">
+                1% Listing Commission
+              </span>
+            </div>
+            <h1 className="section-title">Rent &amp; Lease in Jaipur</h1>
             <p className="section-subtitle">
-              Pre-leased banking assets, retail showrooms, and institutional land parcels with verifiable historical lease agreements.
+              Commercial office spaces, pre-leased bank branches, high-street retail showrooms, and industrial warehouses.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
-            {isAuthenticated ? (
-              <Link
-                to="/invest/matches"
-                className="btn-primary text-xs !py-2 !px-4 whitespace-nowrap shadow-sm"
-              >
-                My Matched Assets
-              </Link>
-            ) : (
-              <Link
-                to="/auth/login"
-                className="btn-secondary text-xs !py-2 !px-4 whitespace-nowrap"
-              >
-                Sign in to Match Criteria
-              </Link>
-            )}
-            <Link to="/invest/criteria" className="btn-secondary text-xs !py-2 !px-4 whitespace-nowrap">
-              Configure Criteria
-            </Link>
-          </div>
-        </div>
-
-        {/* Regulatory & Risk Transparency Banner */}
-        <div className="border border-stone-200 bg-white rounded-lg p-4 mb-8 text-xs text-stone-600 flex items-start gap-3 shadow-soft">
-          <ShieldAlert size={18} className="text-stone-700 shrink-0 mt-0.5" />
-          <div className="leading-relaxed">
-            <strong className="text-stone-900 block font-semibold mb-0.5">
-              Due Diligence Notice
-            </strong>
-            All financial parameters (including historical rental yields, lock-in periods, and rent escalation terms) represent factual clauses from executed lease deeds. JaipurEstates does not guarantee rental returns or provide financial advisory. Buyers must conduct independent legal and tax due diligence prior to signing registered deeds.
-          </div>
-        </div>
-
-        {/* Quick Filter Asset Class Chips */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6 no-scrollbar text-xs">
-          <span className="text-stone-500 font-medium whitespace-nowrap flex items-center gap-1">
-            <SlidersHorizontal size={13} /> Asset Category:
-          </span>
-          <button
-            onClick={() => setAssetClass('')}
-            className={`px-3 py-1.5 rounded text-xs font-medium transition-colors whitespace-nowrap ${
-              assetClass === ''
-                ? 'bg-stone-900 text-white'
-                : 'bg-white border border-stone-200 text-stone-700 hover:bg-stone-100'
-            }`}
-          >
-            All Categories
-          </button>
-          {ASSET_CLASSES.slice(0, 4).map((ac) => (
-            <button
-              key={ac}
-              onClick={() => setAssetClass(assetClass === ac ? '' : ac)}
-              className={`px-3 py-1.5 rounded text-xs font-medium transition-colors whitespace-nowrap ${
-                assetClass === ac
-                  ? 'bg-terracotta-700 text-white'
-                  : 'bg-white border border-stone-200 text-stone-700 hover:bg-stone-100'
-              }`}
+            <a
+              href={`https://wa.me/${primaryPhone.cleanNumber}?text=Hello%20Jaipur%20Estates%2C%20I%20want%20to%20list%20a%20commercial%20space%20for%20rent%20or%20lease`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-terracotta text-xs !py-2.5 !px-4 whitespace-nowrap shadow-sm flex items-center gap-1.5"
             >
-              {ac}
-            </button>
-          ))}
+              <MessageSquare size={14} />
+              <span>List Space for Lease</span>
+            </a>
+          </div>
         </div>
 
-        {/* Filter Panel */}
+        {/* Informational Advisory Notice */}
+        <div className="border border-stone-200 bg-white rounded-xl p-4 mb-8 text-xs text-stone-600 shadow-soft">
+          <strong className="text-stone-900 block font-semibold mb-0.5">
+            Estimated Reference Notice
+          </strong>
+          All rental yields and escalation figures displayed are estimated market benchmarks based on historical agreements. No future financial returns or commitments are guaranteed. Standard 1% listing and brokerage commission applies.
+        </div>
+
+        {/* Filter Bar */}
         <div className="bg-white rounded-xl p-5 mb-8 border border-stone-200 shadow-soft">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-            {/* Risk Category */}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              fetchAssets();
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"
+          >
+            {/* Asset Class */}
             <div>
-              <label className="block text-xs font-medium text-stone-600 mb-1">Profile</label>
+              <label className="block text-xs font-medium text-stone-600 mb-1">Space Category</label>
               <select
-                value={riskCategory}
-                onChange={(e) => setRiskCategory(e.target.value)}
-                className="input-field text-xs py-2"
+                value={assetClass}
+                onChange={(e) => setAssetClass(e.target.value)}
+                className="input-field text-xs"
               >
-                <option value="">All Profiles</option>
-                {RISK_CATEGORIES.map((rc) => (
-                  <option key={rc} value={rc}>
-                    {rc}
+                <option value="">All Categories</option>
+                {ASSET_CLASSES.map((cls) => (
+                  <option key={cls} value={cls}>
+                    {cls}
                   </option>
                 ))}
               </select>
@@ -196,7 +159,7 @@ export default function InvestListings() {
               <select
                 value={locality}
                 onChange={(e) => setLocality(e.target.value)}
-                className="input-field text-xs py-2"
+                className="input-field text-xs"
               >
                 <option value="">All Jaipur Localities</option>
                 {JAIPUR_LOCALITIES.map((loc) => (
@@ -207,35 +170,18 @@ export default function InvestListings() {
               </select>
             </div>
 
-            {/* Ticket Size Max */}
+            {/* Max Ticket / Value */}
             <div>
-              <label className="block text-xs font-medium text-stone-600 mb-1">Max Ticket Size</label>
+              <label className="block text-xs font-medium text-stone-600 mb-1">Max Budget / Entry</label>
               <select
                 value={maxTicket}
                 onChange={(e) => setMaxTicket(e.target.value)}
-                className="input-field text-xs py-2"
+                className="input-field text-xs"
               >
                 <option value="">Any Budget</option>
-                <option value="5000000">Up to ₹50 Lakh</option>
-                <option value="10000000">Up to ₹1 Crore</option>
-                <option value="25000000">Up to ₹2.5 Crore</option>
-                <option value="50000000">Up to ₹5 Crore</option>
-                <option value="100000000">Up to ₹10 Crore</option>
-              </select>
-            </div>
-
-            {/* Sort */}
-            <div>
-              <label className="block text-xs font-medium text-stone-600 mb-1">Sort By</label>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="input-field text-xs py-2"
-              >
-                <option value="ticketAsc">Ticket Size: Low to High</option>
-                <option value="ticketDesc">Ticket Size: High to Low</option>
-                <option value="yieldDesc">Historical Yield: High to Low</option>
-                <option value="createdAt">Newest First</option>
+                <option value="5000000">Under ₹50 Lakh</option>
+                <option value="10000000">Under ₹1 Crore</option>
+                <option value="25000000">Under ₹2.5 Crore</option>
               </select>
             </div>
 
@@ -244,19 +190,20 @@ export default function InvestListings() {
               <button
                 type="button"
                 onClick={handleResetFilters}
-                className="btn-secondary !py-2 text-xs w-full justify-center"
+                className="btn-secondary w-full text-xs !py-2.5 justify-center flex items-center gap-1.5"
               >
-                <RotateCcw size={13} /> Reset
+                <RotateCcw size={14} />
+                <span>Reset Filters</span>
               </button>
             </div>
-          </div>
+          </form>
         </div>
 
-        {/* Assets Catalog */}
+        {/* Asset Cards */}
         {loading ? (
           <div className="py-24 flex flex-col justify-center items-center">
             <LoadingSpinner size="lg" />
-            <p className="text-stone-500 text-xs mt-3">Loading commercial assets...</p>
+            <p className="text-stone-500 text-xs mt-3">Loading listings...</p>
           </div>
         ) : error ? (
           <div className="bg-red-50 border border-red-200 text-red-800 rounded-lg p-6 text-center max-w-md mx-auto">
@@ -268,9 +215,9 @@ export default function InvestListings() {
         ) : assets.length === 0 ? (
           <div className="card p-12 text-center max-w-md mx-auto">
             <Building2 size={32} className="mx-auto text-stone-400 mb-3" />
-            <h3 className="font-serif text-lg text-stone-900">No assets found</h3>
+            <h3 className="font-serif text-lg text-stone-900">No spaces found</h3>
             <p className="text-stone-500 text-xs mt-1">
-              No commercial listings match your current filters. Try adjusting your ticket size or category.
+              No commercial listings match your current filters. Try adjusting your selections.
             </p>
             <button onClick={handleResetFilters} className="btn-primary text-xs mt-4">
               Clear Filters
@@ -279,15 +226,15 @@ export default function InvestListings() {
         ) : (
           <div>
             <div className="flex items-center justify-between text-xs text-stone-500 mb-5">
-              <span>Showing <strong>{assets.length}</strong> commercial & land assets</span>
-              <span>All investment figures reflect historical actuals</span>
+              <span>Showing <strong>{assets.length}</strong> commercial spaces for rent &amp; lease</span>
+              <span>All figures are estimated benchmarks (Est. ₹)</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {assets.map((asset) => (
                 <div
                   key={asset._id}
-                  className="card group flex flex-col hover:border-stone-400 transition-colors"
+                  className="card group flex flex-col hover:border-stone-400 transition-colors bg-white"
                 >
                   {/* Image & Badges */}
                   <div className="relative aspect-[16/10] bg-stone-900 overflow-hidden">
@@ -304,27 +251,18 @@ export default function InvestListings() {
                       <span className="badge-dark text-[11px] font-medium">
                         {asset.assetClass}
                       </span>
-                      {asset.jdaApproved && (
-                        <span className="badge-blue text-[11px]">JDA Approved</span>
-                      )}
+                      <span className="bg-terracotta-700/90 text-white text-[10px] font-semibold px-2 py-0.5 rounded backdrop-blur-sm">
+                        1% Commission
+                      </span>
                     </div>
 
-                    <div className="absolute bottom-3 right-3 bg-stone-900/90 text-white px-2 py-0.5 rounded text-[11px] font-medium z-10">
-                      {asset.riskCategory.split(' ')[0]}
+                    <div className="absolute bottom-3 right-3 bg-stone-900/90 text-white px-2.5 py-1 rounded text-xs font-bold z-10 shadow">
+                      {formatINR(asset.entryTicketSizeINR)}
                     </div>
                   </div>
 
                   {/* Body Content */}
                   <div className="p-5 flex-1 flex flex-col">
-                    <div className="mb-2">
-                      <span className="text-[10px] text-stone-400 font-medium uppercase tracking-wider block">
-                        Entry Ticket Size
-                      </span>
-                      <div className="text-2xl font-semibold text-stone-950">
-                        {formatINR(asset.entryTicketSizeINR)}
-                      </div>
-                    </div>
-
                     <h3 className="font-serif font-medium text-stone-900 line-clamp-1 text-base mb-1.5 group-hover:text-terracotta-700 transition-colors">
                       {asset.title}
                     </h3>
@@ -337,33 +275,39 @@ export default function InvestListings() {
                     {/* Lease Matrix */}
                     <div className="grid grid-cols-2 gap-3 py-2.5 border-y border-stone-100 text-xs text-stone-600 mb-4 bg-stone-50/60 p-2.5 rounded">
                       <div>
-                        <span className="text-stone-400 block text-[10px]">Current Tenant</span>
+                        <span className="text-stone-400 block text-[10px]">Current Use</span>
                         <span className="font-medium text-stone-800 line-clamp-1">
-                          {asset.currentTenantProfile || 'Self / Vacant'}
+                          {asset.currentTenantProfile || 'Commercial Space'}
                         </span>
                       </div>
                       <div>
                         <span className="text-stone-400 block text-[10px]">Historical Yield</span>
                         <span className="font-medium text-stone-800">
-                          {asset.historicalRentalYieldPct ? `${asset.historicalRentalYieldPct}% p.a.` : 'Capital Gain'}
+                          {asset.historicalRentalYieldPct ? `Est. ${asset.historicalRentalYieldPct}% p.a.` : 'Commercial Lease'}
                         </span>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1.5 text-xs text-stone-500 mb-4">
-                      <FileCheck2 size={14} className="text-stone-400 shrink-0" />
-                      <span>
-                        {asset.titleVerified ? 'Title Deed Audited' : 'Due Diligence Package Ready'}
-                      </span>
-                    </div>
+                    <p className="text-xs text-stone-600 line-clamp-2 mb-4 leading-relaxed">
+                      {asset.description}
+                    </p>
 
                     {/* CTA */}
-                    <div className="mt-auto">
-                      <Link
-                        to={`/invest/${asset._id}`}
-                        className="btn-primary w-full text-xs py-2 justify-center"
+                    <div className="mt-auto space-y-2 pt-1">
+                      <a
+                        href={getWhatsAppLink(asset.title, asset.locality)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-terracotta w-full text-xs !py-2 justify-center flex items-center gap-1.5"
                       >
-                        <span>Review Due Diligence & Inquire</span>
+                        <MessageSquare size={13} />
+                        <span>Inquire Now (WhatsApp)</span>
+                      </a>
+                      <Link
+                        to={`/invest/assets/${asset._id}`}
+                        className="btn-secondary w-full text-xs !py-1.5 justify-center text-stone-700 hover:text-stone-900"
+                      >
+                        <span>View Details</span>
                         <ArrowRight size={13} />
                       </Link>
                     </div>

@@ -178,7 +178,8 @@ export default function StayDetail() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="badge bg-rose-100 text-rose-800 font-semibold">{stay.stayType}</span>
-                <span className="badge-green">Verified Host Listing</span>
+                <span className="badge-green">1% Listing Commission</span>
+                <span className="text-xs text-stone-500 font-mono">Market Estimate</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900">{stay.title}</h1>
               <p className="flex items-center gap-1.5 text-sm text-gray-500 mt-2">
@@ -190,7 +191,7 @@ export default function StayDetail() {
             </div>
             <div className="text-left md:text-right">
               <div className="text-3xl font-bold text-gray-900">
-                ₹{stay.basePricePerNight.toLocaleString('en-IN')}
+                Est. ₹{stay.basePricePerNight.toLocaleString('en-IN')}
                 <span className="text-sm font-normal text-gray-500 ml-1">/ night</span>
               </div>
               <div className="text-xs text-gray-500 mt-1">

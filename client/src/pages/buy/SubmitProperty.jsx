@@ -34,9 +34,7 @@ const schema = z.object({
   possessionStatus: z.enum(['Ready to Move', 'Under Construction']),
   price: z.coerce.number().min(100000, 'Minimum price is ₹1 Lakh'),
   isNegotiable: z.boolean().default(false),
-  ownershipType: z.enum(['Freehold', 'JDA Approved Leasehold', 'Patta', 'Other']),
-  reraRegistered: z.boolean().default(false),
-  reraId: z.string().optional(),
+  ownershipType: z.enum(['Freehold', 'Leasehold', 'Patta', 'Other']),
   coverImageUrl: z.string().url('Cover image must be a valid image URL'),
   galleryImages: z.string().optional(),
   amenitiesList: z.string().optional(),
@@ -62,12 +60,9 @@ export default function SubmitProperty() {
       bhk: 2,
       bathrooms: 2,
       isNegotiable: false,
-      reraRegistered: false,
       coverImageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
     },
   });
-
-  const isRera = watch('reraRegistered');
 
   const onSubmit = async (formData) => {
     try {
@@ -100,8 +95,6 @@ export default function SubmitProperty() {
         price: Number(formData.price),
         isNegotiable: formData.isNegotiable,
         ownershipType: formData.ownershipType,
-        reraRegistered: formData.reraRegistered,
-        reraId: formData.reraRegistered ? formData.reraId : '',
         coverImageUrl: formData.coverImageUrl,
         galleryImageUrls,
         amenities,
@@ -123,7 +116,7 @@ export default function SubmitProperty() {
           </div>
           <h2 className="text-2xl font-serif font-bold text-gray-900">Submitted for Review</h2>
           <p className="text-sm text-gray-600 leading-relaxed">
-            Your property listing has been successfully submitted! Our team will review the legal details and RERA certification before making it publicly visible on the platform.
+            Your property listing has been successfully submitted! Our team will review the details and verify pricing before making it publicly visible on the platform. Standard 1% commission applies upon deal closing.
           </p>
           <div className="pt-4 flex flex-col gap-2">
             <Link to="/buy" className="btn-primary text-sm justify-center">
@@ -323,7 +316,7 @@ export default function SubmitProperty() {
                   <label className="block text-xs font-semibold text-gray-700 mb-1">Ownership Type</label>
                   <select className="input-field" {...register('ownershipType')}>
                     <option value="Freehold">Freehold</option>
-                    <option value="JDA Approved Leasehold">JDA Approved Leasehold</option>
+                    <option value="Leasehold">Leasehold</option>
                     <option value="Patta">Patta</option>
                     <option value="Other">Other</option>
                   </select>
@@ -331,9 +324,9 @@ export default function SubmitProperty() {
               </div>
             </div>
 
-            {/* Section 4: Pricing & Legal */}
+            {/* Section 4: Pricing */}
             <div className="border-t border-gray-100 pt-6">
-              <h3 className="text-base font-semibold text-gray-900 mb-3">4. Pricing & Legal Details</h3>
+              <h3 className="text-base font-semibold text-gray-900 mb-3">4. Pricing & Commission</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 mb-1">Expected Price (₹ INR)</label>
@@ -358,29 +351,9 @@ export default function SubmitProperty() {
                   </label>
                 </div>
 
-                <div className="sm:col-span-2 bg-gray-50 p-4 rounded-xl space-y-3">
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      id="reraRegistered"
-                      className="rounded text-brand-600 focus:ring-brand-500"
-                      {...register('reraRegistered')}
-                    />
-                    <label htmlFor="reraRegistered" className="text-xs text-gray-900 font-semibold cursor-pointer">
-                      Property is RERA Registered
-                    </label>
-                  </div>
-                  {isRera && (
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-700 mb-1">RERA Registration ID</label>
-                      <input
-                        type="text"
-                        placeholder="e.g. RAJ/P/2023/1234"
-                        className="input-field text-xs bg-white"
-                        {...register('reraId')}
-                      />
-                    </div>
-                  )}
+                <div className="sm:col-span-2 bg-stone-50 border border-stone-200 p-3.5 rounded-xl text-xs text-stone-600">
+                  <strong className="text-stone-900 block font-semibold mb-0.5">Transparent 1% Listing Commission</strong>
+                  Standard 1% listing and brokerage commission applies only upon successfully concluded transactions. No upfront fees.
                 </div>
               </div>
             </div>

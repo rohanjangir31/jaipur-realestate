@@ -2,28 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
   MapPin,
-  ShieldCheck,
-  Plus,
+  Building,
   RotateCcw,
   SlidersHorizontal,
   ArrowRight,
-  Building,
+  Plus,
+  MessageSquare,
+  Sparkles,
 } from 'lucide-react';
 import { buyApi } from '../../services/api';
 import { formatINR, JAIPUR_LOCALITIES } from '../../utils/formatters';
 import { useAuth } from '../../context/AuthContext';
 import { usePageMeta } from '../../utils/usePageMeta';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
-
-const PROPERTY_TYPES = [
-  'Apartment/Flat',
-  'Independent House/Villa',
-  'Builder Floor',
-  'Plot/Land',
-  'Commercial Office/Shop',
-  'Commercial Showroom',
-  'Penthouse',
-];
+import { CONTACT_NUMBERS } from '../../utils/contact';
 
 const QUICK_LOCALITIES = [
   'Vaishali Nagar',
@@ -35,24 +27,24 @@ const QUICK_LOCALITIES = [
 
 export default function BuyListings() {
   usePageMeta({
-    title: 'Buy Property in Jaipur | Verified Apartments, Villas & Plots',
-    description: 'Search verified apartments in Vaishali Nagar, villas in Jagatpura, and plots in Jaipur with genuine RERA verification.',
+    title: 'Buy & Sell Property in Jaipur | Apartments, Villas & Plots',
+    description: 'Explore estimated market prices for verified apartments in Vaishali Nagar, villas in Jagatpura, and plots in Jaipur. 1% standard listing commission.',
   });
 
   const [searchParams, setSearchParams] = useSearchParams();
   const { isAuthenticated, hasRole } = useAuth();
+  const primaryPhone = CONTACT_NUMBERS[0];
 
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Filter States initialized from URL params if present
+  // Filters initialized from URL
   const [locality, setLocality] = useState(searchParams.get('locality') || '');
   const [propertyType, setPropertyType] = useState(searchParams.get('propertyType') || '');
   const [bhk, setBhk] = useState(searchParams.get('bhk') || '');
   const [minPrice, setMinPrice] = useState(searchParams.get('minPrice') || '');
   const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') || '');
-  const [reraOnly, setReraOnly] = useState(searchParams.get('reraOnly') === 'true');
   const [sortBy, setSortBy] = useState(searchParams.get('sortBy') || 'createdAt');
 
   const fetchProperties = async () => {
@@ -65,7 +57,6 @@ export default function BuyListings() {
         bhk: bhk !== '' ? bhk : undefined,
         minPrice: minPrice || undefined,
         maxPrice: maxPrice || undefined,
-        reraOnly: reraOnly || undefined,
         sortBy,
       };
       const res = await buyApi.getProperties(params);
@@ -77,20 +68,19 @@ export default function BuyListings() {
     }
   };
 
-  // Sync state with URL search params whenever URL changes (e.g. from footer links or browser navigation)
+  // Sync state with URL search params whenever URL changes
   useEffect(() => {
     setLocality(searchParams.get('locality') || '');
     setPropertyType(searchParams.get('propertyType') || '');
     setBhk(searchParams.get('bhk') || '');
     setMinPrice(searchParams.get('minPrice') || '');
     setMaxPrice(searchParams.get('maxPrice') || '');
-    setReraOnly(searchParams.get('reraOnly') === 'true');
     setSortBy(searchParams.get('sortBy') || 'createdAt');
   }, [searchParams]);
 
   useEffect(() => {
     fetchProperties();
-  }, [locality, propertyType, bhk, minPrice, maxPrice, reraOnly, sortBy]);
+  }, [locality, propertyType, bhk, minPrice, maxPrice, sortBy]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -103,9 +93,13 @@ export default function BuyListings() {
     setBhk('');
     setMinPrice('');
     setMaxPrice('');
-    setReraOnly(false);
     setSortBy('createdAt');
     setSearchParams({});
+  };
+
+  const getWhatsAppLink = (title, loc) => {
+    const text = encodeURIComponent(`Hello Jaipur Estates, I would like to inquire about "${title}" in ${loc}.`);
+    return `https://wa.me/${primaryPhone.cleanNumber}?text=${text}`;
   };
 
   return (
@@ -114,17 +108,22 @@ export default function BuyListings() {
         {/* Header & Quick Action */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div>
-            <span className="section-label">Residential & Commercial</span>
-            <h1 className="section-title">Properties for Sale in Jaipur</h1>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="section-label">Residential &amp; Commercial</span>
+              <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-terracotta-50 text-terracotta-800 border border-terracotta-200">
+                1% Listing Commission
+              </span>
+            </div>
+            <h1 className="section-title">Buy &amp; Sell in Jaipur</h1>
             <p className="section-subtitle">
-              Verified apartments, independent villas, builder floors, and land parcels across Jaipur localities.
+              Verified apartments, independent villas, builder floors, and land parcels with estimated market pricing.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             <Link
               to="/buy/submit"
-              className="btn-primary text-xs !py-2 !px-4 whitespace-nowrap shadow-sm"
+              className="btn-terracotta text-xs !py-2.5 !px-4 whitespace-nowrap shadow-sm"
             >
               <Plus size={15} /> Post Property for Sale
             </Link>
@@ -159,28 +158,18 @@ export default function BuyListings() {
               {loc}
             </button>
           ))}
-          <button
-            onClick={() => setReraOnly(!reraOnly)}
-            className={`px-3 py-1.5 rounded text-xs font-medium transition-colors whitespace-nowrap flex items-center gap-1.5 ${
-              reraOnly
-                ? 'bg-emerald-800 text-white'
-                : 'bg-white border border-stone-200 text-emerald-800 hover:bg-emerald-50'
-            }`}
-          >
-            <ShieldCheck size={13} /> RERA Registered Only
-          </button>
         </div>
 
         {/* Filter Panel */}
         <div className="bg-white rounded-xl p-5 mb-8 border border-stone-200 shadow-soft">
-          <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
+          <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
             {/* Locality */}
             <div>
               <label className="block text-xs font-medium text-stone-600 mb-1">Locality</label>
               <select
                 value={locality}
                 onChange={(e) => setLocality(e.target.value)}
-                className="input-field text-xs py-2"
+                className="input-field text-xs"
               >
                 <option value="">All Localities</option>
                 {JAIPUR_LOCALITIES.map((loc) => (
@@ -197,14 +186,13 @@ export default function BuyListings() {
               <select
                 value={propertyType}
                 onChange={(e) => setPropertyType(e.target.value)}
-                className="input-field text-xs py-2"
+                className="input-field text-xs"
               >
-                <option value="">All Property Types</option>
-                {PROPERTY_TYPES.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
+                <option value="">All Types</option>
+                <option value="Apartment/Flat">Apartment/Flat</option>
+                <option value="Independent House/Villa">Independent House/Villa</option>
+                <option value="Penthouse">Penthouse</option>
+                <option value="Commercial Office/Shop">Commercial Office/Shop</option>
               </select>
             </div>
 
@@ -214,14 +202,13 @@ export default function BuyListings() {
               <select
                 value={bhk}
                 onChange={(e) => setBhk(e.target.value)}
-                className="input-field text-xs py-2"
+                className="input-field text-xs"
               >
                 <option value="">Any BHK</option>
                 <option value="1">1 BHK</option>
                 <option value="2">2 BHK</option>
                 <option value="3">3 BHK</option>
-                <option value="4">4 BHK</option>
-                <option value="5">5+ BHK</option>
+                <option value="4">4+ BHK</option>
               </select>
             </div>
 
@@ -231,40 +218,33 @@ export default function BuyListings() {
               <select
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
-                className="input-field text-xs py-2"
+                className="input-field text-xs"
               >
                 <option value="">Any Budget</option>
-                <option value="3000000">Up to ₹30 Lakh</option>
-                <option value="5000000">Up to ₹50 Lakh</option>
-                <option value="7500000">Up to ₹75 Lakh</option>
-                <option value="10000000">Up to ₹1 Crore</option>
-                <option value="20000000">Up to ₹2 Crore</option>
-                <option value="50000000">Up to ₹5 Crore</option>
+                <option value="5000000">Under ₹50 Lakh</option>
+                <option value="10000000">Under ₹1 Crore</option>
+                <option value="20000000">Under ₹2 Crore</option>
               </select>
             </div>
 
-            {/* Sort */}
-            <div>
-              <label className="block text-xs font-medium text-stone-600 mb-1">Sort By</label>
+            {/* Sort & Reset */}
+            <div className="flex items-end gap-2">
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="input-field text-xs py-2"
+                className="input-field text-xs flex-1"
               >
                 <option value="createdAt">Newest First</option>
-                <option value="priceAsc">Price: Low to High</option>
-                <option value="priceDesc">Price: High to Low</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
               </select>
-            </div>
-
-            {/* Reset */}
-            <div className="flex items-end">
               <button
                 type="button"
                 onClick={handleResetFilters}
-                className="btn-secondary !py-2 text-xs w-full justify-center"
+                className="p-2.5 rounded-lg border border-stone-200 text-stone-500 hover:text-stone-900 hover:bg-stone-50 transition-colors"
+                title="Reset Filters"
               >
-                <RotateCcw size={13} /> Reset
+                <RotateCcw size={15} />
               </button>
             </div>
           </form>
@@ -297,15 +277,15 @@ export default function BuyListings() {
         ) : (
           <div>
             <div className="flex items-center justify-between text-xs text-stone-500 mb-5">
-              <span>Showing <strong>{properties.length}</strong> verified properties in Jaipur</span>
-              <span>All prices listed in Indian Rupees (INR)</span>
+              <span>Showing <strong>{properties.length}</strong> properties in Jaipur</span>
+              <span>All figures are estimated market prices (Est. ₹)</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {properties.map((property) => (
                 <div
                   key={property._id}
-                  className="card group flex flex-col hover:border-stone-400 transition-colors"
+                  className="card group flex flex-col hover:border-stone-400 transition-colors bg-white"
                 >
                   {/* Photo */}
                   <div className="relative aspect-[16/10] bg-stone-900 overflow-hidden">
@@ -319,14 +299,12 @@ export default function BuyListings() {
                       }}
                     />
                     <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
-                      {property.reraRegistered && (
-                        <span className="badge-green shadow-sm text-[11px]">
-                          <ShieldCheck size={12} /> RERA Approved
-                        </span>
-                      )}
-                      {property.titleVerified && (
-                        <span className="badge-blue shadow-sm text-[11px]">Title Verified</span>
-                      )}
+                      <span className="bg-stone-900/90 text-white text-[10px] font-semibold px-2 py-0.5 rounded backdrop-blur-sm">
+                        Buy &amp; Sell
+                      </span>
+                      <span className="bg-terracotta-700/90 text-white text-[10px] font-semibold px-2 py-0.5 rounded backdrop-blur-sm">
+                        1% Commission
+                      </span>
                     </div>
 
                     <div className="absolute bottom-3 right-3 badge-dark text-[11px] font-medium z-10">
@@ -339,11 +317,6 @@ export default function BuyListings() {
                     <div className="mb-2">
                       <div className="text-2xl font-semibold text-stone-950">
                         {formatINR(property.price)}
-                        {property.pricePerSqFt && (
-                          <span className="text-xs font-normal text-stone-500 ml-2">
-                            (₹{property.pricePerSqFt.toLocaleString('en-IN')}/sq.ft)
-                          </span>
-                        )}
                       </div>
                     </div>
 
@@ -372,13 +345,22 @@ export default function BuyListings() {
                       </div>
                     </div>
 
-                    {/* Direct inquiry CTA */}
-                    <div className="mt-auto">
+                    {/* Direct inquiry action */}
+                    <div className="mt-auto space-y-2 pt-1">
+                      <a
+                        href={getWhatsAppLink(property.title, property.locality)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-terracotta w-full text-xs !py-2 justify-center flex items-center gap-1.5"
+                      >
+                        <MessageSquare size={13} />
+                        <span>Inquire Now (WhatsApp)</span>
+                      </a>
                       <Link
                         to={`/buy/${property._id}`}
-                        className="btn-primary w-full text-xs py-2 justify-center"
+                        className="btn-secondary w-full text-xs !py-1.5 justify-center text-stone-700 hover:text-stone-900"
                       >
-                        <span>View Details & Inquire</span>
+                        <span>View Details</span>
                         <ArrowRight size={13} />
                       </Link>
                     </div>

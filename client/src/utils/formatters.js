@@ -1,11 +1,17 @@
 /**
- * Format a number as Indian Rupee (e.g., 8500000 → "₹85 Lakh")
+ * Format a number as Indian Rupee with clear estimate notation (e.g., 8500000 → "Est. ₹85 Lakh")
  */
-export const formatINR = (amount) => {
+export const formatINR = (amount, includeEstimate = true) => {
   if (!amount && amount !== 0) return '—';
-  if (amount >= 10_000_000) return `₹${(amount / 10_000_000).toFixed(2)} Cr`;
-  if (amount >= 100_000)    return `₹${(amount / 100_000).toFixed(2)} Lakh`;
-  return `₹${amount.toLocaleString('en-IN')}`;
+  let formatted = '';
+  if (amount >= 10_000_000) {
+    formatted = `₹${(amount / 10_000_000).toFixed(2)} Cr`;
+  } else if (amount >= 100_000) {
+    formatted = `₹${(amount / 100_000).toFixed(2)} Lakh`;
+  } else {
+    formatted = `₹${amount.toLocaleString('en-IN')}`;
+  }
+  return includeEstimate ? `Est. ${formatted}` : formatted;
 };
 
 /**
@@ -14,7 +20,9 @@ export const formatINR = (amount) => {
 export const formatDate = (date) => {
   if (!date) return '—';
   return new Date(date).toLocaleDateString('en-IN', {
-    day: 'numeric', month: 'short', year: 'numeric',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
   });
 };
 
@@ -49,11 +57,11 @@ export const JAIPUR_LOCALITIES = [
  * Get role display label
  */
 export const ROLE_LABELS = {
-  buyer:       'Buyer',
-  owner:       'Property Owner',
-  investor:    'Investor',
-  host:        'Stay Host',
-  agent:       'Agent',
-  admin:       'Admin',
+  buyer: 'Buyer / Seller',
+  owner: 'Property Owner',
+  investor: 'Tenant / Investor',
+  host: 'Airbnb Host',
+  agent: 'Associate',
+  admin: 'Admin',
   super_admin: 'Super Admin',
 };

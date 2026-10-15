@@ -1,9 +1,11 @@
 /**
- * Curated, verified seed catalog of Jaipur real estate properties,
- * commercial investment assets, and short-term heritage stays.
+ * Curated catalog of Jaipur properties across:
+ * 1. Buy & Sell (Residential flats, villas, plots)
+ * 2. Rent & Lease (Commercial offices, retail showrooms, pre-leased spaces)
+ * 3. Airbnb Management & Stays (Turnkey homestays, villas, havelis to buy and run on Airbnb)
  *
- * All listings represent verified Jaipur localities, realistic pricing,
- * actual carpet-to-super area specifications, and official RERA references.
+ * All figures displayed are market estimates.
+ * Standard 1% Listing & Advisory Commission applies.
  */
 
 export const VERIFIED_BUY_PROPERTIES = [
@@ -29,13 +31,10 @@ export const VERIFIED_BUY_PROPERTIES = [
     superAreaSqFt: 1850,
     carpetAreaSqFt: 1420,
     possessionStatus: 'Ready to Move',
-    price: 8500000, // ₹85 Lakh
+    price: 8500000, // Est. ₹85 Lakh
     maintenanceMonthly: 2500,
     isNegotiable: true,
     ownershipType: 'Freehold',
-    reraRegistered: true,
-    reraId: 'RAJ/P/2021/1542',
-    titleVerified: true,
     coverImageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
     galleryImageUrls: [
       'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
@@ -50,7 +49,7 @@ export const VERIFIED_BUY_PROPERTIES = [
     id: 'buy-2',
     title: '4 BHK Independent Duplex Villa in Jagatpura',
     description:
-      'Architecturally designed modern villa on 200 sq. yard JDA approved plot. High ceilings, Italian marble flooring in living hall, private terrace garden, and servant room. Rapid connectivity to Jaipur Airport and Bombay Hospital.',
+      'Architecturally designed modern villa on 200 sq. yard plot. High ceilings, Italian marble flooring in living hall, private terrace garden, and servant room. Rapid connectivity to Jaipur Airport and Bombay Hospital.',
     locality: 'Jagatpura',
     address: 'Sector 7, Model Town Extension, Jagatpura',
     landmark: 'Near Mahal Road, Behind SKIT',
@@ -68,13 +67,10 @@ export const VERIFIED_BUY_PROPERTIES = [
     carpetAreaSqFt: 2200,
     plotAreaSqYd: 200,
     possessionStatus: 'Ready to Move',
-    price: 16500000, // ₹1.65 Cr
+    price: 16500000, // Est. ₹1.65 Cr
     maintenanceMonthly: 0,
     isNegotiable: false,
-    ownershipType: 'JDA Approved Leasehold',
-    reraRegistered: true,
-    reraId: 'RAJ/P/2022/2045',
-    titleVerified: true,
+    ownershipType: 'Freehold Leasehold',
     coverImageUrl: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80',
     galleryImageUrls: [
       'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80',
@@ -105,12 +101,10 @@ export const VERIFIED_BUY_PROPERTIES = [
     superAreaSqFt: 1100,
     carpetAreaSqFt: 880,
     possessionStatus: 'Ready to Move',
-    price: 3600000, // ₹36 Lakh
+    price: 3600000, // Est. ₹36 Lakh
     maintenanceMonthly: 1200,
     isNegotiable: true,
     ownershipType: 'Freehold',
-    reraRegistered: false,
-    titleVerified: true,
     coverImageUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
     galleryImageUrls: [],
     amenities: ['Lift', '24x7 Security', 'Covered Two-Wheeler Parking', 'Water Storage'],
@@ -139,13 +133,10 @@ export const VERIFIED_BUY_PROPERTIES = [
     superAreaSqFt: 1600,
     carpetAreaSqFt: 1350,
     possessionStatus: 'Ready to Move',
-    price: 13500000, // ₹1.35 Cr
+    price: 13500000, // Est. ₹1.35 Cr
     maintenanceMonthly: 4000,
     isNegotiable: false,
     ownershipType: 'Freehold',
-    reraRegistered: true,
-    reraId: 'RAJ/P/2019/987',
-    titleVerified: true,
     coverImageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
     galleryImageUrls: [],
     amenities: ['Central Air Conditioning', 'High Speed Elevators', 'Power Backup', 'Fire Fighting System', 'Visitor Parking'],
@@ -155,9 +146,9 @@ export const VERIFIED_BUY_PROPERTIES = [
   {
     _id: 'buy-5',
     id: 'buy-5',
-    title: '3 BHK High-Rise Penthouse with Panoramic Aravali Views',
+    title: '3 BHK High-Rise Penthouse with Panoramic Views',
     description:
-      'New launch penthouse offering unobstructed skyline views. Expansive master suite, open kitchen with island counter, wrap-around sunset deck, and world-class clubhouse amenities in Jagatpura.',
+      'Penthouse offering unobstructed skyline views. Expansive master suite, open kitchen with island counter, wrap-around sunset deck, and clubhouse amenities in Jagatpura.',
     locality: 'Jagatpura',
     address: 'Skyline Heights, Mahal Road, Jagatpura',
     landmark: 'Opposite Bombay Hospital Road',
@@ -174,13 +165,10 @@ export const VERIFIED_BUY_PROPERTIES = [
     superAreaSqFt: 2450,
     carpetAreaSqFt: 1980,
     possessionStatus: 'Under Construction',
-    price: 14500000, // ₹1.45 Cr
+    price: 14500000, // Est. ₹1.45 Cr
     maintenanceMonthly: 3000,
     isNegotiable: false,
     ownershipType: 'Freehold',
-    reraRegistered: true,
-    reraId: 'RAJ/P/2023/3412',
-    titleVerified: true,
     coverImageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
     galleryImageUrls: [],
     amenities: ['Clubhouse', 'Swimming Pool', 'Gymnasium', 'Visitor Parking', 'Intercom', 'Jogging Track'],
@@ -193,16 +181,16 @@ export const VERIFIED_INVESTMENT_ASSETS = [
   {
     _id: 'inv-1',
     id: 'inv-1',
-    title: 'Pre-Leased Nationalized Bank Branch on Tonk Road',
+    title: 'Pre-Leased Commercial Bank Branch on Tonk Road',
     description:
-      'Ground floor retail banking branch pre-leased to a leading public sector bank on a 9-year registered lease deed. High visibility corner location on main Tonk Road with dedicated ATM room and robust cash flow.',
+      'Ground floor retail banking branch pre-leased on a 9-year registered lease deed. High visibility corner location on main Tonk Road with dedicated ATM room and steady monthly rental cash flow.',
     assetClass: 'Pre-Leased Commercial',
-    riskCategory: 'Conservative (Cash Flow)',
+    rentType: 'Long-Term Lease',
     locality: 'Tonk Road',
     address: 'Ground Floor, Mahaveer Nagar, Main Tonk Road',
     pinCode: '302018',
-    entryTicketSizeINR: 6000000, // ₹60 Lakh
-    totalAssetValueINR: 18000000, // ₹1.8 Crore
+    entryTicketSizeINR: 6000000, // Est. ₹60 Lakh
+    totalAssetValueINR: 18000000, // Est. ₹1.8 Crore
     historicalRentalYieldPct: 7.2,
     lastRentalYieldYear: 'FY 2023-24',
     currentTenantProfile: 'Tier-1 Public Sector Bank (Regional Branch)',
@@ -210,9 +198,6 @@ export const VERIFIED_INVESTMENT_ASSETS = [
     leaseRemainingMonths: 72,
     lockInPeriodMonths: 36,
     annualEscalationPct: 15,
-    jdaApproved: true,
-    reraRegistered: false,
-    titleVerified: true,
     ownershipType: 'Freehold',
     coverImageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
     galleryImageUrls: [
@@ -224,27 +209,23 @@ export const VERIFIED_INVESTMENT_ASSETS = [
   {
     _id: 'inv-2',
     id: 'inv-2',
-    title: 'JDA Approved Industrial Plot in Sitapura Growth Corridor',
+    title: 'Industrial Warehouse & Logistics Plot in Sitapura Corridor',
     description:
-      'Prime 1,000 sq. meter commercial/industrial plot situated in RIICO Industrial Area, Sitapura. Ideal for warehousing, light manufacturing, or engineering design facilities with direct arterial connectivity to Ring Road and Jaipur Airport.',
-    assetClass: 'High-Growth Land',
-    riskCategory: 'Growth (Capital Appreciation)',
+      'Prime 1,000 sq. meter commercial/industrial parcel situated in RIICO Industrial Area, Sitapura. Ideal for warehousing, light manufacturing, or engineering design facilities with arterial connectivity to Ring Road and Jaipur Airport.',
+    assetClass: 'Industrial Lease',
+    rentType: 'Long-Term Land Lease',
     locality: 'Sitapura',
     address: 'Phase III, Sitapura Industrial Area',
     pinCode: '302022',
-    entryTicketSizeINR: 4000000, // ₹40 Lakh
-    totalAssetValueINR: 12000000, // ₹1.2 Crore
+    entryTicketSizeINR: 4000000, // Est. ₹40 Lakh
+    totalAssetValueINR: 12000000, // Est. ₹1.2 Crore
     historicalRentalYieldPct: null,
     lastRentalYieldYear: '',
-    currentTenantProfile: 'Vacant Land / Development Ready',
+    currentTenantProfile: 'Industrial / Logistics Space',
     leaseRegistered: false,
     leaseRemainingMonths: 0,
     lockInPeriodMonths: 0,
     annualEscalationPct: 0,
-    jdaApproved: true,
-    reraRegistered: true,
-    reraId: 'RAJ/P/2022/1908',
-    titleVerified: true,
     ownershipType: 'Industrial Lease',
     coverImageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
     galleryImageUrls: [],
@@ -254,16 +235,16 @@ export const VERIFIED_INVESTMENT_ASSETS = [
   {
     _id: 'inv-3',
     id: 'inv-3',
-    title: 'Serviced Apartment Floor Plate near World Trade Park',
+    title: 'Serviced Corporate Floor Plate near World Trade Park',
     description:
-      'Consolidated residential floor plate consisting of four boutique studio apartments operating under a unified hospitality lease. Located within walking distance to WTP, Gaurav Tower, and premier corporate offices in South Jaipur.',
-    assetClass: 'Serviced Apartment',
-    riskCategory: 'Moderate (Balanced)',
+      'Consolidated floor plate consisting of four boutique studio suites operating under unified corporate lease. Located within walking distance to WTP, Gaurav Tower, and premier corporate offices in South Jaipur.',
+    assetClass: 'Commercial Office Lease',
+    rentType: 'Commercial Lease',
     locality: 'Malviya Nagar',
     address: 'Calgiri Road, Sector 3, Malviya Nagar',
     pinCode: '302017',
-    entryTicketSizeINR: 2500000, // ₹25 Lakh
-    totalAssetValueINR: 8500000, // ₹85 Lakh
+    entryTicketSizeINR: 2500000, // Est. ₹25 Lakh
+    totalAssetValueINR: 8500000, // Est. ₹85 Lakh
     historicalRentalYieldPct: 6.4,
     lastRentalYieldYear: 'FY 2023-24',
     currentTenantProfile: 'Boutique Corporate Stay Operator',
@@ -271,10 +252,6 @@ export const VERIFIED_INVESTMENT_ASSETS = [
     leaseRemainingMonths: 48,
     lockInPeriodMonths: 24,
     annualEscalationPct: 10,
-    jdaApproved: true,
-    reraRegistered: true,
-    reraId: 'RAJ/P/2021/1104',
-    titleVerified: true,
     ownershipType: 'Freehold',
     coverImageUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
     galleryImageUrls: [],
@@ -286,24 +263,21 @@ export const VERIFIED_INVESTMENT_ASSETS = [
     id: 'inv-4',
     title: 'Highway Frontage Commercial Land on Ajmer Road (NH-48)',
     description:
-      'Direct highway frontage commercial land parcel strategically positioned along the rapidly expanding Ajmer Road growth corridor near Mahindra World City SEZ. High capital appreciation zone with clear registry and demarcation.',
-    assetClass: 'High-Growth Land',
-    riskCategory: 'Growth (Capital Appreciation)',
+      'Direct highway frontage commercial parcel along the Ajmer Road corridor near Mahindra World City. Ideal for showroom, warehouse, or commercial complex with clear demarcation.',
+    assetClass: 'Commercial Land Lease',
+    rentType: 'Development Lease',
     locality: 'Ajmer Road',
     address: 'Near GVK Toll Plaza, Main Ajmer Road (NH-48)',
     pinCode: '302026',
-    entryTicketSizeINR: 7500000, // ₹75 Lakh
-    totalAssetValueINR: 35000000, // ₹3.5 Crore
+    entryTicketSizeINR: 7500000, // Est. ₹75 Lakh
+    totalAssetValueINR: 35000000, // Est. ₹3.5 Crore
     historicalRentalYieldPct: null,
     lastRentalYieldYear: '',
-    currentTenantProfile: 'Commercial Development Land',
+    currentTenantProfile: 'Commercial Development Parcel',
     leaseRegistered: false,
     leaseRemainingMonths: 0,
     lockInPeriodMonths: 0,
     annualEscalationPct: 0,
-    jdaApproved: true,
-    reraRegistered: false,
-    titleVerified: true,
     ownershipType: 'Freehold',
     coverImageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
     galleryImageUrls: [],
@@ -316,10 +290,11 @@ export const VERIFIED_STAY_LISTINGS = [
   {
     _id: 'stay-1',
     id: 'stay-1',
-    title: 'Heritage Courtyard Haveli in Bani Park',
+    title: 'Turnkey Airbnb Courtyard Haveli in Bani Park',
     description:
-      'Authentic 1940s restored Rajputana haveli featuring traditional jharokhas, carved stone pillars, shaded central courtyard, and handmade block-printed upholstery. Quiet residential avenue in Bani Park with leafy sit-outs and home-cooked Rajasthani breakfast upon request.',
-    stayType: 'Heritage Haveli',
+      'Authentic restored Rajputana haveli featuring central courtyard, jharokhas, and handcrafted stone pillars. Available for purchase as a running Airbnb property or for end-to-end homestay management with high tourist occupancy.',
+    stayType: 'Airbnb Haveli',
+    airbnbCategory: 'Turnkey Airbnb Purchase & Management',
     locality: 'Bani Park',
     address: 'D-24, Kabir Marg, Bani Park',
     landmark: 'Near Collectorate Circle',
@@ -328,7 +303,7 @@ export const VERIFIED_STAY_LISTINGS = [
     bedrooms: 2,
     beds: 2,
     bathrooms: 2,
-    basePricePerNight: 4800,
+    basePricePerNight: 4800, // Est. ₹4,800/night
     weekendPriceMultiplier: 1.15,
     cleaningFee: 400,
     minNights: 1,
@@ -340,13 +315,13 @@ export const VERIFIED_STAY_LISTINGS = [
       { name: 'Hawa Mahal', distanceKm: 4.8 },
     ],
     amenities: [
-      'WiFi',
+      'Turnkey Airbnb Setup',
+      'WiFi & Smart Lock',
       'Air Conditioning',
-      'Traditional Rajasthani Decor',
+      'Heritage Rajasthani Decor',
       'Caretaker On-site',
-      'Complimentary Breakfast',
       'Power Backup',
-      'Terrace / Courtyard',
+      'Central Courtyard',
     ],
     petsAllowed: false,
     smokingAllowed: false,
@@ -362,10 +337,11 @@ export const VERIFIED_STAY_LISTINGS = [
   {
     _id: 'stay-2',
     id: 'stay-2',
-    title: 'Boutique Garden Homestay near Central Park, C-Scheme',
+    title: 'Boutique Airbnb Garden Homestay near Central Park',
     description:
-      'Calm and artistic homestay surrounded by flowering bougainvillea in central Jaipur. High ceilings, vintage wooden furnishings, dedicated workspace with high-speed fiber internet, and walking distance to Central Park jogging track and famous C-Scheme cafes.',
-    stayType: 'Boutique Homestay',
+      'Artistic homestay surrounded by bougainvillea in C-Scheme. Turnkey setup with dedicated workspace, fiber internet, and prime location for tourists and business travelers. Buy or partner with our Airbnb host management team.',
+    stayType: 'Airbnb Homestay',
+    airbnbCategory: 'Airbnb Setup & Host Management',
     locality: 'C-Scheme',
     address: '14, Prithviraj Road, C-Scheme',
     landmark: 'Behind Statue Circle',
@@ -374,7 +350,7 @@ export const VERIFIED_STAY_LISTINGS = [
     bedrooms: 1,
     beds: 1,
     bathrooms: 1,
-    basePricePerNight: 3200,
+    basePricePerNight: 3200, // Est. ₹3,200/night
     weekendPriceMultiplier: 1.0,
     cleaningFee: 250,
     minNights: 1,
@@ -386,11 +362,11 @@ export const VERIFIED_STAY_LISTINGS = [
       { name: 'Albert Hall Museum', distanceKm: 2.5 },
     ],
     amenities: [
-      'WiFi',
+      'Airbnb Management Ready',
+      'High-Speed WiFi',
       'Air Conditioning',
       'Dedicated Workspace',
       'Kitchen Facility',
-      'Free Parking',
       'Garden Sit-out',
     ],
     petsAllowed: true,
@@ -404,10 +380,11 @@ export const VERIFIED_STAY_LISTINGS = [
   {
     _id: 'stay-3',
     id: 'stay-3',
-    title: 'Luxury 4 BHK Private Villa with Plunge Pool, Civil Lines',
+    title: 'Luxury Airbnb 4 BHK Private Villa with Plunge Pool',
     description:
-      'Exclusive independent retreat located in the tranquil VIP zone of Civil Lines. Includes private courtyard plunge pool, expansive dining hall, dedicated chef service, curated heritage artifacts, and enclosed secure driveway parking.',
-    stayType: 'Luxury Villa',
+      'Exclusive independent retreat in Civil Lines. Private courtyard plunge pool, dining hall, chef service, and secure parking. High per-night rental yield on Airbnb with complete property management available.',
+    stayType: 'Airbnb Luxury Villa',
+    airbnbCategory: 'Luxury Airbnb Villa Investment',
     locality: 'Civil Lines',
     address: 'Civil Lines Road, Near Raj Bhavan',
     landmark: 'Civil Lines Metro Station (500m)',
@@ -416,7 +393,7 @@ export const VERIFIED_STAY_LISTINGS = [
     bedrooms: 4,
     beds: 5,
     bathrooms: 4,
-    basePricePerNight: 16500,
+    basePricePerNight: 16500, // Est. ₹16,500/night
     weekendPriceMultiplier: 1.25,
     cleaningFee: 1500,
     minNights: 2,
@@ -428,14 +405,13 @@ export const VERIFIED_STAY_LISTINGS = [
       { name: 'Amer Fort', distanceKm: 14.5 },
     ],
     amenities: [
-      'WiFi',
+      'High Airbnb Nightly Revenue',
+      'Private Plunge Pool',
+      'Full Host Staff Available',
       'Air Conditioning',
-      'Swimming Pool',
-      'Caretaker On-site',
-      'Kitchen Facility',
+      'Gourmet Kitchen',
       'Power Backup',
-      'Free Parking',
-      'CCTV in Common Areas',
+      'Secure Driveway',
     ],
     petsAllowed: false,
     smokingAllowed: false,
@@ -448,10 +424,11 @@ export const VERIFIED_STAY_LISTINGS = [
   {
     _id: 'stay-4',
     id: 'stay-4',
-    title: 'Modern Studio Apartment near WTP, Malviya Nagar',
+    title: 'Turnkey Airbnb Studio Apartment near WTP',
     description:
-      'Compact self-contained studio flat adjacent to World Trade Park and Gaurav Tower. Fitted with kitchenette, induction cooker, microwave, smart TV, and fast WiFi. Ideal for solo travellers, couples, or digital nomads visiting South Jaipur.',
-    stayType: 'Service Apartment',
+      'Self-contained studio flat near World Trade Park and Gaurav Tower. Fitted with kitchenette, microwave, smart TV, and WiFi. Ready to buy and list on Airbnb immediately with steady business and leisure guest demand.',
+    stayType: 'Airbnb Studio Apartment',
+    airbnbCategory: 'Turnkey Airbnb Studio',
     locality: 'Malviya Nagar',
     address: 'Sector 4, Malviya Nagar, Near Calgiri Marg',
     landmark: 'Walking distance to World Trade Park',
@@ -460,7 +437,7 @@ export const VERIFIED_STAY_LISTINGS = [
     bedrooms: 1,
     beds: 1,
     bathrooms: 1,
-    basePricePerNight: 2200,
+    basePricePerNight: 2200, // Est. ₹2,200/night
     weekendPriceMultiplier: 1.1,
     cleaningFee: 200,
     minNights: 1,
@@ -471,9 +448,10 @@ export const VERIFIED_STAY_LISTINGS = [
       { name: 'Jaipur International Airport', distanceKm: 4.5 },
     ],
     amenities: [
-      'WiFi',
+      'Self Check-In Ready',
+      'Fast WiFi',
       'Air Conditioning',
-      'Kitchen Facility',
+      'Kitchenette',
       'Dedicated Workspace',
       'Power Backup',
     ],

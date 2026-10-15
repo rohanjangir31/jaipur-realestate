@@ -176,7 +176,7 @@ export default function InvestorMatches() {
                             {asset.assetClass}
                           </span>
                           <span className="badge-blue text-xs">{asset.riskCategory}</span>
-                          {asset.jdaApproved && <span className="badge-green text-xs">JDA Approved</span>}
+                          <span className="badge bg-stone-100 text-stone-700 text-xs">1% Commission</span>
                         </div>
 
                         <h3 className="text-lg font-bold text-gray-900 mb-1">{asset.title}</h3>

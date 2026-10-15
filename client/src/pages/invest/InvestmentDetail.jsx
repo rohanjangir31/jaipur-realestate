@@ -150,19 +150,8 @@ export default function InvestmentDetail() {
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <span className="badge bg-emerald-100 text-emerald-800 font-semibold">{asset.assetClass}</span>
-                <span className="badge-blue">{asset.riskCategory}</span>
-                {asset.jdaApproved && <span className="badge-green">JDA Approved</span>}
-                {asset.reraRegistered && (
-                  <a
-                    href="https://rera.rajasthan.gov.in/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="Click to cross-check on official Rajasthan RERA portal"
-                    className="badge-green hover:bg-green-200 transition-colors inline-flex items-center gap-1 cursor-pointer"
-                  >
-                    <ShieldCheck size={13} /> RERA: {asset.reraId || 'Registered'} <ExternalLink size={10} />
-                  </a>
-                )}
+                <span className="badge-green">1% Listing Commission</span>
+                <span className="text-xs text-stone-500 font-mono">Market Estimate</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900">{asset.title}</h1>
               <p className="flex items-center gap-1.5 text-sm text-gray-500 mt-2">
@@ -271,9 +260,6 @@ export default function InvestmentDetail() {
                     <strong>Title Verification:</strong> Verified against Revenue Records & Sub-Registrar Registry.
                   </span>
                 </div>
-                {asset.reraId && (
-                  <span className="font-semibold text-emerald-800">RERA ID: {asset.reraId}</span>
-                )}
               </div>
             </div>
 

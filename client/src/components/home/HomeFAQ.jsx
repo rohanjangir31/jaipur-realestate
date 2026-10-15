@@ -1,36 +1,36 @@
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle, ExternalLink } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 const FAQS = [
   {
-    question: 'How do I verify whether a project or property in Jaipur is RERA approved and JDA sanctioned?',
+    question: 'What is your listing and brokerage commission?',
     answer:
-      'Under Rajasthan RERA regulations, all ongoing and new residential or commercial projects exceeding 500 sq. meters or 8 apartments must be registered on the official state portal (rera.rajasthan.gov.in). Each registered project receives a unique alphanumeric registration number (e.g., RAJ/P/2022/XXXX). On Jaipur Estates, every project with RERA registration displays a direct link and registration number. You can verify the sanctioned maps, completion dates, and promoter details directly on the Rajasthan RERA public portal. For plotted layouts, ensure the land has a valid 90A conversion and JDA layout approval lease deed (Patta).',
+      'We operate on a transparent, standard 1% listing and brokerage commission on successfully completed transactions. There are zero upfront listing charges, zero subscription fees, and no hidden markups.',
   },
   {
-    question: 'What is the difference between Super Built-Up Area and Carpet Area under Rajasthan RERA?',
+    question: 'How do you assist with Buy & Sell across Jaipur?',
     answer:
-      'Under the Real Estate (Regulation and Development) Act, carpet area is strictly defined as the net usable floor area of an apartment, excluding external walls, areas under service shafts, exclusive balcony or verandah area, and common terrace area. Super Built-Up Area traditionally includes common areas such as lift lobbies, staircases, and corridors. At Jaipur Estates, we mandate the explicit disclosure of both Net Carpet Area and Super Built-Up Area so you know exactly what usable living space you are paying for.',
+      'For buyers, we curate verified residential flats, duplex villas, and plots across top Jaipur localities like Vaishali Nagar, Jagatpura, Mansarovar, and C-Scheme. For owners and sellers, we showcase your property to vetted buyers and coordinate site visits directly without intermediary confusion.',
   },
   {
-    question: 'Can Non-Resident Indians (NRIs) and OCIs buy residential or commercial property in Jaipur?',
+    question: 'Can I purchase a property and run it on Airbnb with your management?',
     answer:
-      'Yes. Under RBI and FEMA guidelines, NRIs and PIOs/OCIs can freely acquire any residential or commercial real estate in Jaipur without requiring prior approval from the Reserve Bank of India. The acquisition funds must be remitted into India through normal banking channels (NRE/NRO/FCNR accounts). However, agricultural land, plantation property, and farmhouse land cannot be purchased by NRIs without specific prior permissions.',
+      'Yes. Jaipur is one of India’s highest-demand tourism markets. We curate turnkey Airbnb-ready villas, heritage havelis, and studio apartments. You can buy the asset, and our team connects you with professional homestay management to handle guest hosting, housekeeping, and calendar operations.',
   },
   {
-    question: 'How does Jaipur Estates protect me from broker spam and fake listings?',
+    question: 'How does Rent & Lease work for residential and commercial spaces?',
     answer:
-      'Unlike open classified websites that sell your phone number to hundreds of third-party telemarketers, Jaipur Estates operates a closed-loop advisory model. Your inquiry is handled solely by our local Jaipur advisory desks. We verify the physical title, possession status, and owner identity before arranging any introduction or site inspection. Your personal contact details are never resold or distributed to unauthorized third parties.',
+      'We provide verified market estimates for commercial offices, retail high-street shops, and warehouses. We assist both property owners and prospective tenants with direct introductions, property walkthroughs, and clear lease deed documentation.',
   },
   {
-    question: 'What are the current stamp duty, registration fees, and state surcharges in Rajasthan?',
+    question: 'Are all property prices displayed on the website final or estimated?',
     answer:
-      'In Rajasthan, base stamp duty is 5% for male purchasers and 4% for female purchasers (or 4.5% for joint ownership where a woman is co-owner). Additionally, the state levies a statutory 20% surcharge (Gaushala and basic infrastructure development) on the stamp duty amount, along with a 1% state registration fee on the total agreement/circle rate value. Use our interactive calculator above to estimate your total acquisition costs accurately.',
+      'All figures shown on the website are estimated market prices ("Est."). These serve as reliable reference benchmarks. Final figures are always finalized directly between the buyer and owner during inspection and mutually agreed paperwork.',
   },
   {
-    question: 'How do site inspections and physical viewings work through the platform?',
+    question: 'How do I schedule a site visit or speak with your team?',
     answer:
-      'When you submit an inquiry on any residential or commercial property, our Jaipur desk contacts you within 24 business hours to confirm your preferred timing and specific queries. We coordinate directly with the property owner or project curator to arrange an accompanied site inspection with all title documents and sanctioned plans ready for review.',
+      'Our direct calling lines and WhatsApp are open all 7 days of the week from 9:00 AM to 8:00 PM IST. Click "Inquire Now" on any property or call us directly to schedule a convenient viewing time.',
   },
 ];
 
@@ -44,10 +44,10 @@ export default function HomeFAQ() {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-stone-200">
       <div className="max-w-2xl mb-12">
-        <span className="section-label">Buyer & Investor Guide</span>
+        <span className="section-label">Helpful Information</span>
         <h2 className="section-title">Frequently Asked Questions</h2>
         <p className="section-subtitle">
-          Essential legal, regulatory, and procedural guidance for acquiring property or booking stays in Jaipur.
+          Clear answers regarding our 1% commission, Buy & Sell, Airbnb management, and Rent & Lease in Jaipur.
         </p>
       </div>
 
@@ -76,17 +76,6 @@ export default function HomeFAQ() {
               {isOpen && (
                 <div className="mt-3.5 pr-8 text-sm text-stone-600 leading-relaxed animate-fadeIn">
                   <p>{faq.answer}</p>
-                  {i === 0 && (
-                    <a
-                      href="https://rera.rajasthan.gov.in/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-terracotta-700 hover:text-terracotta-900 mt-3"
-                    >
-                      <span>Visit Rajasthan RERA Public Portal</span>
-                      <ExternalLink size={12} />
-                    </a>
-                  )}
                 </div>
               )}
             </div>

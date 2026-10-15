@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, MessageSquare, X, Shield, Clock } from 'lucide-react';
+import { Phone, MessageSquare, X, Clock, Sparkles } from 'lucide-react';
 import { CONTACT_NUMBERS, OFFICE_HOURS, OFFICE_ADDRESS } from '../../utils/contact';
 
 export default function QuickContact() {
@@ -13,11 +13,11 @@ export default function QuickContact() {
           <div className="flex items-start justify-between border-b border-stone-800 pb-3">
             <div>
               <div className="flex items-center gap-1.5 text-terracotta-400 text-xs font-semibold uppercase tracking-wider">
-                <Shield size={13} />
-                <span>Verified Direct Desk</span>
+                <Sparkles size={13} />
+                <span>Standard 1% Commission</span>
               </div>
               <h3 className="font-serif text-lg text-white font-medium mt-0.5">
-                Speak with our Jaipur team
+                Direct Calling Lines
               </h3>
             </div>
             <button
@@ -30,36 +30,29 @@ export default function QuickContact() {
           </div>
 
           <p className="text-xs text-stone-400 leading-relaxed">
-            Connect directly with our local curators. No automated switchboards or third-party call centers.
+            Connect directly with our local coordinators. Open all 7 days for Buy &amp; Sell, commercial Rent &amp; Lease, and Airbnb inquiries.
           </p>
 
-          {/* 3 Direct Lines */}
+          {/* Direct Lines without job tags */}
           <div className="space-y-2.5">
-            {CONTACT_NUMBERS.map(({ number, tel, whatsapp, label, role }) => (
+            {CONTACT_NUMBERS.map(({ number, tel, whatsapp }, index) => (
               <div
                 key={number}
                 className="p-3 rounded-xl bg-stone-900/80 border border-stone-800 hover:border-stone-700 transition-colors"
               >
-                <div className="flex items-start justify-between gap-2 mb-1">
-                  <div>
-                    <h4 className="text-xs font-semibold text-stone-200">{label}</h4>
-                    <p className="text-[11px] text-stone-400 leading-tight mt-0.5">{role}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between pt-2 border-t border-stone-800/80 mt-2">
+                <div className="flex items-center justify-between">
                   <a
                     href={tel}
-                    className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-terracotta-400 hover:text-terracotta-300 transition-colors"
+                    className="inline-flex items-center gap-2 text-sm font-mono font-medium text-stone-100 hover:text-terracotta-400 transition-colors"
                   >
-                    <Phone size={12} />
+                    <Phone size={13} className="text-terracotta-500" />
                     <span>{number}</span>
                   </a>
 
                   <div className="flex items-center gap-2">
                     <a
                       href={tel}
-                      className="px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 text-[11px] font-medium transition-colors"
+                      className="px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 text-xs font-medium transition-colors"
                     >
                       Call
                     </a>
@@ -67,9 +60,9 @@ export default function QuickContact() {
                       href={whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-emerald-950/70 border border-emerald-800/60 text-emerald-300 hover:bg-emerald-900/80 text-[11px] font-medium transition-colors"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-emerald-950/70 border border-emerald-800/60 text-emerald-300 hover:bg-emerald-900/80 text-xs font-medium transition-colors"
                     >
-                      <MessageSquare size={11} />
+                      <MessageSquare size={12} />
                       <span>WhatsApp</span>
                     </a>
                   </div>

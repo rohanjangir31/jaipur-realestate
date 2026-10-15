@@ -29,6 +29,7 @@ import InvestorMatches from './pages/invest/InvestorMatches';
 
 // Admin Dashboard
 import AdminDashboard from './pages/admin/AdminDashboard';
+import Poster from './pages/Poster';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -97,6 +98,7 @@ export default function App() {
                 }
               />
 
+              <Route path="/poster" element={<Poster />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
