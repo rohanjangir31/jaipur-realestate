@@ -108,12 +108,7 @@ export default function BuyListings() {
         {/* Header & Quick Action */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="section-label">Residential &amp; Commercial</span>
-              <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-terracotta-50 text-terracotta-800 border border-terracotta-200">
-                1% Listing Commission
-              </span>
-            </div>
+            <span className="section-label mb-2">Residential &amp; Commercial</span>
             <h1 className="section-title">Buy &amp; Sell in Jaipur</h1>
             <p className="section-subtitle">
               Verified apartments, independent villas, builder floors, and land parcels with estimated market pricing.
@@ -285,14 +280,17 @@ export default function BuyListings() {
               {properties.map((property) => (
                 <div
                   key={property._id}
-                  className="property-card group bg-white"
+                  className="listing-card group"
                 >
+                  {/* Top accent stripe */}
+                  <div className="h-1 w-full bg-gradient-to-r from-terracotta-700 to-terracotta-500" />
+
                   {/* Photo */}
                   <div className="relative aspect-[16/10] bg-stone-900 overflow-hidden">
                     <img
                       src={property.coverImageUrl}
                       alt={property.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-expo"
                       onError={(e) => {
                         e.target.src =
                           'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80';
@@ -300,65 +298,64 @@ export default function BuyListings() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent z-[1]" />
                     <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
-                      <span className="bg-stone-900/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm uppercase tracking-wide">
+                      <span className="bg-white/95 text-stone-900 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
                         Buy &amp; Sell
-                      </span>
-                      <span className="bg-terracotta-700/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">
-                        Verified Listing
                       </span>
                     </div>
 
-                    <div className="absolute bottom-3 right-3 bg-white/95 text-stone-900 px-3 py-1 rounded-xl text-xs font-bold z-10 shadow-lift">
-                      Est. {formatINR(property.price)}
+                    <div className="absolute bottom-3 left-3 z-10">
+                      <div className="bg-terracotta-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold shadow-glow-terracotta">
+                        Est. {formatINR(property.price)}
+                      </div>
                     </div>
                   </div>
 
                   {/* Property Details */}
-                  <div className="p-5 flex-1 flex flex-col">
-                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="flex items-center justify-between gap-2 mb-2">
                       <p className="flex items-center gap-1.5 text-xs text-stone-500">
                         <MapPin size={12} className="text-terracotta-600 shrink-0" />
                         <span>{property.locality}, Jaipur</span>
                       </p>
-                      <span className="text-[11px] font-medium text-stone-600 bg-stone-100 px-2 py-0.5 rounded-md">
+                      <span className="text-[10px] font-semibold text-stone-600 bg-stone-100 px-2.5 py-1 rounded-full">
                         {property.propertyType}
                       </span>
                     </div>
 
-                    <h3 className="font-serif font-semibold text-stone-900 line-clamp-1 text-base mb-3 group-hover:text-terracotta-700 transition-colors">
+                    <h3 className="font-serif font-semibold text-stone-900 line-clamp-1 text-base mb-4 group-hover:text-terracotta-700 transition-colors">
                       {property.title}
                     </h3>
 
                     {/* Specifications */}
-                    <div className="grid grid-cols-3 gap-2 py-2.5 border-y border-stone-100 text-xs text-stone-600 mb-4 bg-stone-50/70 px-3 rounded-xl">
+                    <div className="grid grid-cols-3 gap-3 py-3 border-y border-stone-100 text-xs text-stone-600 mb-5 bg-sandstone-50 px-3 rounded-2xl">
                       <div>
-                        <span className="text-stone-400 block text-[10px]">Bedrooms</span>
+                        <span className="text-stone-400 block text-[10px] mb-0.5">Bedrooms</span>
                         <span className="font-semibold text-stone-800">{property.bhk} BHK</span>
                       </div>
                       <div>
-                        <span className="text-stone-400 block text-[10px]">Super Area</span>
+                        <span className="text-stone-400 block text-[10px] mb-0.5">Super Area</span>
                         <span className="font-semibold text-stone-800">{property.superAreaSqFt} sqft</span>
                       </div>
                       <div className="truncate">
-                        <span className="text-stone-400 block text-[10px]">Possession</span>
+                        <span className="text-stone-400 block text-[10px] mb-0.5">Possession</span>
                         <span className="font-semibold text-stone-800">{property.possessionStatus}</span>
                       </div>
                     </div>
 
                     {/* Direct inquiry action */}
-                    <div className="mt-auto space-y-2 pt-1">
+                    <div className="mt-auto space-y-2.5">
                       <a
                         href={getWhatsAppLink(property.title, property.locality)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-terracotta w-full text-xs !py-2.5 justify-center flex items-center gap-1.5"
+                        className="btn-terracotta w-full text-xs !py-3 justify-center flex items-center gap-1.5"
                       >
                         <MessageSquare size={13} />
-                        <span>Inquire Now (WhatsApp)</span>
+                        <span>Inquire Now</span>
                       </a>
                       <Link
                         to={`/buy/${property._id}`}
-                        className="btn-secondary w-full text-xs !py-2 justify-center text-stone-700 hover:text-stone-900"
+                        className="btn-secondary w-full text-xs !py-2.5 justify-center text-stone-700 hover:text-stone-900"
                       >
                         <span>View Details</span>
                         <ArrowRight size={13} />

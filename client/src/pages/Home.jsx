@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
   MapPin, ArrowRight, Search, Check, Building, Home as HomeIcon, BedDouble,
   Phone, MessageSquare, Clock, Sparkles, CalendarCheck, Compass, ChevronRight,
-  Star, Zap, Shield,
+  Star, Zap, Shield, TrendingUp,
 } from 'lucide-react';
 import { JAIPUR_LOCALITIES } from '../utils/formatters';
-import { CONTACT_NUMBERS, OFFICE_HOURS, OFFICE_ADDRESS, LISTING_COMMISSION } from '../utils/contact';
+import { CONTACT_NUMBERS, OFFICE_HOURS, OFFICE_ADDRESS } from '../utils/contact';
 import { usePageMeta } from '../utils/usePageMeta';
 import FeaturedShowcase from '../components/home/FeaturedShowcase';
 import PropertyCalculator from '../components/tools/PropertyCalculator';
@@ -20,7 +20,7 @@ const SERVICES = [
     eyebrow: 'Residential & Commercial',
     title: 'Buy & Sell',
     description:
-      'Verified apartments, builder floors, duplex villas, and commercial plots across Jaipur — with transparent estimated market pricing and direct owner introductions.',
+      'Verified apartments, builder floors, duplex villas, and commercial plots across Jaipur with transparent estimated market pricing and direct owner introductions.',
     features: [
       'Transparent estimated market prices (Est. ₹)',
       'Carpet area & super built-up clearly listed',
@@ -28,6 +28,7 @@ const SERVICES = [
     ],
     primaryCta: { label: 'Browse Buy & Sell Catalog', to: '/buy' },
     secondaryCta: { label: 'Post a Property', to: '/buy/submit' },
+    iconBg: 'bg-terracotta-700',
   },
   {
     icon: Building,
@@ -43,6 +44,7 @@ const SERVICES = [
     ],
     primaryCta: { label: 'View Rent & Lease Catalog', to: '/invest' },
     secondaryCta: null,
+    iconBg: 'bg-sage-700',
   },
   {
     icon: BedDouble,
@@ -58,6 +60,7 @@ const SERVICES = [
     ],
     primaryCta: { label: 'Explore Airbnb Properties', to: '/stay' },
     secondaryCta: { label: 'List Your Place for Hosting', to: '/stay/host/submit' },
+    iconBg: 'bg-rose-700',
   },
 ];
 
@@ -68,22 +71,30 @@ const STEPS = [
     icon: Compass,
     title: 'Discover & Shortlist',
     desc: "Explore estimated market prices across Buy & Sell, Rent & Lease, or turnkey Airbnb properties in Jaipur's top neighbourhoods.",
-    tag: '✓ Estimated Pricing (Est. ₹)',
+    tag: 'Estimated Pricing (Est. ₹)',
   },
   {
     num: '02',
     icon: MessageSquare,
     title: '1-Click Direct Inquiry',
     desc: 'Click "Inquire Now" on any property to connect directly on WhatsApp or phone. No bots, no waiting rooms, no forms.',
-    tag: '✓ Open All 7 Days (9 AM – 6 PM)',
+    tag: 'Open All 7 Days (9 AM – 6 PM)',
   },
   {
     num: '03',
     icon: CalendarCheck,
     title: 'Visit & Close Smoothly',
-    desc: 'Schedule an accompanied site visit, review details directly with the owner, and close at a transparent listing commission.',
-    tag: '✓ Standard Listing Commission on Success',
+    desc: 'Schedule an accompanied site visit, review details directly with the owner, and close with complete transparency.',
+    tag: 'Direct Owner Introduction',
   },
+];
+
+/* ── Stats ── */
+const STATS = [
+  { value: '17+', label: 'Curated Listings' },
+  { value: '3',   label: 'Direct Lines' },
+  { value: '7',   label: 'Days Open' },
+  { value: '0',   label: 'Hidden Fees' },
 ];
 
 export default function Home() {
@@ -120,78 +131,82 @@ export default function Home() {
     <div className="min-h-screen bg-[#FAF8F5] text-stone-800" id="home">
 
       {/* ══════════════════════════════════════════════════════
-          HERO SECTION
+          HERO — Full editorial luxury dark section
       ══════════════════════════════════════════════════════ */}
-      <section className="relative bg-[#161513] overflow-hidden pt-20 pb-28 md:pt-28 md:pb-36">
-        {/* Decorative background grid */}
+      <section className="relative bg-[#161513] overflow-hidden">
+        {/* Background layers */}
         <div className="absolute inset-0 bg-hero-pattern opacity-100 pointer-events-none" />
-        {/* Warm glow */}
-        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full
-                        bg-terracotta-900/30 blur-[120px] pointer-events-none" />
-        <div className="absolute -bottom-40 right-10 w-[500px] h-[500px] rounded-full
-                        bg-stone-900/80 blur-[100px] pointer-events-none" />
+        {/* Warm terracotta glow */}
+        <div className="absolute -top-60 -left-60 w-[800px] h-[800px] rounded-full
+                        bg-terracotta-900/20 blur-[140px] pointer-events-none" />
+        {/* Subtle gold glow top-right */}
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full
+                        bg-gold-500/5 blur-[100px] pointer-events-none" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Eyebrow */}
-          <div className="flex flex-wrap items-center gap-2 mb-6">
+        {/* ── Hero Content ── */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 md:pt-32 md:pb-16">
+
+          {/* Eyebrow badges */}
+          <div className="flex flex-wrap items-center gap-2 mb-8">
             <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.15em]
-                             text-terracotta-300 bg-terracotta-950/60 border border-terracotta-800/60
-                             px-3 py-1 rounded-full">
+                             text-terracotta-300 bg-terracotta-950/70 border border-terracotta-800/60
+                             px-3 py-1.5 rounded-full">
               <MapPin size={11} /> Jaipur, Rajasthan
             </span>
             <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400
-                             bg-emerald-950/50 border border-emerald-900/60 px-3 py-1 rounded-full">
+                             bg-emerald-950/50 border border-emerald-900/60 px-3 py-1.5 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Open 7 Days · 9 AM–6 PM
+              Open 7 Days · 9 AM – 6 PM
             </span>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-serif font-normal tracking-tight
-                          text-white leading-[1.08] max-w-5xl">
-            Buy, Sell, Rent &amp; Manage Airbnb
-            <br className="hidden sm:block" />
-            <span className="text-terracotta-400"> in Jaipur.</span>
-          </h1>
-          <p className="mt-6 text-lg sm:text-xl text-stone-400 font-normal leading-relaxed max-w-2xl">
-            A clean, read-only property directory for Jaipur — estimated market prices,
-            direct owner introductions, and turnkey Airbnb management support.
-          </p>
+          {/* Main headline — editorial */}
+          <div className="max-w-5xl mb-8">
+            <h1 className="font-serif font-normal tracking-tight text-white leading-[1.05]
+                           text-5xl sm:text-6xl lg:text-[5.5rem]">
+              Jaipur's Premier
+              <br />
+              <span className="text-terracotta-400 italic">Property</span>
+              {' '}Advisory.
+            </h1>
+            <p className="mt-6 text-lg sm:text-xl text-stone-400 font-normal leading-relaxed max-w-2xl">
+              Buy, Sell, Rent &amp; manage Airbnb — a curated, read-only directory with
+              estimated market prices and direct owner connections.
+            </p>
+          </div>
 
-          {/* CTA row */}
-          <div className="flex flex-wrap items-center gap-3 mt-8">
+          {/* CTA buttons */}
+          <div className="flex flex-wrap items-center gap-3 mb-14">
             <Link to="/buy"
-                  className="inline-flex items-center gap-2 bg-terracotta-700 hover:bg-terracotta-800
-                             text-white font-bold text-sm px-7 py-3.5 rounded-2xl
-                             transition-all duration-200 shadow-lg hover:shadow-glow-terracotta">
+                  className="inline-flex items-center gap-2 bg-terracotta-700 hover:bg-terracotta-600
+                             text-white font-bold text-sm px-8 py-4 rounded-2xl
+                             transition-all duration-300 shadow-glow-terracotta hover:scale-105">
               Browse Properties <ArrowRight size={16} />
             </Link>
             <a href={`https://wa.me/${primaryPhone.cleanNumber}?text=Hello%20Jaipur%20Estates%2C%20I%27d%20like%20to%20inquire`}
                target="_blank" rel="noopener noreferrer"
-               className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20
-                          text-white font-bold text-sm px-7 py-3.5 rounded-2xl border border-white/20
-                          transition-all duration-200 backdrop-blur-sm">
+               className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/14
+                          text-white font-bold text-sm px-8 py-4 rounded-2xl border border-white/15
+                          transition-all duration-300 backdrop-blur-sm">
               <MessageSquare size={16} /> WhatsApp Us
             </a>
           </div>
 
-          {/* Trust pills */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-10 text-xs text-stone-500">
-            <span className="flex items-center gap-1.5 text-stone-400">
-              <Sparkles size={13} className="text-gold-400" />
-              Standard Listing Commission
-            </span>
-            <span className="hidden sm:inline text-stone-700">·</span>
-            <span>All Prices Displayed as Market Estimates (Est.)</span>
-            <span className="hidden sm:inline text-stone-700">·</span>
-            <span>Open All 7 Days for Direct Calling &amp; WhatsApp</span>
+          {/* Stats row */}
+          <div className="flex flex-wrap items-center gap-3 mb-16">
+            {STATS.map(({ value, label }) => (
+              <div key={label} className="stat-chip">
+                <span className="font-serif font-bold text-white text-xl leading-none">{value}</span>
+                <span className="text-stone-400 text-xs">{label}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* ── Search Box (floats at bottom of hero) ── */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-14">
-          <div className="bg-white rounded-3xl p-5 sm:p-7 shadow-elevated border border-stone-200">
-            {/* Search Tabs */}
+        {/* ── Search Bar — transitions seamlessly into page ── */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-t-3xl p-6 sm:p-8 shadow-deep border-x border-t border-stone-200">
+            {/* Tabs */}
             <div className="flex gap-1 p-1 bg-stone-100 rounded-2xl w-fit mb-6">
               {[
                 { id: 'buy',    label: 'Buy & Sell',     Icon: HomeIcon },
@@ -202,7 +217,7 @@ export default function Home() {
                   key={id}
                   type="button"
                   onClick={() => setActiveTab(id)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold
                                whitespace-nowrap transition-all duration-200 ${
                     activeTab === id
                       ? 'bg-[#161513] text-white shadow-sm'
@@ -216,7 +231,7 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Search Inputs */}
+            {/* Search fields */}
             <form onSubmit={handleSearch}
                   className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
               <div className="sm:col-span-5">
@@ -296,16 +311,15 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          FEATURED SHOWCASE (floats above, elevated)
+          FEATURED SHOWCASE
       ══════════════════════════════════════════════════════ */}
       <FeaturedShowcase />
 
       {/* ══════════════════════════════════════════════════════
-          THREE SERVICES GRID
+          THREE SERVICES — Luxury card grid
       ══════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        {/* Section header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="max-w-xl">
             <span className="section-label mb-3">Three Clear Services</span>
             <h2 className="section-title">
@@ -324,26 +338,30 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-          {SERVICES.map(({ icon: Icon, eyebrow, title, description, features, primaryCta, secondaryCta, accentColor }) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {SERVICES.map(({ icon: Icon, eyebrow, title, description, features, primaryCta, secondaryCta, accentColor, iconBg }) => (
             <div key={title}
-                 className="group card flex flex-col hover:-translate-y-1 duration-300">
-              {/* Card Header */}
-              <div className="p-7 flex-1 flex flex-col">
-                {/* Icon */}
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5
-                                 ${accentColor === 'terracotta'
-                                   ? 'bg-terracotta-50 text-terracotta-700 border border-terracotta-100'
-                                   : accentColor === 'sage'
-                                     ? 'bg-emerald-50 text-emerald-700 border border-emerald-100'
-                                     : 'bg-rose-50 text-rose-700 border border-rose-100'}`}>
+                 className="group relative bg-white rounded-3xl border border-stone-200 overflow-hidden
+                            shadow-card hover:shadow-card-hover hover:-translate-y-2
+                            transition-all duration-500 flex flex-col">
+              {/* Colored top accent stripe */}
+              <div className={`h-1 w-full ${
+                accentColor === 'terracotta' ? 'bg-gradient-to-r from-terracotta-700 to-terracotta-500'
+                : accentColor === 'sage' ? 'bg-gradient-to-r from-sage-700 to-emerald-500'
+                : 'bg-gradient-to-r from-rose-700 to-rose-500'
+              }`} />
+
+              <div className="p-8 flex-1 flex flex-col">
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6
+                                 ${iconBg} text-white shadow-md`}>
                   <Icon size={22} />
                 </div>
 
-                <span className={`text-xs font-bold uppercase tracking-[0.12em] mb-2
-                                  ${accentColor === 'terracotta' ? 'text-terracotta-600'
-                                    : accentColor === 'sage'      ? 'text-emerald-600'
-                                    : 'text-rose-600'}`}>
+                <span className={`text-xs font-bold uppercase tracking-[0.12em] mb-2 ${
+                  accentColor === 'terracotta' ? 'text-terracotta-600'
+                  : accentColor === 'sage' ? 'text-sage-500'
+                  : 'text-rose-600'
+                }`}>
                   {eyebrow}
                 </span>
                 <h3 className="font-serif text-2xl text-stone-900 mb-3 group-hover:text-terracotta-700
@@ -352,19 +370,19 @@ export default function Home() {
                 </h3>
                 <p className="text-sm text-stone-500 leading-relaxed mb-6">{description}</p>
 
-                {/* Features */}
-                <ul className="space-y-2.5 border-t border-stone-100 pt-5 mb-7">
+                <ul className="space-y-2.5 border-t border-stone-100 pt-5 mb-8">
                   {features.map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-xs text-stone-600">
-                      <Check size={14} className="text-terracotta-600 shrink-0 mt-0.5" />
+                      <span className="w-4 h-4 rounded-full bg-terracotta-700 flex items-center justify-center shrink-0 mt-0.5">
+                        <Check size={9} className="text-white" />
+                      </span>
                       <span>{f}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Buttons */}
-              <div className="p-7 pt-0 space-y-2.5">
+              <div className="p-8 pt-0 space-y-2.5">
                 <Link to={primaryCta.to}
                       className="btn-terracotta w-full justify-center text-sm">
                   {primaryCta.label} <ArrowRight size={15} />
@@ -390,83 +408,65 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════
           PROPERTY CALCULATOR
       ══════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28">
         <PropertyCalculator />
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          HOW IT WORKS — DARK HIGHLIGHTED SECTION
+          HOW IT WORKS — Editorial dark section
       ══════════════════════════════════════════════════════ */}
-      <section className="bg-[#161513] py-28 border-y border-stone-800 relative overflow-hidden">
-        {/* Background glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px]
-                        bg-terracotta-900/20 blur-[100px] pointer-events-none" />
+      <section className="bg-[#161513] py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-hero-pattern opacity-100 pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px]
+                        bg-terracotta-900/15 blur-[120px] pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
-            <div>
-              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em]
-                               text-terracotta-400 bg-terracotta-950/60 border border-terracotta-900/60
-                               px-3 py-1.5 rounded-full mb-4">
-                <Zap size={11} /> Straightforward Process
-              </span>
-              <h2 className="text-4xl sm:text-5xl font-serif text-white font-normal leading-tight">
-                How Our Direct<br className="hidden sm:block" />
-                Advisory Works
-              </h2>
-              <p className="text-stone-400 text-base mt-3 max-w-xl leading-relaxed">
-                Simple, transparent, and direct. No hidden steps, no upfront listing fees,
-                and a standard listing commission on successful closing only.
-              </p>
-            </div>
-            <div className="inline-flex items-center gap-2 bg-stone-900 border border-stone-800
-                            px-5 py-2.5 rounded-2xl text-sm font-semibold text-terracotta-300 self-start md:self-auto">
-              <Sparkles size={15} className="text-terracotta-400" />
-              Standard Listing Commission
-            </div>
+          <div className="max-w-2xl mb-24">
+            <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em]
+                             text-terracotta-400 bg-terracotta-950/60 border border-terracotta-900/60
+                             px-3 py-1.5 rounded-full mb-6">
+              <Zap size={11} /> Straightforward Process
+            </span>
+            <h2 className="text-5xl sm:text-6xl font-serif text-white font-normal leading-tight">
+              How Our Direct<br />
+              <span className="text-terracotta-400">Advisory Works</span>
+            </h2>
+            <p className="text-stone-400 text-lg mt-5 leading-relaxed">
+              Simple, transparent, and direct. No hidden steps, no upfront listing fees.
+            </p>
           </div>
 
-          {/* Steps */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {STEPS.map(({ num, icon: Icon, title, desc, tag }, i) => (
+          {/* Steps — gridded editorial panels */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-stone-800/40 rounded-3xl overflow-hidden border border-stone-800">
+            {STEPS.map(({ num, icon: Icon, title, desc, tag }) => (
               <div key={num}
-                   className="relative p-8 rounded-3xl bg-stone-900/70 border border-stone-800
-                              hover:border-terracotta-700/60 hover:bg-stone-900/90
-                              transition-all duration-300 group shine-hover">
-                {/* Step number (massive) */}
-                <span className="absolute -top-4 -left-1 text-[72px] font-serif font-bold
-                                 text-stone-800/80 leading-none select-none group-hover:text-stone-700/80
-                                 transition-colors duration-300">
+                   className="relative p-10 sm:p-12 bg-[#161513] hover:bg-[#1C1A18]
+                              transition-colors duration-300 group">
+                {/* Giant editorial background number */}
+                <div className="absolute top-6 right-6 font-serif font-bold text-[7rem] leading-none
+                                text-stone-800/60 select-none group-hover:text-stone-700/60
+                                transition-colors duration-500">
                   {num}
-                </span>
-
-                <div className="relative">
-                  {/* Icon */}
-                  <div className="w-12 h-12 rounded-2xl bg-stone-800 border border-stone-700
-                                  flex items-center justify-center mb-6
-                                  group-hover:bg-terracotta-900/60 group-hover:border-terracotta-800
-                                  transition-all duration-300">
-                    <Icon size={22} className="text-stone-300 group-hover:text-terracotta-300
-                                               transition-colors duration-300" />
-                  </div>
-
-                  <h3 className="text-xl font-serif text-white font-medium mb-3">{title}</h3>
-                  <p className="text-sm text-stone-400 leading-relaxed mb-6">{desc}</p>
-
-                  <div className="text-xs font-bold text-stone-500 pt-4 border-t border-stone-800
-                                  flex items-center gap-1.5 font-mono">
-                    <span className="text-terracotta-500">✓</span>
-                    <span>{tag.replace('✓ ', '')}</span>
-                  </div>
                 </div>
 
-                {/* Connector arrow (hidden on last) */}
-                {i < 2 && (
-                  <div className="hidden md:block absolute top-1/2 -right-3 -translate-y-1/2 z-10">
-                    <ChevronRight size={20} className="text-stone-700" />
+                <div className="relative">
+                  <div className="w-14 h-14 rounded-2xl bg-stone-900 border border-stone-700
+                                  flex items-center justify-center mb-8
+                                  group-hover:bg-terracotta-900/50 group-hover:border-terracotta-800
+                                  transition-all duration-300">
+                    <Icon size={24} className="text-stone-300 group-hover:text-terracotta-300
+                                              transition-colors duration-300" />
                   </div>
-                )}
+
+                  <h3 className="text-2xl font-serif text-white font-normal mb-3">{title}</h3>
+                  <p className="text-sm text-stone-400 leading-relaxed mb-8">{desc}</p>
+
+                  <div className="inline-flex items-center gap-2 text-xs font-bold
+                                  text-stone-500 border-t border-stone-800 pt-5 w-full">
+                    <span className="text-terracotta-500 text-base">✓</span>
+                    <span>{tag}</span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -474,42 +474,42 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          OWNER / HOST CALLOUT BANNER
+          OWNER / HOST CALLOUT — Dark split banner
       ══════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="relative bg-[#1C1A18] rounded-3xl p-10 sm:p-14 border border-stone-800
-                        overflow-hidden shadow-elevated">
-          {/* Decorative bg */}
-          <div className="absolute inset-0 bg-hero-pattern opacity-50 pointer-events-none" />
-          <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full
-                          bg-terracotta-900/20 blur-[80px] pointer-events-none" />
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
+        <div className="relative bg-[#1C1A18] rounded-3xl overflow-hidden shadow-deep border border-stone-800">
+          <div className="absolute inset-0 bg-hero-pattern opacity-60 pointer-events-none" />
+          <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full
+                          bg-terracotta-900/15 blur-[100px] pointer-events-none" />
+          {/* Left accent stripe */}
+          <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-terracotta-700 via-terracotta-500 to-transparent" />
 
-          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-8">
+          <div className="relative p-12 sm:p-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
               <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em]
                                text-terracotta-400 bg-terracotta-950/70 border border-terracotta-900/60
-                               px-3 py-1.5 rounded-full mb-4">
+                               px-3 py-1.5 rounded-full mb-6">
                 Property Owners &amp; Sellers
               </span>
-              <h2 className="text-3xl sm:text-4xl font-serif text-white font-normal leading-tight mb-4">
+              <h2 className="text-4xl sm:text-5xl font-serif text-white font-normal leading-tight mb-5">
                 Want to sell, lease, or list<br className="hidden sm:block" />
-                a property on Airbnb in Jaipur?
+                a property on Airbnb?
               </h2>
-              <p className="text-stone-400 text-base leading-relaxed max-w-2xl">
+              <p className="text-stone-400 text-base leading-relaxed">
                 Submit your property details to our catalog. We connect you directly with genuine buyers,
-                corporate tenants, and homestay travelers across Jaipur.
+                corporate tenants, and homestay travellers across Jaipur.
               </p>
             </div>
-            <div className="lg:col-span-4 flex flex-col gap-3">
+            <div className="lg:col-span-5 flex flex-col gap-3">
               <Link to="/buy/submit"
-                    className="btn-terracotta text-center justify-center text-sm !py-3.5">
+                    className="btn-terracotta text-center justify-center !py-4 text-sm">
                 Post Property for Sale <ArrowRight size={15} />
               </Link>
               <Link to="/stay/host/submit"
                     className="inline-flex items-center justify-center gap-2 text-sm font-semibold
                                text-stone-200 bg-stone-800 border border-stone-700
                                hover:border-stone-600 hover:bg-stone-700
-                               px-6 py-3.5 rounded-xl transition-all duration-200 text-center">
+                               px-6 py-4 rounded-xl transition-all duration-200">
                 List for Airbnb Management
               </Link>
             </div>
@@ -518,72 +518,67 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          DIRECT CONTACT SECTION
+          DIRECT CONTACT — Premium cards with top gradient
       ══════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-        <div className="bg-white rounded-3xl border border-stone-200 shadow-soft overflow-hidden">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between
-                          gap-4 px-8 sm:px-10 py-8 border-b border-stone-100">
-            <div>
-              <span className="section-label mb-2">Direct Communication</span>
-              <h2 className="text-2xl sm:text-3xl font-serif text-stone-900">
-                Speak directly with our Jaipur coordinators
-              </h2>
-              <p className="text-stone-500 text-sm mt-1 max-w-xl">
-                Direct phone &amp; WhatsApp for Buy &amp; Sell, Rent &amp; Lease, and Airbnb inquiries.
-              </p>
-            </div>
-            <div className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-700
-                            bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-full shrink-0">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              {OFFICE_HOURS}
-            </div>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28">
+        <div className="text-center mb-14">
+          <span className="section-label mb-3 block text-center">Direct Communication</span>
+          <h2 className="section-title mx-auto">
+            Speak directly with our<br />Jaipur coordinators
+          </h2>
+          <p className="section-subtitle mx-auto text-center">
+            Direct phone &amp; WhatsApp for Buy &amp; Sell, Rent &amp; Lease, and Airbnb inquiries.
+          </p>
+          <div className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-700
+                          bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-full mt-5">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            {OFFICE_HOURS}
           </div>
+        </div>
 
-          {/* Phone Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-stone-100">
-            {CONTACT_NUMBERS.map(({ number, tel, whatsapp }, index) => (
-              <div key={number} className="p-8 flex flex-col justify-between group hover:bg-stone-50/80 transition-colors">
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-terracotta-600 block mb-3">
-                    Direct Line {index + 1}
-                  </span>
-                  <a href={tel}
-                     className="font-mono text-2xl font-bold text-stone-900 hover:text-terracotta-700
-                                transition-colors block mb-5">
-                    {number}
-                  </a>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <a href={tel}
-                     className="flex-1 inline-flex items-center justify-center gap-1.5
-                                py-2.5 px-4 rounded-xl bg-stone-900 text-white hover:bg-stone-800
-                                text-xs font-bold transition-all">
-                    <Phone size={13} /> Call Now
-                  </a>
-                  <a href={whatsapp} target="_blank" rel="noopener noreferrer"
-                     className="inline-flex items-center justify-center gap-1.5
-                                py-2.5 px-4 rounded-xl bg-emerald-50 text-emerald-800
-                                hover:bg-emerald-100 border border-emerald-200
-                                text-xs font-bold transition-all">
-                    <MessageSquare size={13} /> WhatsApp
-                  </a>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {CONTACT_NUMBERS.map(({ number, tel, whatsapp }, index) => (
+            <div key={number}
+                 className="relative bg-white rounded-3xl border border-stone-200 p-8
+                            shadow-card hover:shadow-card-hover hover:-translate-y-1.5
+                            transition-all duration-500 group overflow-hidden">
+              {/* Terracotta top stripe */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r
+                              from-terracotta-600 to-terracotta-400" />
+
+              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-terracotta-600 block mb-4">
+                Direct Line {index + 1}
+              </span>
+              <a href={tel}
+                 className="font-mono text-2xl font-bold text-stone-900 hover:text-terracotta-700
+                            transition-colors block mb-6">
+                {number}
+              </a>
+
+              <div className="flex items-center gap-3">
+                <a href={tel}
+                   className="flex-1 inline-flex items-center justify-center gap-1.5
+                              py-3 px-4 rounded-xl bg-stone-900 text-white hover:bg-stone-800
+                              text-xs font-bold transition-all">
+                  <Phone size={13} /> Call Now
+                </a>
+                <a href={whatsapp} target="_blank" rel="noopener noreferrer"
+                   className="flex-1 inline-flex items-center justify-center gap-1.5
+                              py-3 px-4 rounded-xl bg-emerald-50 text-emerald-800
+                              hover:bg-emerald-100 border border-emerald-200
+                              text-xs font-bold transition-all">
+                  <MessageSquare size={13} /> WhatsApp
+                </a>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          FAQ
-      ══════════════════════════════════════════════════════ */}
+      {/* FAQ */}
       <HomeFAQ />
 
-      {/* ══════════════════════════════════════════════════════
-          ADVISORY NOTICE (TINY FOOTER DISCLAIMER)
-      ══════════════════════════════════════════════════════ */}
+      {/* Advisory Notice */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="border border-stone-200 bg-white/70 rounded-2xl px-6 py-5 text-xs
                         text-stone-500 leading-relaxed backdrop-blur-sm">
@@ -594,8 +589,7 @@ export default function Home() {
           All property specifications, rental figures, and prices displayed are estimated benchmarks
           ("Est.") for reference only. Final pricing, agreement terms, and transaction conditions
           are mutually agreed upon directly between buyers, sellers, tenants, and owners during
-          on-site inspections. A standard listing and brokerage commission applies upon
-          successful closing.
+          on-site inspections.
         </div>
       </section>
     </div>

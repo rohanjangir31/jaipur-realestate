@@ -94,12 +94,7 @@ export default function InvestListings() {
         {/* Top Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="section-label">Commercial &amp; Retail</span>
-              <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-terracotta-50 text-terracotta-800 border border-terracotta-200">
-                1% Listing Commission
-              </span>
-            </div>
+            <span className="section-label mb-2">Commercial &amp; Retail</span>
             <h1 className="section-title">Rent &amp; Lease in Jaipur</h1>
             <p className="section-subtitle">
               Commercial office spaces, pre-leased bank branches, high-street retail showrooms, and industrial warehouses.
@@ -124,7 +119,7 @@ export default function InvestListings() {
           <strong className="text-stone-900 block font-semibold mb-0.5">
             Estimated Reference Notice
           </strong>
-          All rental yields and escalation figures displayed are estimated market benchmarks based on historical agreements. No future financial returns or commitments are guaranteed. Standard 1% listing and brokerage commission applies.
+          All rental yields and escalation figures displayed are estimated market benchmarks based on historical agreements. No future financial returns or commitments are guaranteed. All figures are indicative references only.
         </div>
 
         {/* Filter Bar */}
@@ -234,14 +229,17 @@ export default function InvestListings() {
               {assets.map((asset) => (
                 <div
                   key={asset._id}
-                  className="property-card group bg-white"
+                  className="listing-card group"
                 >
+                  {/* Top accent stripe */}
+                  <div className="h-1 w-full bg-gradient-to-r from-sage-700 to-emerald-600" />
+
                   {/* Image & Badges */}
                   <div className="relative aspect-[16/10] bg-stone-900 overflow-hidden">
                     <img
                       src={asset.coverImageUrl}
                       alt={asset.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       onError={(e) => {
                         e.target.src =
                           'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80';
@@ -249,64 +247,63 @@ export default function InvestListings() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent z-[1]" />
                     <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
-                      <span className="bg-stone-900/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm uppercase tracking-wide">
+                      <span className="bg-white/95 text-stone-900 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
                         {asset.assetClass}
-                      </span>
-                      <span className="bg-emerald-800/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">
-                        Verified Space
                       </span>
                     </div>
 
-                    <div className="absolute bottom-3 right-3 bg-white/95 text-stone-900 px-3 py-1 rounded-xl text-xs font-bold z-10 shadow-lift">
-                      Est. {formatINR(asset.entryTicketSizeINR)}
+                    <div className="absolute bottom-3 left-3 z-10">
+                      <div className="bg-sage-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold shadow-md">
+                        Est. {formatINR(asset.entryTicketSizeINR)}
+                      </div>
                     </div>
                   </div>
 
                   {/* Body Content */}
-                  <div className="p-5 flex-1 flex flex-col">
+                  <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center gap-1.5 text-xs text-stone-500 mb-2">
                       <MapPin size={12} className="text-terracotta-600 shrink-0" />
                       <span>{asset.locality}, Jaipur</span>
                     </div>
 
-                    <h3 className="font-serif font-semibold text-stone-900 line-clamp-1 text-base mb-2 group-hover:text-terracotta-700 transition-colors">
+                    <h3 className="font-serif font-semibold text-stone-900 line-clamp-1 text-base mb-4 group-hover:text-terracotta-700 transition-colors">
                       {asset.title}
                     </h3>
 
                     {/* Lease Matrix */}
-                    <div className="grid grid-cols-2 gap-3 py-2.5 border-y border-stone-100 text-xs text-stone-600 mb-4 bg-stone-50/70 p-3 rounded-xl">
+                    <div className="grid grid-cols-2 gap-3 py-3 border-y border-stone-100 text-xs text-stone-600 mb-5 bg-sandstone-50 p-3 rounded-2xl">
                       <div>
-                        <span className="text-stone-400 block text-[10px]">Current Use</span>
+                        <span className="text-stone-400 block text-[10px] mb-0.5">Current Use</span>
                         <span className="font-semibold text-stone-800 line-clamp-1">
                           {asset.currentTenantProfile || 'Commercial Space'}
                         </span>
                       </div>
                       <div>
-                        <span className="text-stone-400 block text-[10px]">Historical Yield</span>
+                        <span className="text-stone-400 block text-[10px] mb-0.5">Historical Yield</span>
                         <span className="font-semibold text-stone-800">
                           {asset.historicalRentalYieldPct ? `Est. ${asset.historicalRentalYieldPct}% p.a.` : 'Commercial Lease'}
                         </span>
                       </div>
                     </div>
 
-                    <p className="text-xs text-stone-500 line-clamp-2 mb-4 leading-relaxed">
+                    <p className="text-xs text-stone-500 line-clamp-2 mb-5 leading-relaxed">
                       {asset.description}
                     </p>
 
                     {/* CTA */}
-                    <div className="mt-auto space-y-2 pt-1">
+                    <div className="mt-auto space-y-2.5">
                       <a
                         href={getWhatsAppLink(asset.title, asset.locality)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-terracotta w-full text-xs !py-2.5 justify-center flex items-center gap-1.5"
+                        className="btn-terracotta w-full text-xs !py-3 justify-center flex items-center gap-1.5"
                       >
                         <MessageSquare size={13} />
-                        <span>Inquire Now (WhatsApp)</span>
+                        <span>Inquire Now</span>
                       </a>
                       <Link
                         to={`/invest/assets/${asset._id}`}
-                        className="btn-secondary w-full text-xs !py-2 justify-center text-stone-700 hover:text-stone-900"
+                        className="btn-secondary w-full text-xs !py-2.5 justify-center text-stone-700 hover:text-stone-900"
                       >
                         <span>View Details</span>
                         <ArrowRight size={13} />

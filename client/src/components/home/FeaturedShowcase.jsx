@@ -22,65 +22,70 @@ export default function FeaturedShowcase() {
       `Hello Jaipur Estates, I'd like to inquire about "${title}" in ${locality}.`
     )}`;
 
-  /* ── Single Property Card ── */
+  /* ── Luxury Property Card ── */
   const PropertyCard = ({
-    image, category, badge, badgeCls, price, locality, title, description,
+    image, category, badge, badgeCls, price, priceBg, locality, title, description,
     specs, inquireHref, detailTo,
   }) => (
-    <div className="group property-card">
-      {/* Image */}
-      <div className="relative h-52 overflow-hidden bg-stone-200">
+    <div className="group listing-card">
+      {/* Image with gradient overlay */}
+      <div className="relative h-56 overflow-hidden bg-stone-200">
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           loading="lazy"
           onError={(e) => { e.target.src = FALLBACK_IMG; }}
         />
-
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/70 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-950/75 via-stone-900/20 to-transparent" />
 
-        {/* Top left labels */}
-        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-          <span className="bg-stone-900/90 text-white text-[10px] font-bold px-2.5 py-1
-                           rounded-full backdrop-blur-sm uppercase tracking-wide">
+        {/* Category badge — top left */}
+        <div className="absolute top-4 left-4">
+          <span className="bg-white/95 text-stone-900 text-[10px] font-bold px-3 py-1
+                           rounded-full uppercase tracking-wider shadow-sm">
             {category}
-          </span>
-          <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm ${badgeCls}`}>
-            {badge}
           </span>
         </div>
 
-        {/* Bottom right: price */}
-        <div className="absolute bottom-3 right-3 bg-white text-stone-900 text-xs font-bold
-                         px-3 py-1.5 rounded-xl shadow-lift">
-          {price}
+        {/* Price — bottom left */}
+        <div className="absolute bottom-4 left-4">
+          <div className={`${priceBg} text-white text-xs font-bold
+                          px-4 py-2 rounded-xl shadow-md`}>
+            {price}
+          </div>
+        </div>
+
+        {/* Badge — bottom right */}
+        <div className="absolute bottom-4 right-4">
+          <span className={`text-[10px] font-bold px-2.5 py-1.5 rounded-lg backdrop-blur-sm ${badgeCls}`}>
+            {badge}
+          </span>
         </div>
       </div>
 
       {/* Body */}
-      <div className="p-5 flex-1 flex flex-col">
+      <div className="p-6 flex-1 flex flex-col">
         {/* Location */}
-        <div className="flex items-center gap-1.5 text-xs text-stone-500 mb-2">
+        <div className="flex items-center gap-1.5 text-xs text-stone-500 mb-3">
           <MapPin size={12} className="text-terracotta-600 shrink-0" />
           <span>{locality}, Jaipur</span>
         </div>
 
         {/* Title */}
-        <h3 className="font-serif text-base font-semibold text-stone-900
-                        group-hover:text-terracotta-700 transition-colors
-                        line-clamp-1 mb-2">
+        <h3 className="font-serif text-lg font-semibold text-stone-900
+                       group-hover:text-terracotta-700 transition-colors
+                       line-clamp-2 mb-2 leading-snug">
           {title}
         </h3>
 
         {/* Description */}
-        <p className="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-4">{description}</p>
+        <p className="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-5">{description}</p>
 
-        {/* Specs grid */}
+        {/* Specs */}
         {specs && (
-          <div className="grid grid-cols-2 gap-2 bg-[#FAF8F5] rounded-xl p-3
-                           border border-stone-100 text-[11px] mb-5">
+          <div className="grid grid-cols-2 gap-2 bg-sandstone-50 rounded-2xl p-4
+                          border border-sandstone-200 text-[11px] mb-6">
             {specs.map(({ label, value }) => (
               <div key={label}>
                 <span className="text-stone-400 block mb-0.5">{label}</span>
@@ -91,18 +96,18 @@ export default function FeaturedShowcase() {
         )}
 
         {/* CTAs */}
-        <div className="mt-auto space-y-2">
+        <div className="mt-auto space-y-2.5">
           <a
             href={inquireHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-terracotta w-full justify-center !py-2.5 text-xs"
+            className="btn-terracotta w-full justify-center !py-3 text-xs"
           >
             <MessageSquare size={13} /> Inquire Now
           </a>
           <Link
             to={detailTo}
-            className="btn-secondary w-full justify-center !py-2 text-xs"
+            className="btn-secondary w-full justify-center !py-2.5 text-xs"
           >
             <Eye size={13} /> View Details <ArrowRight size={12} />
           </Link>
@@ -112,19 +117,19 @@ export default function FeaturedShowcase() {
   );
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 mb-20 relative z-10">
-      {/* White elevated panel */}
-      <div className="bg-white rounded-3xl border border-stone-200 shadow-elevated p-6 sm:p-9">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 relative z-10">
+      {/* Elevated panel — continues seamlessly from hero search bar */}
+      <div className="bg-white rounded-b-3xl border-x border-b border-stone-200 shadow-elevated p-6 sm:p-10 mb-6">
 
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-6
-                         border-b border-stone-100">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-8
+                        border-b border-stone-100">
           <div>
             <span className="section-label mb-2">Curated Catalog</span>
             <h2 className="text-2xl sm:text-3xl font-serif text-stone-900 font-normal">
               Featured Properties in Jaipur
             </h2>
-            <p className="text-stone-500 text-sm mt-1.5 max-w-xl">
+            <p className="text-stone-500 text-sm mt-2 max-w-xl leading-relaxed">
               Hand-picked across Buy &amp; Sell, Rent &amp; Lease, and Turnkey Airbnb — all with
               estimated market pricing.
             </p>
@@ -150,10 +155,11 @@ export default function FeaturedShowcase() {
           {featuredBuy && (
             <PropertyCard
               image={featuredBuy.coverImageUrl}
-              category="Buy & Sell"
+              category="Buy &amp; Sell"
               badge="Est. Price"
               badgeCls="bg-terracotta-700/90 text-white"
               price={`Est. ${formatINR(featuredBuy.price)}`}
+              priceBg="bg-terracotta-700"
               locality={featuredBuy.locality}
               title={featuredBuy.title}
               description={featuredBuy.description}
@@ -169,10 +175,11 @@ export default function FeaturedShowcase() {
           {featuredRent && (
             <PropertyCard
               image={featuredRent.coverImageUrl}
-              category="Rent & Lease"
+              category="Rent &amp; Lease"
               badge="Pre-Leased"
-              badgeCls="bg-emerald-800/90 text-white"
+              badgeCls="bg-sage-700/90 text-white"
               price={`Entry: Est. ${formatINR(featuredRent.entryTicketSizeINR)}`}
+              priceBg="bg-sage-700"
               locality={featuredRent.locality}
               title={featuredRent.title}
               description={featuredRent.description}
@@ -188,10 +195,11 @@ export default function FeaturedShowcase() {
           {featuredAirbnb && (
             <PropertyCard
               image={featuredAirbnb.coverImageUrl}
-              category="Airbnb & Stays"
+              category="Airbnb &amp; Stays"
               badge="Turnkey Homestay"
               badgeCls="bg-rose-700/90 text-white"
-              price={`Est. ₹${featuredAirbnb.basePricePerNight.toLocaleString('en-IN')} / night`}
+              price={`Est. \u20b9${featuredAirbnb.basePricePerNight.toLocaleString('en-IN')} / night`}
+              priceBg="bg-rose-700"
               locality={featuredAirbnb.locality}
               title={featuredAirbnb.title}
               description={featuredAirbnb.description}

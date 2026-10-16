@@ -111,12 +111,7 @@ export default function StayListings() {
         {/* Top Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="section-label">Airbnb &amp; Holiday Homes</span>
-              <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-terracotta-50 text-terracotta-800 border border-terracotta-200">
-                1% Listing Commission
-              </span>
-            </div>
+            <span className="section-label mb-2">Airbnb &amp; Holiday Homes</span>
             <h1 className="section-title">Airbnb Properties &amp; Management</h1>
             <p className="section-subtitle">
               Turnkey courtyard havelis, luxury villas, and studio flats in Jaipur. Buy to launch your Airbnb or partner with our hosting management team.
@@ -138,7 +133,7 @@ export default function StayListings() {
           <strong className="text-stone-900 block font-semibold mb-0.5">
             Turnkey Airbnb &amp; Host Management
           </strong>
-          All properties listed are ready for short-stay occupancy or turnkey purchase. Displayed per-night figures are market estimates based on seasonal averages. Standard 1% listing and advisory commission applies.
+          All properties listed are ready for short-stay occupancy or turnkey purchase. Displayed per-night figures are market estimates based on seasonal averages. All figures are indicative references only.
         </div>
 
         {/* Quick Filter Stay Types */}
@@ -184,9 +179,7 @@ export default function StayListings() {
               >
                 <option value="">All Localities</option>
                 {JAIPUR_LOCALITIES.map((loc) => (
-                  <option key={loc} value={loc}>
-                    {loc}
-                  </option>
+                  <option key={loc} value={loc}>{loc}</option>
                 ))}
               </select>
             </div>
@@ -265,21 +258,24 @@ export default function StayListings() {
           <div>
             <div className="flex items-center justify-between text-xs text-stone-500 mb-5">
               <span>Showing <strong>{stays.length}</strong> Airbnb properties in Jaipur</span>
-              <span>All nightly rates are estimated averages (Est. ₹)</span>
+              <span>All nightly rates are estimated averages (Est. &#8377;)</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {stays.map((stay) => (
                 <div
                   key={stay._id}
-                  className="property-card group bg-white"
+                  className="listing-card group"
                 >
+                  {/* Top accent stripe */}
+                  <div className="h-1 w-full bg-gradient-to-r from-rose-700 to-rose-500" />
+
                   {/* Photo */}
                   <div className="relative aspect-[16/10] bg-stone-900 overflow-hidden">
                     <img
                       src={stay.coverImageUrl}
                       alt={stay.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       onError={(e) => {
                         e.target.src =
                           'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80';
@@ -287,64 +283,63 @@ export default function StayListings() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent z-[1]" />
                     <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
-                      <span className="bg-stone-900/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm uppercase tracking-wide">
+                      <span className="bg-white/95 text-stone-900 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
                         {stay.stayType}
-                      </span>
-                      <span className="bg-rose-700/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">
-                        Turnkey Setup
                       </span>
                     </div>
 
-                    <div className="absolute bottom-3 right-3 bg-white/95 text-stone-900 px-3 py-1 rounded-xl text-xs font-bold z-10 shadow-lift">
-                      Est. ₹{stay.basePricePerNight.toLocaleString('en-IN')} / night
+                    <div className="absolute bottom-3 left-3 z-10">
+                      <div className="bg-rose-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold shadow-md">
+                        Est. &#8377;{stay.basePricePerNight.toLocaleString('en-IN')} / night
+                      </div>
                     </div>
                   </div>
 
                   {/* Details */}
-                  <div className="p-5 flex-1 flex flex-col">
+                  <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center gap-1.5 text-xs text-stone-500 mb-2">
                       <MapPin size={12} className="text-terracotta-600 shrink-0" />
                       <span>{stay.locality}, Jaipur</span>
                     </div>
 
-                    <h3 className="font-serif font-semibold text-stone-900 line-clamp-1 text-base mb-2 group-hover:text-terracotta-700 transition-colors">
+                    <h3 className="font-serif font-semibold text-stone-900 line-clamp-1 text-base mb-4 group-hover:text-terracotta-700 transition-colors">
                       {stay.title}
                     </h3>
 
                     {/* Room Specs */}
-                    <div className="grid grid-cols-3 gap-2 py-2.5 border-y border-stone-100 text-xs text-stone-600 mb-4 bg-stone-50/70 px-3 rounded-xl text-center">
+                    <div className="grid grid-cols-3 gap-3 py-3 border-y border-stone-100 text-xs text-stone-600 mb-5 bg-sandstone-50 px-3 rounded-2xl text-center">
                       <div>
-                        <span className="text-stone-400 block text-[10px]">Bedrooms</span>
+                        <span className="text-stone-400 block text-[10px] mb-0.5">Bedrooms</span>
                         <span className="font-semibold text-stone-800">{stay.bedrooms}</span>
                       </div>
                       <div>
-                        <span className="text-stone-400 block text-[10px]">Beds</span>
+                        <span className="text-stone-400 block text-[10px] mb-0.5">Beds</span>
                         <span className="font-semibold text-stone-800">{stay.beds}</span>
                       </div>
                       <div>
-                        <span className="text-stone-400 block text-[10px]">Max Guests</span>
+                        <span className="text-stone-400 block text-[10px] mb-0.5">Max Guests</span>
                         <span className="font-semibold text-stone-800">{stay.maxGuests}</span>
                       </div>
                     </div>
 
-                    <p className="text-xs text-stone-500 line-clamp-2 mb-4 leading-relaxed">
+                    <p className="text-xs text-stone-500 line-clamp-2 mb-5 leading-relaxed">
                       {stay.description}
                     </p>
 
                     {/* Direct inquiry CTA */}
-                    <div className="mt-auto space-y-2 pt-1">
+                    <div className="mt-auto space-y-2.5">
                       <a
                         href={getWhatsAppLink(stay.title, stay.locality)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-terracotta w-full text-xs !py-2.5 justify-center flex items-center gap-1.5"
+                        className="btn-terracotta w-full text-xs !py-3 justify-center flex items-center gap-1.5"
                       >
                         <MessageSquare size={13} />
-                        <span>Inquire Now (WhatsApp)</span>
+                        <span>Inquire Now</span>
                       </a>
                       <Link
                         to={`/stay/${stay._id}`}
-                        className="btn-secondary w-full text-xs !py-2 justify-center text-stone-700 hover:text-stone-900"
+                        className="btn-secondary w-full text-xs !py-2.5 justify-center text-stone-700 hover:text-stone-900"
                       >
                         <span>View Property &amp; Setup</span>
                         <ArrowRight size={13} />

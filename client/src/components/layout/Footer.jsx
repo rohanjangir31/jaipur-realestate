@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Mail, Phone, MessageSquare, ArrowUpRight } from 'lucide-react';
+import { MapPin, Mail, Phone, MessageSquare, ArrowUpRight, Heart } from 'lucide-react';
 import Logo from '../ui/Logo';
 import { CONTACT_NUMBERS, OFFICE_ADDRESS, CONTACT_EMAIL, OFFICE_HOURS } from '../../utils/contact';
 
@@ -11,27 +11,27 @@ const FOOTER_LINKS = {
     { label: 'Commercial Offices',         to: '/buy?propertyType=Commercial Office/Shop' },
     { label: 'Vaishali Nagar',             to: '/buy?locality=Vaishali%20Nagar' },
     { label: 'Jagatpura Properties',       to: '/buy?locality=Jagatpura' },
-    { label: 'Post a Property →',          to: '/buy/submit', highlight: true },
+    { label: 'Post a Property \u2192',     to: '/buy/submit', highlight: true },
   ],
   'Rent & Lease': [
     { label: 'Pre-Leased Commercial',      to: '/invest?assetClass=Pre-Leased%20Commercial' },
     { label: 'Industrial & Warehousing',   to: '/invest?assetClass=Industrial%20Lease' },
     { label: 'Commercial Office Lease',    to: '/invest?assetClass=Commercial%20Office%20Lease' },
     { label: 'Full Lease Catalog',         to: '/invest' },
-    { label: 'List for Rent / Lease →',    to: '/buy/submit', highlight: true },
+    { label: 'List for Rent / Lease \u2192', to: '/buy/submit', highlight: true },
   ],
   'Airbnb & Stays': [
     { label: 'Turnkey Airbnb Havelis',     to: '/stay?stayType=Airbnb%20Haveli' },
     { label: 'Luxury Airbnb Villas',       to: '/stay?stayType=Airbnb%20Luxury%20Villa' },
     { label: 'Boutique Homestays',         to: '/stay?stayType=Airbnb%20Homestay' },
     { label: 'Airbnb Studio Flats',        to: '/stay?stayType=Airbnb%20Studio%20Apartment' },
-    { label: 'List for Airbnb Hosting →',  to: '/stay/host/submit', highlight: true },
+    { label: 'List for Airbnb Hosting \u2192', to: '/stay/host/submit', highlight: true },
   ],
 };
 
 export default function Footer() {
   return (
-    <footer className="bg-[#111010] text-stone-400 border-t border-stone-800/80 mt-auto">
+    <footer className="bg-[#0f0e0d] text-stone-400 border-t border-stone-900 mt-auto">
 
       {/* ── Main Footer Body ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
@@ -39,29 +39,33 @@ export default function Footer() {
 
           {/* Column 1: Brand + Contact (span 4) */}
           <div className="lg:col-span-4">
-            <Link to="/" className="inline-block mb-5">
+            <Link to="/" className="inline-block mb-6">
               <Logo variant="dark" />
             </Link>
             <p className="text-stone-500 text-sm leading-relaxed max-w-sm mb-6">
-              Jaipur's transparent property showcase — Buy &amp; Sell, Rent &amp; Lease, and turnkey
+              Jaipur's transparent property showcase — Buy & Sell, Rent & Lease, and turnkey
               Airbnb management. All prices are market estimates. No hidden fees.
             </p>
 
             {/* Live Status Pill */}
             <div className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400
-                            bg-emerald-950/50 border border-emerald-900/60 px-3 py-1.5 rounded-full mb-6">
+                            bg-emerald-950/50 border border-emerald-900/60 px-4 py-2 rounded-full mb-8">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
               Open All 7 Days · 9 AM – 6 PM IST
             </div>
 
             {/* Contact Details */}
-            <div className="space-y-3">
-              <div className="flex items-start gap-2.5">
-                <MapPin size={14} className="text-stone-600 shrink-0 mt-0.5" />
+            <div className="space-y-3 mb-6">
+              <div className="flex items-start gap-3">
+                <div className="w-7 h-7 rounded-lg bg-stone-800 flex items-center justify-center shrink-0 mt-0.5">
+                  <MapPin size={13} className="text-terracotta-500" />
+                </div>
                 <span className="text-xs text-stone-500 leading-relaxed">{OFFICE_ADDRESS}</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Mail size={14} className="text-stone-600 shrink-0" />
+              <div className="flex items-center gap-3">
+                <div className="w-7 h-7 rounded-lg bg-stone-800 flex items-center justify-center shrink-0">
+                  <Mail size={13} className="text-terracotta-500" />
+                </div>
                 <a href={`mailto:${CONTACT_EMAIL}`}
                    className="text-xs text-stone-400 hover:text-white transition-colors">
                   {CONTACT_EMAIL}
@@ -70,16 +74,16 @@ export default function Footer() {
             </div>
 
             {/* Phone Numbers */}
-            <div className="mt-5 pt-5 border-t border-stone-800">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-terracotta-500 block mb-3">
+            <div className="border-t border-stone-800 pt-6">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-terracotta-500 block mb-4">
                 Direct Calling Lines
               </span>
               <div className="space-y-2">
                 {CONTACT_NUMBERS.map(({ number, tel, whatsapp }) => (
                   <div key={number}
-                       className="flex items-center justify-between px-3 py-2.5 rounded-xl
-                                  bg-stone-900/60 border border-stone-800/80 hover:border-stone-700
-                                  transition-colors">
+                       className="flex items-center justify-between px-4 py-3 rounded-2xl
+                                  bg-stone-900/60 border border-stone-800 hover:border-stone-700
+                                  transition-colors group">
                     <a href={tel}
                        className="font-mono text-sm font-bold text-stone-200 hover:text-white transition-colors">
                       {number}
@@ -105,11 +109,11 @@ export default function Footer() {
 
           {/* Column 2-4: Service Links */}
           {Object.entries(FOOTER_LINKS).map(([category, links], idx) => (
-            <div key={category} className={idx === 2 ? "lg:col-span-2 md:col-span-1" : "lg:col-span-3 md:col-span-1"}>
-              <h4 className="text-xs font-bold uppercase tracking-[0.12em] text-stone-200 mb-4">
+            <div key={category} className={idx === 2 ? 'lg:col-span-2 md:col-span-1' : 'lg:col-span-3 md:col-span-1'}>
+              <h4 className="text-xs font-bold uppercase tracking-[0.12em] text-stone-200 mb-5">
                 {category}
               </h4>
-              <ul className="space-y-2.5">
+              <ul className="space-y-3">
                 {links.map(({ label, to, highlight }) => (
                   <li key={label}>
                     <Link
@@ -132,17 +136,17 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom Bar ── */}
-      <div className="border-t border-stone-800/60">
+      <div className="border-t border-stone-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5
                         flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-stone-600">
-            © {new Date().getFullYear()} Jaipur Estates. Estimated market pricing across Jaipur.
+            \u00a9 {new Date().getFullYear()} Jaipur Estates. Estimated market pricing across Jaipur.
             All figures are indicative.
           </p>
           <div className="flex items-center gap-5 text-xs text-stone-600">
             <Link to="/"       className="hover:text-stone-300 transition-colors">Home</Link>
-            <Link to="/buy"    className="hover:text-stone-300 transition-colors">Buy &amp; Sell</Link>
-            <Link to="/invest" className="hover:text-stone-300 transition-colors">Rent &amp; Lease</Link>
+            <Link to="/buy"    className="hover:text-stone-300 transition-colors">Buy & Sell</Link>
+            <Link to="/invest" className="hover:text-stone-300 transition-colors">Rent & Lease</Link>
             <Link to="/stay"   className="hover:text-stone-300 transition-colors">Airbnb</Link>
             <Link to="/poster" className="text-terracotta-500 hover:text-terracotta-300 font-semibold
                                           flex items-center gap-0.5 transition-colors">
