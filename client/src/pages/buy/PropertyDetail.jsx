@@ -161,10 +161,11 @@ export default function PropertyDetail() {
               </p>
             </div>
             <div className="text-left md:text-right">
-              <div className="text-3xl font-bold text-brand-700">{formatINR(property.price)}</div>
+              <div className="text-xs text-stone-500 font-medium uppercase tracking-wider mb-0.5">Estimated Price</div>
+              <div className="text-3xl font-bold text-terracotta-700">Est. {formatINR(property.price)}</div>
               {property.pricePerSqFt && (
-                <div className="text-xs text-gray-500 mt-1">
-                  ₹{property.pricePerSqFt.toLocaleString('en-IN')} per sq.ft
+                <div className="text-xs text-stone-500 mt-1">
+                  Est. ₹{property.pricePerSqFt.toLocaleString('en-IN')} per sq.ft
                 </div>
               )}
               {property.isNegotiable && (

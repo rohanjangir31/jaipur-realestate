@@ -45,7 +45,12 @@ export default {
           700: '#2c4b3a',
           800: '#223c2e',
         },
-        // Backwards compatibility for existing class references
+        gold: {
+          400: '#e3a857',
+          500: '#d4911c',
+          600: '#b87c10',
+        },
+        // Backward compatibility
         brand: {
           50:  '#fdf6f3',
           100: '#faece6',
@@ -73,11 +78,36 @@ export default {
         sans:    ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         display: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
         serif:   ['Playfair Display', 'Georgia', 'serif'],
+        mono:    ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
       },
       boxShadow: {
-        'soft': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
-        'lift': '0 8px 24px -4px rgba(24, 23, 22, 0.08), 0 2px 6px -1px rgba(24, 23, 22, 0.04)',
-        'elevated': '0 16px 36px -8px rgba(24, 23, 22, 0.12), 0 4px 12px -2px rgba(24, 23, 22, 0.06)',
+        'soft':     '0 1px 3px 0 rgba(0,0,0,0.05), 0 1px 2px -1px rgba(0,0,0,0.05)',
+        'lift':     '0 8px 24px -4px rgba(24,23,22,0.10), 0 2px 6px -1px rgba(24,23,22,0.05)',
+        'elevated': '0 20px 48px -8px rgba(24,23,22,0.14), 0 8px 20px -4px rgba(24,23,22,0.06)',
+        'glow-terracotta': '0 0 0 3px rgba(153,65,38,0.25)',
+        'glow-gold': '0 0 0 3px rgba(227,168,87,0.30)',
+        'card-hover': '0 16px 40px -8px rgba(24,23,22,0.16), 0 4px 12px -2px rgba(24,23,22,0.08)',
+      },
+      backgroundImage: {
+        'hero-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+        'sandstone-dots': "radial-gradient(circle, #d7c4ac22 1px, transparent 1px)",
+      },
+      backgroundSize: {
+        'dots-sm': '20px 20px',
+        'dots-md': '32px 32px',
+      },
+      borderRadius: {
+        '2xl': '1rem',
+        '3xl': '1.5rem',
+        '4xl': '2rem',
+      },
+      transitionTimingFunction: {
+        'spring': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
+      scale: {
+        '102': '1.02',
+        '103': '1.03',
       },
     },
   },

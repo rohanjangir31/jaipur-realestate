@@ -162,9 +162,9 @@ export default function InvestmentDetail() {
               </p>
             </div>
             <div className="text-left md:text-right">
-              <span className="text-xs text-gray-400 uppercase font-semibold tracking-wider block">Minimum Ticket</span>
-              <div className="text-3xl font-bold text-gray-900">{formatINR(asset.entryTicketSizeINR)}</div>
-              <div className="text-xs text-gray-500 mt-1">Total Asset Value: {formatINR(asset.totalAssetValueINR)}</div>
+              <span className="text-xs text-stone-500 uppercase font-semibold tracking-wider block">Estimated Minimum Ticket</span>
+              <div className="text-3xl font-bold text-stone-900">Est. {formatINR(asset.entryTicketSizeINR)}</div>
+              <div className="text-xs text-stone-500 mt-1">Total Asset Value: Est. {formatINR(asset.totalAssetValueINR)}</div>
             </div>
           </div>
         </div>

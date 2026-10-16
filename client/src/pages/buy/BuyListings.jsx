@@ -285,63 +285,63 @@ export default function BuyListings() {
               {properties.map((property) => (
                 <div
                   key={property._id}
-                  className="card group flex flex-col hover:border-stone-400 transition-colors bg-white"
+                  className="property-card group bg-white"
                 >
                   {/* Photo */}
                   <div className="relative aspect-[16/10] bg-stone-900 overflow-hidden">
                     <img
                       src={property.coverImageUrl}
                       alt={property.title}
-                      className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       onError={(e) => {
                         e.target.src =
                           'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80';
                       }}
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent z-[1]" />
                     <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
-                      <span className="bg-stone-900/90 text-white text-[10px] font-semibold px-2 py-0.5 rounded backdrop-blur-sm">
+                      <span className="bg-stone-900/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm uppercase tracking-wide">
                         Buy &amp; Sell
                       </span>
-                      <span className="bg-terracotta-700/90 text-white text-[10px] font-semibold px-2 py-0.5 rounded backdrop-blur-sm">
-                        1% Commission
+                      <span className="bg-terracotta-700/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">
+                        Verified Listing
                       </span>
                     </div>
 
-                    <div className="absolute bottom-3 right-3 badge-dark text-[11px] font-medium z-10">
-                      {property.propertyType}
+                    <div className="absolute bottom-3 right-3 bg-white/95 text-stone-900 px-3 py-1 rounded-xl text-xs font-bold z-10 shadow-lift">
+                      Est. {formatINR(property.price)}
                     </div>
                   </div>
 
                   {/* Property Details */}
                   <div className="p-5 flex-1 flex flex-col">
-                    <div className="mb-2">
-                      <div className="text-2xl font-semibold text-stone-950">
-                        {formatINR(property.price)}
-                      </div>
+                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                      <p className="flex items-center gap-1.5 text-xs text-stone-500">
+                        <MapPin size={12} className="text-terracotta-600 shrink-0" />
+                        <span>{property.locality}, Jaipur</span>
+                      </p>
+                      <span className="text-[11px] font-medium text-stone-600 bg-stone-100 px-2 py-0.5 rounded-md">
+                        {property.propertyType}
+                      </span>
                     </div>
 
-                    <h3 className="font-serif font-medium text-stone-900 line-clamp-1 text-base mb-1.5 group-hover:text-terracotta-700 transition-colors">
+                    <h3 className="font-serif font-semibold text-stone-900 line-clamp-1 text-base mb-3 group-hover:text-terracotta-700 transition-colors">
                       {property.title}
                     </h3>
 
-                    <p className="flex items-center gap-1.5 text-xs text-stone-500 mb-4">
-                      <MapPin size={13} className="text-stone-400 shrink-0" />
-                      <span>{property.locality}, Jaipur</span>
-                    </p>
-
                     {/* Specifications */}
-                    <div className="grid grid-cols-3 gap-2 py-2.5 border-y border-stone-100 text-xs text-stone-600 mb-4 bg-stone-50/60 px-2.5 rounded">
+                    <div className="grid grid-cols-3 gap-2 py-2.5 border-y border-stone-100 text-xs text-stone-600 mb-4 bg-stone-50/70 px-3 rounded-xl">
                       <div>
                         <span className="text-stone-400 block text-[10px]">Bedrooms</span>
-                        <span className="font-medium text-stone-800">{property.bhk} BHK</span>
+                        <span className="font-semibold text-stone-800">{property.bhk} BHK</span>
                       </div>
                       <div>
                         <span className="text-stone-400 block text-[10px]">Super Area</span>
-                        <span className="font-medium text-stone-800">{property.superAreaSqFt} sqft</span>
+                        <span className="font-semibold text-stone-800">{property.superAreaSqFt} sqft</span>
                       </div>
                       <div className="truncate">
                         <span className="text-stone-400 block text-[10px]">Possession</span>
-                        <span className="font-medium text-stone-800">{property.possessionStatus}</span>
+                        <span className="font-semibold text-stone-800">{property.possessionStatus}</span>
                       </div>
                     </div>
 
@@ -351,14 +351,14 @@ export default function BuyListings() {
                         href={getWhatsAppLink(property.title, property.locality)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-terracotta w-full text-xs !py-2 justify-center flex items-center gap-1.5"
+                        className="btn-terracotta w-full text-xs !py-2.5 justify-center flex items-center gap-1.5"
                       >
                         <MessageSquare size={13} />
                         <span>Inquire Now (WhatsApp)</span>
                       </a>
                       <Link
                         to={`/buy/${property._id}`}
-                        className="btn-secondary w-full text-xs !py-1.5 justify-center text-stone-700 hover:text-stone-900"
+                        className="btn-secondary w-full text-xs !py-2 justify-center text-stone-700 hover:text-stone-900"
                       >
                         <span>View Details</span>
                         <ArrowRight size={13} />

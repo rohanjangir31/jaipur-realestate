@@ -15,45 +15,81 @@
     @apply font-sans text-stone-800 bg-[#FAF8F5];
   }
   h1, h2, h3, h4 {
-    @apply tracking-tight text-stone-900;
+    @apply tracking-tight;
   }
 }
 
 @layer components {
-  /* Buttons - Clean, purposeful, human */
+
+  /* ── BUTTONS ──────────────────────────────────────────────── */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-stone-900 hover:bg-stone-800 text-white font-medium text-sm px-5 py-2.5 rounded-lg transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm;
+    @apply inline-flex items-center justify-center gap-2
+           bg-stone-950 hover:bg-stone-800
+           text-white font-semibold text-sm
+           px-6 py-3 rounded-xl
+           transition-all duration-200
+           shadow-sm hover:shadow-md
+           disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-terracotta {
-    @apply inline-flex items-center justify-center gap-2 text-white font-medium text-sm px-5 py-2.5 rounded-lg transition-colors duration-150 shadow-sm bg-[#994126] hover:bg-[#7e3722];
+    @apply inline-flex items-center justify-center gap-2
+           bg-[#994126] hover:bg-[#7e3722]
+           text-white font-semibold text-sm
+           px-6 py-3 rounded-xl
+           transition-all duration-200
+           shadow-sm hover:shadow-md
+           disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 border border-stone-300 bg-white hover:bg-stone-50 text-stone-700 font-medium text-sm px-5 py-2.5 rounded-lg transition-colors duration-150 shadow-sm;
+    @apply inline-flex items-center justify-center gap-2
+           border border-stone-300 bg-white hover:bg-stone-50
+           text-stone-800 font-semibold text-sm
+           px-6 py-3 rounded-xl
+           transition-all duration-200
+           shadow-sm hover:shadow-md;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 text-stone-600 hover:text-stone-950 hover:bg-stone-100 font-medium text-sm px-3.5 py-2 rounded-lg transition-colors duration-150;
+    @apply inline-flex items-center justify-center gap-2
+           text-stone-600 hover:text-stone-950 hover:bg-stone-100
+           font-medium text-sm
+           px-4 py-2.5 rounded-xl
+           transition-colors duration-150;
   }
 
-  /* Form Elements - Crisp, accessible, professional */
+  /* ── FORM ELEMENTS ───────────────────────────────────────── */
   .input-field {
-    @apply w-full bg-white border border-stone-300 rounded-lg px-3.5 py-2.5 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-900 focus:ring-1 focus:ring-stone-900 transition-colors duration-150;
+    @apply w-full bg-white border border-stone-200 rounded-xl
+           px-4 py-3 text-sm text-stone-900 placeholder-stone-400
+           focus:outline-none focus:border-terracotta-700 focus:ring-2
+           focus:ring-terracotta-700/20
+           transition-all duration-150;
   }
 
   .input-error {
-    @apply border-red-500 focus:border-red-500 focus:ring-red-500;
+    @apply border-red-500 focus:border-red-500 focus:ring-red-500/20;
   }
 
-  /* Cards - Editorial, clean hairline borders */
+  /* ── CARDS ───────────────────────────────────────────────── */
   .card {
-    @apply bg-white rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden;
+    @apply bg-white rounded-2xl border border-stone-200
+           shadow-sm hover:shadow-lift
+           transition-all duration-300 overflow-hidden;
   }
 
-  /* Status Badges - Understated, editorial */
+  .card-dark {
+    @apply bg-[#1C1A18] rounded-2xl border border-stone-800
+           shadow-sm hover:border-terracotta-700/50
+           transition-all duration-300 overflow-hidden;
+  }
+
+  /* ── BADGES ─────────────────────────────────────────────── */
   .badge {
-    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-medium tracking-normal;
+    @apply inline-flex items-center gap-1.5
+           px-3 py-1 rounded-full
+           text-xs font-semibold tracking-wide;
   }
 
   .badge-green {
@@ -65,7 +101,7 @@
   }
 
   .badge-blue {
-    @apply badge bg-stone-100 text-stone-800 border border-stone-300;
+    @apply badge bg-blue-50 text-blue-900 border border-blue-200;
   }
 
   .badge-rose {
@@ -76,32 +112,106 @@
     @apply badge bg-stone-900 text-white;
   }
 
-  /* Section Typography */
+  /* ── TYPOGRAPHY SYSTEM ───────────────────────────────────── */
   .section-label {
-    @apply text-xs font-semibold uppercase tracking-wider text-[#994126] mb-2 block;
+    @apply text-[11px] font-bold uppercase tracking-[0.15em]
+           text-terracotta-700 block;
   }
 
   .section-title {
-    @apply text-2xl sm:text-3xl lg:text-4xl font-serif text-stone-950 tracking-tight leading-tight;
+    @apply text-3xl sm:text-4xl lg:text-5xl
+           font-serif text-stone-950
+           tracking-tight leading-[1.1];
   }
 
   .section-subtitle {
-    @apply text-stone-600 text-sm sm:text-base max-w-2xl mt-3 font-normal leading-relaxed;
+    @apply text-stone-500 text-base sm:text-lg
+           max-w-2xl mt-4 font-normal leading-relaxed;
+  }
+
+  /* ── PROPERTY CARD HOVER ─────────────────────────────────── */
+  .property-card {
+    @apply bg-white rounded-2xl border border-stone-200 overflow-hidden
+           shadow-sm hover:shadow-elevated hover:-translate-y-1
+           transition-all duration-300 flex flex-col;
+  }
+
+  /* ── GLASS PANEL ─────────────────────────────────────────── */
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-md border border-white/60
+           rounded-2xl shadow-elevated;
+  }
+
+  /* ── GRADIENT TEXT ───────────────────────────────────────── */
+  .text-gradient {
+    @apply bg-gradient-to-r from-terracotta-700 via-terracotta-500 to-amber-500
+           bg-clip-text text-transparent;
+  }
+
+  /* ── DIVIDER ─────────────────────────────────────────────── */
+  .divider {
+    @apply border-t border-stone-200;
+  }
+
+  /* ── PILL TAG ────────────────────────────────────────────── */
+  .pill-tag {
+    @apply inline-flex items-center gap-1
+           text-[10px] font-bold uppercase tracking-widest
+           px-2.5 py-1 rounded-full;
+  }
+
+  /* ── HOVER SHINE ON DARK CARDS ───────────────────────────── */
+  .shine-hover {
+    @apply relative overflow-hidden;
+  }
+  .shine-hover::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent
+           translate-x-[-100%] transition-transform duration-700;
+  }
+  .shine-hover:hover::before {
+    @apply translate-x-[100%];
   }
 }
 
-/* Subtle scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* ── CUSTOM ANIMATIONS ────────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-::-webkit-scrollbar-track {
-  background: #faf8f5;
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
-::-webkit-scrollbar-thumb {
-  background: #d6d3cd;
-  border-radius: 3px;
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #a8a29e;
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out both;
 }
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out both;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0ece8 25%, #e8e4df 50%, #f0ece8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ── SCROLLBAR ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #faf8f5; }
+::-webkit-scrollbar-thumb { background: #c7bfb5; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #a89e94; }
