@@ -5,6 +5,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 import QuickContact from './components/ui/QuickContact';
+import ScrollToTop from './components/layout/ScrollToTop';
 
 // Pages
 import Home from './pages/Home';
@@ -35,6 +36,7 @@ import NotFound from './pages/NotFound';
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AuthProvider>
         <div className="flex flex-col min-h-screen">
           <Navbar />
@@ -50,7 +52,7 @@ export default function App() {
               <Route
                 path="/buy/submit"
                 element={
-                  <ProtectedRoute roles={['owner', 'agent', 'admin', 'super_admin']}>
+                  <ProtectedRoute>
                     <SubmitProperty />
                   </ProtectedRoute>
                 }
@@ -62,7 +64,7 @@ export default function App() {
               <Route
                 path="/stay/host/submit"
                 element={
-                  <ProtectedRoute roles={['host', 'agent', 'admin', 'super_admin']}>
+                  <ProtectedRoute>
                     <HostSubmitStay />
                   </ProtectedRoute>
                 }

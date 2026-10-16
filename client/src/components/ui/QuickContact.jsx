@@ -14,7 +14,7 @@ export default function QuickContact() {
             <div>
               <div className="flex items-center gap-1.5 text-terracotta-400 text-xs font-semibold uppercase tracking-wider">
                 <Sparkles size={13} />
-                <span>Standard 1% Commission</span>
+                <span>Direct Advisory · No Hidden Fees</span>
               </div>
               <h3 className="font-serif text-lg text-white font-medium mt-0.5">
                 Direct Calling Lines
