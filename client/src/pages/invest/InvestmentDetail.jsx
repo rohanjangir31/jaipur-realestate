@@ -45,6 +45,7 @@ export default function InvestmentDetail() {
   const [inquirySuccess, setInquirySuccess] = useState(false);
   const [inquiryError, setInquiryError] = useState('');
   const [activeImage, setActiveImage] = useState('');
+  const [submittedLead, setSubmittedLead] = useState(null);
 
   usePageMeta({
     title: asset ? `${asset.title} in ${asset.locality}` : 'Commercial Investment Opportunity',
@@ -88,6 +89,11 @@ export default function InvestmentDetail() {
   const onInquirySubmit = async (formData) => {
     try {
       setInquiryError('');
+      setSubmittedLead(formData);
+
+      const waText = `Hello Jaipur Estates, I have submitted an expression of interest for "${asset?.title}":\n• Investor: ${formData.contactName}\n• Phone: +91 ${formData.contactPhone}\n• Intended Capital: ₹${formData.intendedCapital?.toLocaleString('en-IN')}\n• Horizon: ${formData.investmentHorizonYears} years\n• Note: ${formData.message || 'Looking for lease diligence.'}`;
+      const waUrl = `https://wa.me/919664247662?text=${encodeURIComponent(waText)}`;
+
       await inquiryApi.submitInquiry({
         inquiryType: 'INVEST',
         referenceId: id,
@@ -104,7 +110,13 @@ export default function InvestmentDetail() {
           investmentHorizonYears: formData.investmentHorizonYears,
         },
       });
+
       setInquirySuccess(true);
+      try {
+        window.open(waUrl, '_blank');
+      } catch {
+        /* Ignore popup blockers */
+      }
       reset();
     } catch (err) {
       setInquiryError(err.response?.data?.message || 'Failed to submit investor inquiry');
@@ -150,7 +162,7 @@ export default function InvestmentDetail() {
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <span className="badge bg-emerald-100 text-emerald-800 font-semibold">{asset.assetClass}</span>
-                <span className="badge-green">1% Listing Commission</span>
+                <span className="badge-green">Verified Asset</span>
                 <span className="text-xs text-stone-500 font-mono">Market Estimate</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900">{asset.title}</h1>
@@ -296,34 +308,48 @@ export default function InvestmentDetail() {
               </div>
 
               {inquirySuccess ? (
-                <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-5 rounded-lg text-center space-y-3">
-                  <ShieldCheck size={32} className="mx-auto text-emerald-600" />
-                  <h4 className="font-semibold text-sm">Due Diligence Request Logged</h4>
-                  <p className="text-xs leading-relaxed text-emerald-800">
-                    Thank you. Our institutional investment desk will share the due diligence docket for <strong>{asset.title}</strong> within 24 business hours.
-                  </p>
-                  <div className="pt-2 border-t border-emerald-200 flex flex-col gap-2">
+                <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-6 rounded-2xl text-center space-y-3.5 shadow-sm">
+                  <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                    <ShieldCheck size={26} />
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-lg font-bold text-stone-900">Request Registered</h4>
+                    <p className="text-xs text-stone-600 leading-relaxed mt-1">
+                      Thank you{submittedLead?.contactName ? `, ${submittedLead.contactName}` : ''}! Your interest in <strong>{asset.title}</strong> has been forwarded to our commercial desk.
+                    </p>
+                  </div>
+
+                  <div className="p-3 bg-white border border-emerald-200 rounded-xl text-left space-y-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 block">Instant Fast-Track</span>
+                    <p className="text-[11px] text-stone-500 leading-relaxed">
+                      To receive lease agreements, tenant covenants, and tenant ROI schedules immediately:
+                    </p>
                     <a
-                      href={`https://wa.me/919664247662?text=${encodeURIComponent(`Hello, I just registered an expression of interest for "${asset.title}" (Ref: ${asset._id || id}). Looking forward to the legal diligence pack.`)}`}
+                      href={`https://wa.me/919664247662?text=${encodeURIComponent(
+                        `Hello Jaipur Estates, I have submitted an expression of interest for "${asset?.title}":\n• Investor: ${submittedLead?.contactName || ''}\n• Phone: +91 ${submittedLead?.contactPhone || ''}\n• Capital: ₹${submittedLead?.intendedCapital?.toLocaleString('en-IN') || ''}\n• Horizon: ${submittedLead?.investmentHorizonYears || ''} years\n• Note: ${submittedLead?.message || 'Please share docket.'}`
+                      )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-medium transition-colors"
+                      className="btn-terracotta w-full justify-center text-xs py-2.5 flex items-center gap-1.5 shadow"
                     >
-                      <MessageSquare size={13} /> Open in WhatsApp Desk
+                      <MessageSquare size={14} /> Open WhatsApp with My Details
                     </a>
+                  </div>
+
+                  <div className="pt-2 border-t border-emerald-200 flex flex-col gap-2">
                     <a
                       href="tel:+919664247662"
-                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-stone-900 hover:bg-stone-800 text-white text-xs font-medium transition-colors"
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold transition-colors"
                     >
                       <Phone size={13} /> Call Commercial Desk (+91 96642 47662)
                     </a>
+                    <button
+                      onClick={() => { setInquirySuccess(false); setSubmittedLead(null); }}
+                      className="text-xs text-stone-500 hover:text-stone-800 underline transition-colors pt-1"
+                    >
+                      Submit another expression of interest
+                    </button>
                   </div>
-                  <button
-                    onClick={() => setInquirySuccess(false)}
-                    className="text-xs text-stone-500 underline hover:text-stone-800 mt-2 block"
-                  >
-                    Submit another expression of interest
-                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onInquirySubmit)} noValidate className="space-y-4">

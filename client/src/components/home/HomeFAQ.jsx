@@ -4,9 +4,9 @@ import { CONTACT_NUMBERS } from '../../utils/contact';
 
 const FAQS = [
   {
-    question: 'What listing commission do you charge?',
+    question: 'What fees or advisory charges apply?',
     answer:
-      'We operate on a transparent, standard listing and brokerage commission on successfully completed transactions only. There are zero upfront listing charges, zero subscription fees, and no hidden markups.',
+      'We operate with complete fee transparency on successfully completed transactions only. There are zero upfront listing charges, zero subscription fees, and no hidden markups.',
   },
   {
     question: 'How do you assist with Buy & Sell across Jaipur?',
@@ -58,7 +58,7 @@ export default function HomeFAQ() {
               Frequently Asked Questions
             </h2>
             <p className="text-stone-500 text-base leading-relaxed mb-8">
-              Clear, honest answers about our listing commission, Buy &amp; Sell, Airbnb management,
+              Clear, honest answers about our direct advisory, Buy &amp; Sell, Airbnb management,
               and Rent &amp; Lease in Jaipur.
             </p>
 

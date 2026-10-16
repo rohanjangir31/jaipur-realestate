@@ -197,7 +197,7 @@ export default function HostSubmitStay() {
             </div>
             <h1 className="text-2xl font-serif font-bold text-gray-900">List Your Place for Airbnb Hosting</h1>
             <p className="text-gray-500 text-sm mt-1">
-              List your courtyard haveli, luxury villa, or studio flat for Airbnb turnkey hosting or acquisition in Jaipur. Standard 1% commission.
+              List your courtyard haveli, luxury villa, or studio flat for Airbnb turnkey hosting or acquisition in Jaipur. Professional hosting management.
             </p>
           </div>
 

@@ -17,7 +17,7 @@ export default function Poster() {
   usePageMeta({
     title: 'Jaipur Estates — Official Marketing Poster & Client Brief',
     description:
-      'Executive client overview of Jaipur Estates. Buy & Sell, Rent & Lease, and Airbnb Management with transparent 1% commission.',
+      'Executive client overview of Jaipur Estates. Buy & Sell, Rent & Lease, and Airbnb Management with transparent advisory.',
   });
 
   const [activeView, setActiveView] = useState('graphic'); // 'graphic' or 'document'

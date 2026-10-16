@@ -5,7 +5,7 @@
  * 3. Airbnb Management & Stays (Turnkey homestays, villas, havelis to buy and run on Airbnb)
  *
  * All figures displayed are market estimates.
- * Standard 1% Listing & Advisory Commission applies.
+ * Transparent Direct Property & Airbnb Advisory.
  */
 
 export const VERIFIED_BUY_PROPERTIES = [

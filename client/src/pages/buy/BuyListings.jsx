@@ -28,7 +28,7 @@ const QUICK_LOCALITIES = [
 export default function BuyListings() {
   usePageMeta({
     title: 'Buy & Sell Property in Jaipur | Apartments, Villas & Plots',
-    description: 'Explore estimated market prices for verified apartments in Vaishali Nagar, villas in Jagatpura, and plots in Jaipur. 1% standard listing commission.',
+    description: 'Explore estimated market prices for verified apartments in Vaishali Nagar, villas in Jagatpura, and plots in Jaipur. Direct owner connections with transparent pricing.',
   });
 
   const [searchParams, setSearchParams] = useSearchParams();

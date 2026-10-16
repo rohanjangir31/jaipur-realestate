@@ -48,6 +48,7 @@ export default function StayDetail() {
   const [activeImage, setActiveImage] = useState('');
   const [inquirySuccess, setInquirySuccess] = useState(false);
   const [inquiryError, setInquiryError] = useState('');
+  const [submittedLead, setSubmittedLead] = useState(null);
 
   usePageMeta({
     title: stay ? `${stay.title} in ${stay.locality}` : 'Heritage Stay in Jaipur',
@@ -113,6 +114,11 @@ export default function StayDetail() {
   const onInquirySubmit = async (formData) => {
     try {
       setInquiryError('');
+      setSubmittedLead(formData);
+
+      const waText = `Hello Jaipur Estates, I have submitted a stay inquiry on your website for "${stay?.title}":\n• Guest: ${formData.contactName}\n• Phone: +91 ${formData.contactPhone}\n• Dates: ${formData.checkInDate} to ${formData.checkOutDate} (${calculatedNights || 'Flexible'} nights)\n• Guests: ${formData.guestsCount} guests\n• Purpose: ${formData.purposeOfStay || 'Vacation / Leisure'}\n• Note: ${formData.message || 'Please confirm dates and host availability.'}`;
+      const waUrl = `https://wa.me/916376312638?text=${encodeURIComponent(waText)}`;
+
       await inquiryApi.submitInquiry({
         inquiryType: 'STAY',
         referenceId: id,
@@ -133,6 +139,11 @@ export default function StayDetail() {
         },
       });
       setInquirySuccess(true);
+      try {
+        window.open(waUrl, '_blank');
+      } catch {
+        /* Ignore popup blockers */
+      }
       reset();
     } catch (err) {
       setInquiryError(err.response?.data?.message || 'Failed to submit stay inquiry');
@@ -178,7 +189,7 @@ export default function StayDetail() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="badge bg-rose-100 text-rose-800 font-semibold">{stay.stayType}</span>
-                <span className="badge-green">1% Listing Commission</span>
+                <span className="badge-green">Turnkey Managed</span>
                 <span className="text-xs text-stone-500 font-mono">Market Estimate</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900">{stay.title}</h1>
@@ -351,34 +362,48 @@ export default function StayDetail() {
               </div>
 
               {inquirySuccess ? (
-                <div className="bg-rose-50 border border-rose-200 text-rose-900 p-5 rounded-lg text-center space-y-3">
-                  <CheckCircle2 size={32} className="mx-auto text-rose-600" />
-                  <h4 className="font-semibold text-sm">Stay Request Sent</h4>
-                  <p className="text-xs leading-relaxed">
-                    We have received your dates inquiry for <strong>{stay.title}</strong>. The host will confirm availability shortly.
-                  </p>
-                  <div className="pt-2 border-t border-rose-200 flex flex-col gap-2">
+                <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-6 rounded-2xl text-center space-y-3.5 shadow-sm">
+                  <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                    <CheckCircle2 size={26} />
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-lg font-bold text-stone-900">Stay Request Received</h4>
+                    <p className="text-xs text-stone-600 leading-relaxed mt-1">
+                      Thank you{submittedLead?.contactName ? `, ${submittedLead.contactName}` : ''}! Your dates request for <strong>{stay.title}</strong> has been logged with our Stays Desk.
+                    </p>
+                  </div>
+
+                  <div className="p-3 bg-white border border-emerald-200 rounded-xl text-left space-y-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 block">Instant Fast-Track</span>
+                    <p className="text-[11px] text-stone-500 leading-relaxed">
+                      To lock your check-in dates directly or confirm haveli/villa house rules with our hosting desk:
+                    </p>
                     <a
-                      href={`https://wa.me/916376312638?text=${encodeURIComponent(`Hello, I just sent a booking inquiry for "${stay.title}" (Ref: ${stay._id || id}) from ${watchedCheckIn} to ${watchedCheckOut}.`)}`}
+                      href={`https://wa.me/916376312638?text=${encodeURIComponent(
+                        `Hello Jaipur Estates, I have submitted a stay inquiry for "${stay?.title}":\n• Guest: ${submittedLead?.contactName || ''}\n• Phone: +91 ${submittedLead?.contactPhone || ''}\n• Dates: ${submittedLead?.checkInDate || watchedCheckIn} to ${submittedLead?.checkOutDate || watchedCheckOut}\n• Guests: ${submittedLead?.guestsCount || 2}\n• Note: ${submittedLead?.message || 'Please confirm availability.'}`
+                      )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium transition-colors"
+                      className="btn-terracotta w-full justify-center text-xs py-2.5 flex items-center gap-1.5 shadow"
                     >
-                      <MessageSquare size={13} /> Open in WhatsApp Desk
+                      <MessageSquare size={14} /> Open WhatsApp with My Dates
                     </a>
+                  </div>
+
+                  <div className="pt-2 border-t border-emerald-200 flex flex-col gap-2">
                     <a
                       href="tel:+916376312638"
-                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-stone-900 hover:bg-stone-800 text-white text-xs font-medium transition-colors"
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold transition-colors"
                     >
                       <Phone size={13} /> Call Stays Desk (+91 63763 12638)
                     </a>
+                    <button
+                      onClick={() => { setInquirySuccess(false); setSubmittedLead(null); }}
+                      className="text-xs text-stone-500 hover:text-stone-800 underline transition-colors pt-1"
+                    >
+                      Submit another request
+                    </button>
                   </div>
-                  <button
-                    onClick={() => setInquirySuccess(false)}
-                    className="text-xs text-stone-500 underline hover:text-stone-800 mt-2 block"
-                  >
-                    Submit another request
-                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onInquirySubmit)} noValidate className="space-y-4">

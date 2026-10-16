@@ -116,7 +116,7 @@ export default function SubmitProperty() {
           </div>
           <h2 className="text-2xl font-serif font-bold text-gray-900">Submitted for Review</h2>
           <p className="text-sm text-gray-600 leading-relaxed">
-            Your property listing has been successfully submitted! Our team will review the details and verify pricing before making it publicly visible on the platform. Standard 1% commission applies upon deal closing.
+            Your property listing has been successfully submitted! Our team will review the details and verify pricing before making it publicly visible on the platform.
           </p>
           <div className="pt-4 flex flex-col gap-2">
             <Link to="/buy" className="btn-primary text-sm justify-center">
@@ -326,7 +326,7 @@ export default function SubmitProperty() {
 
             {/* Section 4: Pricing */}
             <div className="border-t border-gray-100 pt-6">
-              <h3 className="text-base font-semibold text-gray-900 mb-3">4. Pricing & Commission</h3>
+              <h3 className="text-base font-semibold text-gray-900 mb-3">4. Pricing &amp; Terms</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 mb-1">Expected Price (₹ INR)</label>
@@ -352,8 +352,8 @@ export default function SubmitProperty() {
                 </div>
 
                 <div className="sm:col-span-2 bg-stone-50 border border-stone-200 p-3.5 rounded-xl text-xs text-stone-600">
-                  <strong className="text-stone-900 block font-semibold mb-0.5">Transparent 1% Listing Commission</strong>
-                  Standard 1% listing and brokerage commission applies only upon successfully concluded transactions. No upfront fees.
+                  <strong className="text-stone-900 block font-semibold mb-0.5">Transparent Direct Advisory</strong>
+                  Zero upfront listing charges. Our team assists with verified buyer connections, accompanied site visits, and direct deal closure.
                 </div>
               </div>
             </div>

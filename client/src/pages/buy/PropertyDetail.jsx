@@ -44,6 +44,7 @@ export default function PropertyDetail() {
   const [inquirySuccess, setInquirySuccess] = useState(false);
   const [inquiryError, setInquiryError] = useState('');
   const [activeImage, setActiveImage] = useState('');
+  const [submittedLead, setSubmittedLead] = useState(null);
 
   usePageMeta({
     title: property ? `${property.title} in ${property.locality}` : 'Property Details',
@@ -86,6 +87,11 @@ export default function PropertyDetail() {
   const onInquirySubmit = async (formData) => {
     try {
       setInquiryError('');
+      setSubmittedLead(formData);
+
+      const waText = `Hello Jaipur Estates, I have submitted an inquiry on your website for "${property?.title}":\n• Name: ${formData.contactName}\n• Phone: +91 ${formData.contactPhone}\n• Preferred Date: ${formData.preferredVisitDate || 'Flexible'}\n• Financing: ${formData.financingRequired ? 'Bank Loan Assistance Required' : 'Self-Financed'}\n• Note: ${formData.message || 'Please arrange a visit.'}`;
+      const waUrl = `https://wa.me/917737213615?text=${encodeURIComponent(waText)}`;
+
       await inquiryApi.submitInquiry({
         inquiryType: 'BUY',
         referenceId: id,
@@ -101,7 +107,13 @@ export default function PropertyDetail() {
           locality: property?.locality,
         },
       });
+
       setInquirySuccess(true);
+      try {
+        window.open(waUrl, '_blank');
+      } catch {
+        /* Ignore popup blockers */
+      }
       reset();
     } catch (err) {
       setInquiryError(err.response?.data?.message || 'Failed to submit inquiry. Please try again.');
@@ -148,7 +160,7 @@ export default function PropertyDetail() {
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <span className="badge-blue">{property.propertyType}</span>
                 <span className="badge-green inline-flex items-center gap-1">
-                  1% Listing Commission
+                  Direct Owner Connection
                 </span>
                 <span className="text-xs text-stone-500 font-mono">Market Estimate</span>
               </div>
@@ -305,34 +317,48 @@ export default function PropertyDetail() {
               </div>
 
               {inquirySuccess ? (
-                <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-5 rounded-lg text-center space-y-3">
-                  <CheckCircle2 size={32} className="mx-auto text-emerald-600" />
-                  <h4 className="font-semibold text-sm">Inquiry Logged with Jaipur Advisory</h4>
-                  <p className="text-xs leading-relaxed text-emerald-700">
-                    Your request for <strong>{property.title}</strong> has been registered. An advisor will reach out within 24 business hours.
-                  </p>
-                  <div className="pt-2 border-t border-emerald-200 flex flex-col gap-2">
+                <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 p-6 rounded-2xl text-center space-y-3.5 shadow-sm">
+                  <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                    <CheckCircle2 size={26} />
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-lg font-bold text-stone-900">Inquiry Received</h4>
+                    <p className="text-xs text-stone-600 leading-relaxed mt-1">
+                      Thank you{submittedLead?.contactName ? `, ${submittedLead.contactName}` : ''}! Your request for <strong>{property.title}</strong> has been logged with our coordinators.
+                    </p>
+                  </div>
+
+                  <div className="p-3 bg-white border border-emerald-200 rounded-xl text-left space-y-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 block">Instant Fast-Track</span>
+                    <p className="text-[11px] text-stone-500 leading-relaxed">
+                      To receive floor plans, title verification copies, or confirm an accompanied inspection slot today:
+                    </p>
                     <a
-                      href={`https://wa.me/917737213615?text=${encodeURIComponent(`Hello, I just submitted an inquiry on Jaipur Estates for "${property.title}" (Ref: ${property._id || id}). Looking forward to details.`)}`}
+                      href={`https://wa.me/917737213615?text=${encodeURIComponent(
+                        `Hello Jaipur Estates, I have submitted an inquiry for "${property?.title}":\n• Name: ${submittedLead?.contactName || ''}\n• Phone: +91 ${submittedLead?.contactPhone || ''}\n• Preferred Date: ${submittedLead?.preferredVisitDate || 'Flexible'}\n• Message: ${submittedLead?.message || 'Please arrange a visit.'}`
+                      )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium transition-colors"
+                      className="btn-terracotta w-full justify-center text-xs py-2.5 flex items-center gap-1.5 shadow"
                     >
-                      <MessageSquare size={13} /> Open in WhatsApp Desk
-                    </a>
-                    <a
-                      href="tel:+917737213615"
-                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-stone-900 hover:bg-stone-800 text-white text-xs font-medium transition-colors"
-                    >
-                      <Phone size={13} /> Call Primary Desk (+91 77372 13615)
+                      <MessageSquare size={14} /> Open WhatsApp with My Details
                     </a>
                   </div>
-                  <button
-                    onClick={() => setInquirySuccess(false)}
-                    className="text-xs text-stone-500 underline hover:text-stone-800 mt-2 block"
-                  >
-                    Submit another inquiry
-                  </button>
+
+                  <div className="pt-2 border-t border-emerald-200 flex flex-col gap-2">
+                    <a
+                      href="tel:+917737213615"
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold transition-colors"
+                    >
+                      <Phone size={13} /> Call Coordinator (+91 77372 13615)
+                    </a>
+                    <button
+                      onClick={() => { setInquirySuccess(false); setSubmittedLead(null); }}
+                      className="text-xs text-stone-500 hover:text-stone-800 underline transition-colors pt-1"
+                    >
+                      Submit another inquiry
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onInquirySubmit)} noValidate className="space-y-4">

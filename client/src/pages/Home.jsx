@@ -101,7 +101,7 @@ export default function Home() {
   usePageMeta({
     title: 'Jaipur Estates | Buy & Sell · Rent & Lease · Airbnb Management',
     description:
-      'Jaipur property showcase for Buy & Sell, commercial Rent & Lease, and turnkey Airbnb vacation homes. Transparent listing commission. Open 7 days.',
+      'Jaipur property showcase for Buy & Sell, commercial Rent & Lease, and turnkey Airbnb vacation homes. Direct owner connections. Open 7 days.',
   });
 
   const navigate = useNavigate();

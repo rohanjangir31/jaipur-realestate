@@ -27,7 +27,7 @@ const QUICK_STAY_TYPES = [
 export default function StayListings() {
   usePageMeta({
     title: 'Airbnb Properties & Homestay Management in Jaipur | Turnkey Stays',
-    description: 'Buy turnkey properties ready to launch on Airbnb or list your place for professional homestay management in Jaipur. 1% commission.',
+    description: 'Buy turnkey properties ready to launch on Airbnb or list your place for professional homestay management in Jaipur. Turnkey hospitality advisory.',
   });
 
   const [searchParams, setSearchParams] = useSearchParams();

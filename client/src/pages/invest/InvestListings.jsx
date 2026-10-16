@@ -27,7 +27,7 @@ const ASSET_CLASSES = [
 export default function InvestListings() {
   usePageMeta({
     title: 'Rent & Lease Commercial Real Estate in Jaipur | Offices & Shops',
-    description: 'Pre-leased bank branches, high-street retail showrooms, and office spaces for rent and lease in Jaipur. 1% listing commission.',
+    description: 'Pre-leased bank branches, high-street retail showrooms, and office spaces for rent and lease in Jaipur. Transparent commercial advisory.',
   });
 
   const [searchParams, setSearchParams] = useSearchParams();
