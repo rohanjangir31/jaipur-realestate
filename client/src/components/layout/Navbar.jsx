@@ -13,7 +13,7 @@ const NAV_LINKS = [
   { to: '/buy',         label: 'Buy & Sell' },
   { to: '/invest',      label: 'Rent & Lease' },
   { to: '/stay',        label: 'Airbnb & Stays' },
-  { to: '/#calculator', label: 'Stamp Duty Tool', isAnchor: true },
+  { to: '/#calculator', label: 'Land ROI Calculator', isAnchor: true },
 ];
 
 export default function Navbar() {
