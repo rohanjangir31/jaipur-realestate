@@ -1157,6 +1157,8 @@ export default function InquiryModal({
                             <div className="flex flex-wrap gap-2">
                               {[
                                 'Fully furnished',
+                                'Semi-furnished',
+                                'Unfurnished',
                                 'Reserved parking space',
                                 'Road facing / Signage',
                                 'Direct metro access',
@@ -1633,7 +1635,8 @@ export default function InquiryModal({
                               className="input-field text-xs font-medium"
                             >
                               {[
-                                'Under ₹50,000 / month',
+                                'Under ₹15,000 / month',
+                                '₹15,000 – ₹50,000 / month',
                                 '₹50,000 – ₹1.5 Lakh / month',
                                 '₹1.5 Lakh – ₹4 Lakh / month',
                                 '₹4 Lakh+ / month',
@@ -1649,8 +1652,9 @@ export default function InquiryModal({
                             <label className="block text-xs font-bold uppercase tracking-wider text-stone-800 mb-1.5">
                               Is there a preferred lease duration? <span className="text-stone-400 font-normal lowercase">(optional)</span>
                             </label>
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                               {[
+                                '6 months',
                                 '11 months standard',
                                 '1 to 3 years',
                                 'Long-term corporate lease (3+ years)',
@@ -1685,7 +1689,8 @@ export default function InquiryModal({
                               className="input-field text-xs font-medium"
                             >
                               {[
-                                'Under ₹25,000 / month',
+                                'Under ₹10,000 / month',
+                                '₹10,000 – ₹25,000 / month',
                                 '₹25,000 – ₹50,000 / month',
                                 '₹50,000 – ₹1.5 Lakh / month',
                                 '₹1.5 Lakh – ₹4 Lakh / month',
@@ -1731,6 +1736,7 @@ export default function InquiryModal({
                             </label>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                               {[
+                                '6 months',
                                 '11 months standard',
                                 '1 to 3 years',
                                 '3 to 5 years (long lease)',

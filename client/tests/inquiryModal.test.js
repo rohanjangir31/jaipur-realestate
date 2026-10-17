@@ -99,6 +99,21 @@ describe('Real Estate Advisory Questionnaire Logic & Branching', () => {
       assert.strictEqual(state.rentGoal, 'Rent or lease out my property');
       assert.strictEqual(state.rentOwnerAvailability, 'Within 30 days');
     });
+
+    it('supports semi-furnished / unfurnished requirements, under 10k budget, and 6-month lease duration', () => {
+      const state = {
+        vertical: 'rent',
+        rentGoal: 'Find a property to rent or lease',
+        rentPropertyType: 'Apartment or flat',
+        rentTenantRequirements: ['Semi-furnished', 'Unfurnished'],
+        rentTenantBudget: 'Under ₹10,000 / month',
+        rentTenantDuration: '6 months',
+      };
+      assert.ok(state.rentTenantRequirements.includes('Semi-furnished'));
+      assert.ok(state.rentTenantRequirements.includes('Unfurnished'));
+      assert.strictEqual(state.rentTenantBudget, 'Under ₹10,000 / month');
+      assert.strictEqual(state.rentTenantDuration, '6 months');
+    });
   });
 
   describe('Tab 3: Airbnb & Hospitality Branching', () => {
