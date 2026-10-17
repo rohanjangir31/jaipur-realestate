@@ -119,12 +119,14 @@ export default function StayListings() {
           </div>
 
           <div className="flex items-center gap-3">
-            <Link
-              to="/stay/host/submit"
+            <a
+              href={`https://wa.me/916376312638?text=${encodeURIComponent('Hello Jaipur Estates, I would like to inquire about Airbnb turnkey properties and hosting management in Jaipur.')}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-terracotta text-xs !py-2.5 !px-4 whitespace-nowrap shadow-sm flex items-center gap-1.5"
             >
-              <Plus size={15} /> List for Airbnb Hosting
-            </Link>
+              <MessageSquare size={14} /> Inquire Now
+            </a>
           </div>
         </div>
 

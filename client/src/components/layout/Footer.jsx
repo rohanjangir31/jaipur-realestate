@@ -11,21 +11,21 @@ const FOOTER_LINKS = {
     { label: 'Commercial Offices',         to: '/buy?propertyType=Commercial Office/Shop' },
     { label: 'Vaishali Nagar',             to: '/buy?locality=Vaishali%20Nagar' },
     { label: 'Jagatpura Properties',       to: '/buy?locality=Jagatpura' },
-    { label: 'Post a Property →',          to: '/buy/submit', highlight: true },
+    { label: 'Inquire on WhatsApp →',      to: 'https://wa.me/917737213615?text=Hello%20Jaipur%20Estates%2C%20I%20would%20like%20to%20inquire%20about%20Buy%20%26%20Sell%20properties', highlight: true, isExternal: true },
   ],
   'Rent & Lease': [
     { label: 'Pre-Leased Commercial',      to: '/invest?assetClass=Pre-Leased%20Commercial' },
     { label: 'Industrial & Warehousing',   to: '/invest?assetClass=Industrial%20Lease' },
     { label: 'Commercial Office Lease',    to: '/invest?assetClass=Commercial%20Office%20Lease' },
     { label: 'Full Lease Catalog',         to: '/invest' },
-    { label: 'List for Rent / Lease →',    to: '/buy/submit', highlight: true },
+    { label: 'Inquire on WhatsApp →',      to: 'https://wa.me/919664247662?text=Hello%20Jaipur%20Estates%2C%20I%20would%20like%20to%20inquire%20about%20Rent%20%26%20Lease%20spaces', highlight: true, isExternal: true },
   ],
   'Airbnb & Stays': [
     { label: 'Turnkey Airbnb Havelis',     to: '/stay?stayType=Airbnb%20Haveli' },
     { label: 'Luxury Airbnb Villas',       to: '/stay?stayType=Airbnb%20Luxury%20Villa' },
     { label: 'Boutique Homestays',         to: '/stay?stayType=Airbnb%20Homestay' },
     { label: 'Airbnb Studio Flats',        to: '/stay?stayType=Airbnb%20Studio%20Apartment' },
-    { label: 'List for Airbnb Hosting →',  to: '/stay/host/submit', highlight: true },
+    { label: 'Inquire on WhatsApp →',      to: 'https://wa.me/916376312638?text=Hello%20Jaipur%20Estates%2C%20I%20would%20like%20to%20inquire%20about%20Airbnb%20stays%20and%20hosting', highlight: true, isExternal: true },
   ],
 };
 
@@ -134,19 +134,34 @@ export default function Footer() {
                 {category}
               </h4>
               <ul className="space-y-3">
-                {links.map(({ label, to, highlight }) => (
+                {links.map(({ label, to, highlight, isExternal }) => (
                   <li key={label}>
-                    <Link
-                      to={to}
-                      onClick={scrollToTop}
-                      className={`text-sm transition-colors inline-flex items-center gap-1 ${
-                        highlight
-                          ? 'text-terracotta-400 hover:text-terracotta-300 font-semibold'
-                          : 'text-stone-400 hover:text-white'
-                      }`}
-                    >
-                      {label}
-                    </Link>
+                    {isExternal ? (
+                      <a
+                        href={to}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`text-sm transition-colors inline-flex items-center gap-1 ${
+                          highlight
+                            ? 'text-terracotta-400 hover:text-terracotta-300 font-semibold'
+                            : 'text-stone-400 hover:text-white'
+                        }`}
+                      >
+                        {label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={to}
+                        onClick={scrollToTop}
+                        className={`text-sm transition-colors inline-flex items-center gap-1 ${
+                          highlight
+                            ? 'text-terracotta-400 hover:text-terracotta-300 font-semibold'
+                            : 'text-stone-400 hover:text-white'
+                        }`}
+                      >
+                        {label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

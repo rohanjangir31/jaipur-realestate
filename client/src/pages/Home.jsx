@@ -26,8 +26,10 @@ const SERVICES = [
       'Carpet area & super built-up clearly listed',
       'Direct WhatsApp inquiry with local coordinators',
     ],
-    primaryCta: { label: 'Browse Buy & Sell Catalog', to: '/buy' },
-    secondaryCta: { label: 'Post a Property', to: '/buy/submit' },
+    catalogTo: '/buy',
+    catalogLabel: 'Browse Buy & Sell Catalog',
+    phone: CONTACT_NUMBERS[0],
+    waMessage: 'Hello Jaipur Estates, I would like to inquire about Buy & Sell properties in Jaipur.',
     iconBg: 'bg-terracotta-700',
   },
   {
@@ -42,8 +44,10 @@ const SERVICES = [
       'Pre-leased spaces with verified rental history',
       'Direct lease deed negotiation with owners',
     ],
-    primaryCta: { label: 'View Rent & Lease Catalog', to: '/invest' },
-    secondaryCta: null,
+    catalogTo: '/invest',
+    catalogLabel: 'View Rent & Lease Catalog',
+    phone: CONTACT_NUMBERS[1],
+    waMessage: 'Hello Jaipur Estates, I would like to inquire about Rent & Lease commercial properties in Jaipur.',
     iconBg: 'bg-sage-700',
   },
   {
@@ -58,8 +62,10 @@ const SERVICES = [
       'Complete host management — check-in, cleaning, calendar',
       'Prime tourist locations with seasonal demand',
     ],
-    primaryCta: { label: 'Explore Airbnb Properties', to: '/stay' },
-    secondaryCta: { label: 'List Your Place for Hosting', to: '/stay/host/submit' },
+    catalogTo: '/stay',
+    catalogLabel: 'Explore Airbnb Properties',
+    phone: CONTACT_NUMBERS[2],
+    waMessage: 'Hello Jaipur Estates, I would like to inquire about Airbnb turnkey properties and hosting management in Jaipur.',
     iconBg: 'bg-rose-700',
   },
 ];
@@ -339,7 +345,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {SERVICES.map(({ icon: Icon, eyebrow, title, description, features, primaryCta, secondaryCta, accentColor, iconBg }) => (
+          {SERVICES.map(({ icon: Icon, eyebrow, title, description, features, catalogTo, catalogLabel, phone, waMessage, accentColor, iconBg }) => (
             <div key={title}
                  className="group relative bg-white rounded-3xl border border-stone-200 overflow-hidden
                             shadow-card hover:shadow-card-hover hover:-translate-y-2
@@ -364,10 +370,11 @@ export default function Home() {
                 }`}>
                   {eyebrow}
                 </span>
-                <h3 className="font-serif text-2xl text-stone-900 mb-3 group-hover:text-terracotta-700
-                               transition-colors duration-200">
+                <Link to={catalogTo}
+                      className="font-serif text-2xl text-stone-900 mb-3 hover:text-terracotta-700
+                                 transition-colors duration-200 block">
                   {title}
-                </h3>
+                </Link>
                 <p className="text-sm text-stone-500 leading-relaxed mb-6">{description}</p>
 
                 <ul className="space-y-2.5 border-t border-stone-100 pt-5 mb-8">
@@ -383,22 +390,21 @@ export default function Home() {
               </div>
 
               <div className="p-8 pt-0 space-y-2.5">
-                <Link to={primaryCta.to}
-                      className="btn-terracotta w-full justify-center text-sm">
-                  {primaryCta.label} <ArrowRight size={15} />
+                <a
+                  href={`https://wa.me/${phone.cleanNumber}?text=${encodeURIComponent(waMessage)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-terracotta w-full justify-center text-sm font-semibold flex items-center gap-2 shadow-sm"
+                >
+                  <MessageSquare size={16} /> Inquire Now
+                </a>
+                <Link
+                  to={catalogTo}
+                  className="inline-flex items-center justify-center gap-1.5 w-full text-xs font-semibold text-stone-500 hover:text-terracotta-700 transition-colors pt-1"
+                >
+                  <span>{catalogLabel}</span>
+                  <ArrowRight size={13} />
                 </Link>
-                {secondaryCta ? (
-                  <Link to={secondaryCta.to}
-                        className="btn-primary w-full justify-center text-sm">
-                    {secondaryCta.label}
-                  </Link>
-                ) : (
-                  <a href={`https://wa.me/${primaryPhone.cleanNumber}?text=Hello%20Jaipur%20Estates%2C%20I%20am%20looking%20for%20a%20${encodeURIComponent(title)}%20property`}
-                     target="_blank" rel="noopener noreferrer"
-                     className="btn-secondary w-full justify-center text-sm">
-                    <MessageSquare size={14} /> Inquire on WhatsApp
-                  </a>
-                )}
               </div>
             </div>
           ))}
@@ -496,22 +502,23 @@ export default function Home() {
                 a property on Airbnb?
               </h2>
               <p className="text-stone-400 text-base leading-relaxed">
-                Submit your property details to our catalog. We connect you directly with genuine buyers,
-                corporate tenants, and homestay travellers across Jaipur.
+                Connect directly with our advisory desk. We feature your property to genuine buyers,
+                corporate tenants, and homestay travellers across Jaipur through an accompanied, transparent process.
               </p>
             </div>
             <div className="lg:col-span-5 flex flex-col gap-3">
-              <Link to="/buy/submit"
-                    className="btn-terracotta text-center justify-center !py-4 text-sm">
-                Post Property for Sale <ArrowRight size={15} />
-              </Link>
-              <Link to="/stay/host/submit"
-                    className="inline-flex items-center justify-center gap-2 text-sm font-semibold
-                               text-stone-200 bg-stone-800 border border-stone-700
-                               hover:border-stone-600 hover:bg-stone-700
-                               px-6 py-4 rounded-xl transition-all duration-200">
-                List for Airbnb Management
-              </Link>
+              <a href={`https://wa.me/${primaryPhone.cleanNumber}?text=Hello%20Jaipur%20Estates%2C%20I%20am%20a%20property%20owner%20looking%20to%20sell%20or%20lease%20a%20property%20in%20Jaipur.`}
+                 target="_blank" rel="noopener noreferrer"
+                 className="btn-terracotta text-center justify-center !py-4 text-sm flex items-center gap-2">
+                <MessageSquare size={16} /> Inquire Now on WhatsApp <ArrowRight size={15} />
+              </a>
+              <a href={primaryPhone.tel}
+                 className="inline-flex items-center justify-center gap-2 text-sm font-semibold
+                            text-stone-200 bg-stone-800 border border-stone-700
+                            hover:border-stone-600 hover:bg-stone-700
+                            px-6 py-4 rounded-xl transition-all duration-200">
+                <Phone size={14} /> Call Coordinator Desk ({primaryPhone.number})
+              </a>
             </div>
           </div>
         </div>
