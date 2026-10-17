@@ -1,37 +1,73 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { MapPin, Mail, MessageSquare, ArrowUpRight, ArrowUp } from 'lucide-react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { MapPin, Mail, MessageSquare, ArrowUpRight, ArrowUp, Sparkles } from 'lucide-react';
 import Logo from '../ui/Logo';
+import { useInquiry } from '../../context/InquiryContext';
 import { CONTACT_NUMBERS, OFFICE_ADDRESS, CONTACT_EMAIL, OFFICE_HOURS } from '../../utils/contact';
 
-const FOOTER_LINKS = {
-  'Buy & Sell': [
-    { label: 'Apartments & Flats',        to: '/buy?propertyType=Apartment/Flat' },
-    { label: 'Independent Villas',         to: '/buy?propertyType=Independent House/Villa' },
-    { label: 'Commercial Offices',         to: '/buy?propertyType=Commercial Office/Shop' },
-    { label: 'Vaishali Nagar',             to: '/buy?locality=Vaishali%20Nagar' },
-    { label: 'Jagatpura Properties',       to: '/buy?locality=Jagatpura' },
-    { label: 'Inquire on WhatsApp →',      to: 'https://wa.me/917737213615?text=Hello%20Jaipur%20Estates%2C%20I%20would%20like%20to%20inquire%20about%20Buy%20%26%20Sell%20properties', highlight: true, isExternal: true },
-  ],
-  'Rent & Lease': [
-    { label: 'Pre-Leased Commercial',      to: '/invest?assetClass=Pre-Leased%20Commercial' },
-    { label: 'Industrial & Warehousing',   to: '/invest?assetClass=Industrial%20Lease' },
-    { label: 'Commercial Office Lease',    to: '/invest?assetClass=Commercial%20Office%20Lease' },
-    { label: 'Full Lease Catalog',         to: '/invest' },
-    { label: 'Inquire on WhatsApp →',      to: 'https://wa.me/919664247662?text=Hello%20Jaipur%20Estates%2C%20I%20would%20like%20to%20inquire%20about%20Rent%20%26%20Lease%20spaces', highlight: true, isExternal: true },
-  ],
-  'Airbnb & Stays': [
-    { label: 'Turnkey Airbnb Havelis',     to: '/stay?stayType=Airbnb%20Haveli' },
-    { label: 'Luxury Airbnb Villas',       to: '/stay?stayType=Airbnb%20Luxury%20Villa' },
-    { label: 'Boutique Homestays',         to: '/stay?stayType=Airbnb%20Homestay' },
-    { label: 'Airbnb Studio Flats',        to: '/stay?stayType=Airbnb%20Studio%20Apartment' },
-    { label: 'Inquire on WhatsApp →',      to: 'https://wa.me/916376312638?text=Hello%20Jaipur%20Estates%2C%20I%20would%20like%20to%20inquire%20about%20Airbnb%20stays%20and%20hosting', highlight: true, isExternal: true },
-  ],
+const ADVISORY_PRACTICES = {
+  'Buy & Sell Advisory': {
+    vertical: 'buy',
+    items: [
+      { label: 'Independent Luxury Villas', action: 'buy' },
+      { label: 'High-Rise Penthouses & Flats', action: 'buy' },
+      { label: 'Commercial Land & Plots', action: 'buy' },
+      { label: 'Vaishali Nagar & C-Scheme Sourcing', action: 'buy' },
+      { label: 'Jagatpura & Malviya Nagar Corridor', action: 'buy' },
+    ],
+    whatsapp: {
+      label: 'WhatsApp Desk 1 (+91 77372 13615) →',
+      url: 'https://wa.me/917737213615?text=Hello%20Jaipur%20Estates%2C%20I%20would%20like%20to%20inquire%20about%20Buy%20%26%20Sell%20Advisory',
+    },
+  },
+  'Rent & Lease Advisory': {
+    vertical: 'rent',
+    items: [
+      { label: 'Corporate Office Floor Plates', action: 'rent' },
+      { label: 'High-Street Retail Showrooms', action: 'rent' },
+      { label: 'Industrial & Warehousing Hubs', action: 'rent' },
+      { label: 'Pre-Leased High-Yield Assets', action: 'rent' },
+      { label: 'Tonk Road & Sitapura Zones', action: 'rent' },
+    ],
+    whatsapp: {
+      label: 'WhatsApp Desk 2 (+91 96642 47662) →',
+      url: 'https://wa.me/919664247662?text=Hello%20Jaipur%20Estates%2C%20I%20would%20like%20to%20inquire%20about%20Commercial%20Rent%20%26%20Lease%20Advisory',
+    },
+  },
+  'Airbnb & Hospitality': {
+    vertical: 'stay',
+    items: [
+      { label: 'Turnkey Restored Havelis', action: 'stay' },
+      { label: 'Luxury Private Pool Villas', action: 'stay' },
+      { label: 'Boutique Homestays (4–8 Keys)', action: 'stay' },
+      { label: 'Full 360° Hosting & Revenue Ops', action: 'stay' },
+      { label: 'Bani Park & Walled City Enclaves', action: 'stay' },
+    ],
+    whatsapp: {
+      label: 'WhatsApp Desk 3 (+91 63763 12638) →',
+      url: 'https://wa.me/916376312638?text=Hello%20Jaipur%20Estates%2C%20I%20would%20like%20to%20inquire%20about%20Airbnb%20Turnkey%20and%20Hosting%20Operations',
+    },
+  },
 };
 
 export default function Footer() {
+  const { openInquiry } = useInquiry();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavAnchor = (hash) => {
+    if (location.pathname !== '/') {
+      navigate(`/${hash}`);
+    } else {
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (
@@ -47,8 +83,8 @@ export default function Footer() {
               <Logo variant="dark" />
             </Link>
             <p className="text-stone-400 text-sm leading-relaxed max-w-sm mb-6">
-              Jaipur's transparent property showcase — Buy & Sell, Rent & Lease, and turnkey
-              Airbnb management. All prices are market estimates. No hidden fees.
+              Jaipur's bespoke property advisory — off-market sourcing, direct owner introductions,
+              commercial leasing, and turnkey Airbnb hospitality management. Zero public catalog clutter.
             </p>
 
             {/* Live Status Pill */}
@@ -82,7 +118,7 @@ export default function Footer() {
             {/* Phone Numbers */}
             <div className="border-t border-stone-800 pt-6">
               <span className="text-[10px] font-bold uppercase tracking-widest text-terracotta-500 block mb-4">
-                Direct Calling Lines
+                Direct Coordinator Desks
               </span>
               <div className="space-y-2.5">
                 {CONTACT_NUMBERS.map(({ number, tel, whatsapp }) => (
@@ -124,8 +160,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2-4: Service Links */}
-          {Object.entries(FOOTER_LINKS).map(([category, links], idx) => (
+          {/* Column 2-4: Service Verticals & Sourcing Triggers */}
+          {Object.entries(ADVISORY_PRACTICES).map(([category, config], idx) => (
             <div
               key={category}
               className={idx === 2 ? 'lg:col-span-2 md:col-span-1' : 'lg:col-span-3 md:col-span-1'}
@@ -134,36 +170,27 @@ export default function Footer() {
                 {category}
               </h4>
               <ul className="space-y-3">
-                {links.map(({ label, to, highlight, isExternal }) => (
+                {config.items.map(({ label, action }) => (
                   <li key={label}>
-                    {isExternal ? (
-                      <a
-                        href={to}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`text-sm transition-colors inline-flex items-center gap-1 ${
-                          highlight
-                            ? 'text-terracotta-400 hover:text-terracotta-300 font-semibold'
-                            : 'text-stone-400 hover:text-white'
-                        }`}
-                      >
-                        {label}
-                      </a>
-                    ) : (
-                      <Link
-                        to={to}
-                        onClick={scrollToTop}
-                        className={`text-sm transition-colors inline-flex items-center gap-1 ${
-                          highlight
-                            ? 'text-terracotta-400 hover:text-terracotta-300 font-semibold'
-                            : 'text-stone-400 hover:text-white'
-                        }`}
-                      >
-                        {label}
-                      </Link>
-                    )}
+                    <button
+                      type="button"
+                      onClick={() => openInquiry(action)}
+                      className="text-sm text-stone-400 hover:text-stone-100 hover:underline transition-colors text-left"
+                    >
+                      {label}
+                    </button>
                   </li>
                 ))}
+                <li className="pt-2">
+                  <a
+                    href={config.whatsapp.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-terracotta-400 hover:text-terracotta-300 font-semibold inline-flex items-center gap-1 transition-colors"
+                  >
+                    {config.whatsapp.label}
+                  </a>
+                </li>
               </ul>
             </div>
           ))}
@@ -183,15 +210,34 @@ export default function Footer() {
             <Link to="/" onClick={scrollToTop} className="hover:text-terracotta-400 transition-colors">
               Home
             </Link>
-            <Link to="/buy" onClick={scrollToTop} className="hover:text-terracotta-400 transition-colors">
-              Buy &amp; Sell
-            </Link>
-            <Link to="/invest" onClick={scrollToTop} className="hover:text-terracotta-400 transition-colors">
-              Rent &amp; Lease
-            </Link>
-            <Link to="/stay" onClick={scrollToTop} className="hover:text-terracotta-400 transition-colors">
-              Airbnb &amp; Stays
-            </Link>
+            <button
+              type="button"
+              onClick={() => handleNavAnchor('#services')}
+              className="hover:text-terracotta-400 transition-colors cursor-pointer"
+            >
+              Advisory Verticals
+            </button>
+            <button
+              type="button"
+              onClick={() => handleNavAnchor('#process')}
+              className="hover:text-terracotta-400 transition-colors cursor-pointer"
+            >
+              How It Works
+            </button>
+            <button
+              type="button"
+              onClick={() => handleNavAnchor('#calculator')}
+              className="hover:text-terracotta-400 transition-colors cursor-pointer"
+            >
+              Stamp Duty Tool
+            </button>
+            <button
+              type="button"
+              onClick={() => handleNavAnchor('#contact')}
+              className="hover:text-terracotta-400 transition-colors cursor-pointer"
+            >
+              Direct Desks
+            </button>
             <Link
               to="/poster"
               onClick={scrollToTop}
@@ -204,7 +250,7 @@ export default function Footer() {
             <button
               type="button"
               onClick={scrollToTop}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-300 hover:text-white transition-all text-xs font-semibold shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-300 hover:text-white transition-all text-xs font-semibold shadow-sm cursor-pointer"
               aria-label="Back to top"
             >
               <span>Back to Top</span>

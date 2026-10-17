@@ -1,30 +1,35 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
-  Menu, X, LayoutDashboard, LogOut, Phone, ChevronDown, MessageSquare,
+  Menu, X, LayoutDashboard, LogOut, Phone, ChevronDown, MessageSquare, Sparkles,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useInquiry } from '../../context/InquiryContext';
 import Logo from '../ui/Logo';
 import { CONTACT_NUMBERS, OFFICE_HOURS } from '../../utils/contact';
 
-const NAV_LINKS = [
-  { to: '/',       label: 'Home' },
-  { to: '/buy',    label: 'Buy & Sell' },
-  { to: '/invest', label: 'Rent & Lease' },
-  { to: '/stay',   label: 'Airbnb & Stays' },
+const NAV_ITEMS = [
+  { label: 'Advisory Verticals', hash: '#services' },
+  { label: 'How It Works',       hash: '#process' },
+  { label: 'Stamp Duty Tool',    hash: '#calculator' },
+  { label: 'Direct Desks',       hash: '#contact' },
 ];
 
 export default function Navbar() {
   const { isAuthenticated, user, logout, hasRole } = useAuth();
-  const [menuOpen,      setMenuOpen]      = useState(false);
-  const [phoneOpen,     setPhoneOpen]     = useState(false);
-  const [scrolled,      setScrolled]      = useState(false);
+  const { openInquiry } = useInquiry();
+  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [phoneOpen, setPhoneOpen] = useState(false);
+  const [scrolled,  setScrolled]  = useState(false);
   const phoneRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   /* Close menus on route change */
-  useEffect(() => { setMenuOpen(false); setPhoneOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    setMenuOpen(false);
+    setPhoneOpen(false);
+  }, [location.pathname]);
 
   /* Scroll shadow */
   useEffect(() => {
@@ -42,7 +47,22 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handler);
   }, [phoneOpen]);
 
-  const handleLogout = async () => { await logout(); navigate('/'); };
+  const handleNavClick = (hash) => {
+    setMenuOpen(false);
+    if (location.pathname !== '/') {
+      navigate(`/${hash}`);
+    } else {
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
+  };
 
   return (
     <header
@@ -57,36 +77,36 @@ export default function Navbar() {
             <Logo variant="dark" />
           </Link>
 
-          {/* ── Desktop Nav Links ── */}
-          <nav className="hidden md:flex items-center gap-0.5 shrink-0">
-            {NAV_LINKS.map(({ to, label }) => (
-              <NavLink
-                key={to}
-                to={to}
-                end={to === '/'}
-                className={({ isActive }) =>
-                  `relative h-10 inline-flex items-center px-4 rounded-xl text-sm font-medium
-                   whitespace-nowrap transition-all duration-200
-                   ${isActive
-                     ? 'text-white bg-stone-800 shadow-sm'
-                     : 'text-stone-400 hover:text-white hover:bg-stone-800/60'}`
-                }
+          {/* ── Desktop Nav Links (Anchor Navigation) ── */}
+          <nav className="hidden lg:flex items-center gap-1 shrink-0">
+            {NAV_ITEMS.map(({ label, hash }) => (
+              <button
+                key={hash}
+                type="button"
+                onClick={() => handleNavClick(hash)}
+                className="h-10 inline-flex items-center px-3.5 rounded-xl text-sm font-medium
+                           text-stone-300 hover:text-white hover:bg-stone-800/70
+                           transition-all duration-200 cursor-pointer"
               >
-                {({ isActive }) => (
-                  <>
-                    {label}
-                    {isActive && (
-                      <span className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-4 h-0.5
-                                       bg-terracotta-500 rounded-full" />
-                    )}
-                  </>
-                )}
-              </NavLink>
+                {label}
+              </button>
             ))}
           </nav>
 
           {/* ── Desktop Right Zone ── */}
           <div className="hidden md:flex items-center gap-2 shrink-0">
+
+            {/* Request Sourcing Intake Modal Trigger */}
+            <button
+              type="button"
+              onClick={() => openInquiry('buy')}
+              className="h-10 inline-flex items-center gap-1.5 px-4 rounded-xl text-xs font-bold
+                         bg-terracotta-700 hover:bg-terracotta-600 text-white shadow-sm
+                         hover:shadow-glow-terracotta transition-all duration-200 cursor-pointer"
+            >
+              <Sparkles size={13} />
+              <span>Request Sourcing</span>
+            </button>
 
             {/* Phone Popover */}
             <div className="relative" ref={phoneRef}>
@@ -98,7 +118,7 @@ export default function Navbar() {
                            hover:border-terracotta-700 hover:text-white transition-all duration-200"
               >
                 <Phone size={13} className="text-terracotta-400" />
-                <span>Call Us</span>
+                <span>Direct Desks</span>
                 <ChevronDown
                   size={12}
                   className={`text-stone-400 transition-transform duration-200 ${phoneOpen ? 'rotate-180' : ''}`}
@@ -110,7 +130,7 @@ export default function Navbar() {
                                 rounded-2xl shadow-elevated p-4 z-50 animate-fadeIn">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[10px] font-bold uppercase tracking-widest text-terracotta-400">
-                      Direct Lines
+                      Direct Coordinator Lines
                     </span>
                     <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400
                                      bg-emerald-950/60 border border-emerald-900/60 px-2 py-0.5 rounded-full">
@@ -120,23 +140,33 @@ export default function Navbar() {
                   </div>
                   <div className="space-y-2">
                     {CONTACT_NUMBERS.map(({ number, tel, whatsapp }) => (
-                      <div key={number}
-                           className="flex items-center justify-between p-3 rounded-xl
-                                      bg-stone-900 border border-stone-800 hover:border-stone-700 transition-colors">
-                        <a href={tel}
-                           className="font-mono text-sm font-bold text-white hover:text-terracotta-300 transition-colors">
+                      <div
+                        key={number}
+                        className="flex items-center justify-between p-3 rounded-xl
+                                   bg-stone-900 border border-stone-800 hover:border-stone-700 transition-colors"
+                      >
+                        <a
+                          href={tel}
+                          className="font-mono text-sm font-bold text-white hover:text-terracotta-300 transition-colors"
+                        >
                           {number}
                         </a>
                         <div className="flex items-center gap-1.5">
-                          <a href={tel}
-                             className="px-2.5 py-1 rounded-lg bg-stone-800 hover:bg-stone-700
-                                        text-[10px] font-bold text-stone-200 transition-colors">
+                          <a
+                            href={tel}
+                            className="px-2.5 py-1 rounded-lg bg-stone-800 hover:bg-stone-700
+                                       text-[10px] font-bold text-stone-200 transition-colors"
+                          >
                             Call
                           </a>
-                          <a href={whatsapp} target="_blank" rel="noopener noreferrer"
-                             className="p-1.5 rounded-lg bg-emerald-950/80 border border-emerald-900/60
-                                        text-emerald-400 hover:text-emerald-300 transition-colors"
-                             title="WhatsApp">
+                          <a
+                            href={whatsapp}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-1.5 rounded-lg bg-emerald-950/80 border border-emerald-900/60
+                                       text-emerald-400 hover:text-emerald-300 transition-colors"
+                            title="WhatsApp"
+                          >
                             <MessageSquare size={12} />
                           </a>
                         </div>
@@ -151,10 +181,12 @@ export default function Navbar() {
             {isAuthenticated ? (
               <div className="flex items-center gap-1.5">
                 {hasRole('admin', 'super_admin') && (
-                  <Link to="/admin"
-                        className="h-10 inline-flex items-center gap-1.5 px-3 rounded-xl text-xs
-                                   font-semibold text-amber-300 bg-amber-950/60 border border-amber-800/60
-                                   hover:bg-amber-900/60 transition-all whitespace-nowrap">
+                  <Link
+                    to="/admin"
+                    className="h-10 inline-flex items-center gap-1.5 px-3 rounded-xl text-xs
+                               font-semibold text-amber-300 bg-amber-950/60 border border-amber-800/60
+                               hover:bg-amber-900/60 transition-all whitespace-nowrap"
+                  >
                     <LayoutDashboard size={13} />
                     Admin
                   </Link>
@@ -172,23 +204,19 @@ export default function Navbar() {
                   onClick={handleLogout}
                   title="Sign out"
                   className="h-10 w-10 inline-flex items-center justify-center rounded-xl
-                             text-stone-400 hover:text-stone-200 hover:bg-stone-800 transition-colors">
+                             text-stone-400 hover:text-stone-200 hover:bg-stone-800 transition-colors"
+                >
                   <LogOut size={15} />
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
-                <Link to="/auth/login"
-                      className="h-10 inline-flex items-center text-sm font-medium text-stone-300
-                                 hover:text-white px-3 rounded-xl hover:bg-stone-800/60 transition-colors">
+              <div className="flex items-center gap-1.5">
+                <Link
+                  to="/auth/login"
+                  className="h-10 inline-flex items-center text-xs font-medium text-stone-300
+                             hover:text-white px-3 rounded-xl hover:bg-stone-800/60 transition-colors"
+                >
                   Sign In
-                </Link>
-                <Link to="/auth/register"
-                      className="h-10 inline-flex items-center justify-center gap-1.5
-                                 text-sm font-bold text-white bg-terracotta-700
-                                 hover:bg-terracotta-800 px-5 rounded-xl transition-all
-                                 shadow-sm hover:shadow-glow-terracotta whitespace-nowrap">
-                  Get Started
                 </Link>
               </div>
             )}
@@ -208,46 +236,62 @@ export default function Navbar() {
       {/* ── Mobile Drawer ── */}
       {menuOpen && (
         <div className="md:hidden border-t border-stone-800 bg-[#161513] px-4 py-5 space-y-4 animate-fadeIn">
-          {/* Nav links */}
+          {/* Quick Request Sourcing CTA */}
+          <button
+            type="button"
+            onClick={() => {
+              setMenuOpen(false);
+              openInquiry('buy');
+            }}
+            className="w-full h-11 inline-flex items-center justify-center gap-2 rounded-xl text-sm font-bold
+                       bg-terracotta-700 hover:bg-terracotta-600 text-white shadow-sm"
+          >
+            <Sparkles size={15} /> Request Sourcing Consultation
+          </button>
+
+          {/* Nav Links */}
           <nav className="space-y-1">
-            {NAV_LINKS.map(({ to, label }) => (
-              <NavLink
-                key={to}
-                to={to}
-                end={to === '/'}
-                className={({ isActive }) =>
-                  `block px-4 py-3 rounded-xl text-sm font-semibold transition-colors ${
-                    isActive
-                      ? 'bg-stone-800 text-white'
-                      : 'text-stone-400 hover:bg-stone-800/50 hover:text-white'
-                  }`
-                }
+            {NAV_ITEMS.map(({ label, hash }) => (
+              <button
+                key={hash}
+                type="button"
+                onClick={() => handleNavClick(hash)}
+                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold
+                           text-stone-300 hover:bg-stone-800/50 hover:text-white transition-colors"
               >
                 {label}
-              </NavLink>
+              </button>
             ))}
           </nav>
 
           {/* Direct lines */}
           <div className="border-t border-stone-800 pt-4">
             <span className="text-[10px] font-bold uppercase tracking-widest text-terracotta-400 block mb-3">
-              Direct Lines · 7 Days · 9AM–6PM
+              Direct Coordinator Lines · 7 Days · 9AM–6PM
             </span>
             <div className="space-y-2">
               {CONTACT_NUMBERS.map(({ number, tel, whatsapp }) => (
-                <div key={number}
-                     className="flex items-center justify-between p-3 rounded-xl
-                                bg-stone-900 border border-stone-800 text-sm">
+                <div
+                  key={number}
+                  className="flex items-center justify-between p-3 rounded-xl
+                             bg-stone-900 border border-stone-800 text-sm"
+                >
                   <a href={tel} className="font-mono font-bold text-white">
                     {number}
                   </a>
                   <div className="flex gap-2">
-                    <a href={tel}
-                       className="px-2.5 py-1 rounded-lg bg-stone-800 text-[11px] font-bold text-stone-200">
+                    <a
+                      href={tel}
+                      className="px-2.5 py-1 rounded-lg bg-stone-800 text-[11px] font-bold text-stone-200"
+                    >
                       Call
                     </a>
-                    <a href={whatsapp} target="_blank" rel="noopener noreferrer"
-                       className="p-1.5 rounded-lg bg-emerald-950/80 border border-emerald-900/60 text-emerald-400">
+                    <a
+                      href={whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 rounded-lg bg-emerald-950/80 border border-emerald-900/60 text-emerald-400"
+                    >
                       <MessageSquare size={12} />
                     </a>
                   </div>
@@ -264,8 +308,11 @@ export default function Navbar() {
                   Signed in as <strong className="text-white">{user?.name}</strong>
                 </div>
                 {hasRole('admin', 'super_admin') && (
-                  <Link to="/admin" className="block px-4 py-2.5 text-xs font-semibold text-amber-300
-                                               hover:bg-stone-800 rounded-xl transition-colors">
+                  <Link
+                    to="/admin"
+                    className="block px-4 py-2.5 text-xs font-semibold text-amber-300
+                               hover:bg-stone-800 rounded-xl transition-colors"
+                  >
                     Admin Dashboard
                   </Link>
                 )}

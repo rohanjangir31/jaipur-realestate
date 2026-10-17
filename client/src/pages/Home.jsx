@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import {
-  MapPin, ArrowRight, Search, Check, Building, Home as HomeIcon, BedDouble,
-  Phone, MessageSquare, Clock, Sparkles, CalendarCheck, Compass, ChevronRight,
-  Star, Zap, Shield, TrendingUp,
+  MapPin, ArrowRight, Check, Building, Home as HomeIcon, BedDouble,
+  Phone, MessageSquare, Clock, Sparkles, CalendarCheck, Compass,
+  Zap,
 } from 'lucide-react';
 import { JAIPUR_LOCALITIES } from '../utils/formatters';
 import { CONTACT_NUMBERS, OFFICE_HOURS, OFFICE_ADDRESS } from '../utils/contact';
 import { usePageMeta } from '../utils/usePageMeta';
-import InquiryModal from '../components/inquiry/InquiryModal';
+import { useInquiry } from '../context/InquiryContext';
 import PropertyCalculator from '../components/tools/PropertyCalculator';
 import HomeFAQ from '../components/home/HomeFAQ';
 
@@ -18,57 +17,48 @@ const SERVICES = [
     id: 'buy',
     icon: HomeIcon,
     accentColor: 'terracotta',
-    eyebrow: 'Residential & Commercial',
-    title: 'Buy & Sell',
+    eyebrow: 'Residential & Commercial Sourcing',
+    title: 'Buy & Sell Advisory',
     description:
-      'Verified apartments, builder floors, duplex villas, and commercial plots across Jaipur with transparent estimated market pricing and direct owner introductions.',
+      'Private sourcing and seller representation for luxury villas, builder floors, high-rise penthouses, and commercial plots across Jaipur with verified market benchmarks.',
     features: [
-      'Transparent estimated market prices (Est. ₹)',
-      'Carpet area & super built-up clearly listed',
-      'Direct WhatsApp inquiry with local coordinators',
+      'Discreet off-market sourcing & verified inventory',
+      'Realistic market valuation benchmarks (Est. ₹)',
+      'Accompanied private viewings & direct owner introductions',
     ],
-    catalogTo: '/buy',
-    catalogLabel: 'Browse Buy & Sell Catalog',
     phone: CONTACT_NUMBERS[0],
-    waMessage: 'Hello Jaipur Estates, I would like to inquire about Buy & Sell properties in Jaipur.',
     iconBg: 'bg-terracotta-700',
   },
   {
     id: 'rent',
     icon: Building,
     accentColor: 'sage',
-    eyebrow: 'Offices, Retail & Land',
-    title: 'Rent & Lease',
+    eyebrow: 'Corporate Offices, Retail & Land',
+    title: 'Rent & Lease Advisory',
     description:
-      'Commercial offices, pre-leased bank branches, retail showrooms, and industrial warehouses in prime Jaipur hubs — Tonk Road, Sitapura, and Malviya Nagar.',
+      'Corporate office plates, pre-leased banking assets, high-street retail showrooms, and industrial warehousing across Tonk Road, Sitapura, and Malviya Nagar corridors.',
     features: [
-      'Commercial lease estimates with clear details',
-      'Pre-leased spaces with verified rental history',
-      'Direct lease deed negotiation with owners',
+      'Commercial lease appraisal with verified terms',
+      'Pre-leased spaces with verified rental track records',
+      'Direct lease deed structuring with institutional landlords',
     ],
-    catalogTo: '/invest',
-    catalogLabel: 'View Rent & Lease Catalog',
     phone: CONTACT_NUMBERS[1],
-    waMessage: 'Hello Jaipur Estates, I would like to inquire about Rent & Lease commercial properties in Jaipur.',
     iconBg: 'bg-sage-700',
   },
   {
     id: 'stay',
     icon: BedDouble,
     accentColor: 'rose',
-    eyebrow: 'Vacation Homes & Hosting',
-    title: 'Airbnb Management',
+    eyebrow: 'Havelis, Villas & Full Hosting',
+    title: 'Airbnb Turnkey & Management',
     description:
-      'Buy high-occupancy turnkey villas, courtyard havelis, and studio flats ready to launch on Airbnb. Full management support for Airbnb hosting is also available.',
+      'Acquisition of high-yield courtyard havelis, luxury pool villas, and boutique homestays in prime tourist belts, backed by full 360° turnkey hosting operations.',
     features: [
-      'Properties ready for immediate Airbnb onboarding',
-      'Complete host management — check-in, cleaning, calendar',
-      'Prime tourist locations with seasonal demand',
+      'Curated properties primed for high seasonal Airbnb occupancy',
+      'Complete host operations — guest concierge, linen, revenue management',
+      'Prime heritage Jaipur locations with proven tourism demand',
     ],
-    catalogTo: '/stay',
-    catalogLabel: 'Explore Airbnb Properties',
     phone: CONTACT_NUMBERS[2],
-    waMessage: 'Hello Jaipur Estates, I would like to inquire about Airbnb turnkey properties and hosting management in Jaipur.',
     iconBg: 'bg-rose-700',
   },
 ];
@@ -78,69 +68,62 @@ const STEPS = [
   {
     num: '01',
     icon: Compass,
-    title: 'Discover & Shortlist',
-    desc: "Explore estimated market prices across Buy & Sell, Rent & Lease, or turnkey Airbnb properties in Jaipur's top neighbourhoods.",
-    tag: 'Estimated Pricing (Est. ₹)',
+    title: 'Define Your Mandate',
+    desc: 'Share your exact acquisition, leasing, or Airbnb objectives through our private client intake questionnaire.',
+    tag: 'Bespoke Intake Questionnaire',
   },
   {
     num: '02',
     icon: MessageSquare,
-    title: '1-Click Direct Inquiry',
-    desc: 'Click "Inquire Now" on any property to connect directly on WhatsApp or phone. No bots, no waiting rooms, no forms.',
-    tag: 'Open All 7 Days (9 AM – 6 PM)',
+    title: 'Private Sourcing & Matching',
+    desc: 'Our dedicated coordinators scour verified off-market inventory and owner networks tailored to your criteria.',
+    tag: 'Direct Desk Coordination',
   },
   {
     num: '03',
     icon: CalendarCheck,
-    title: 'Visit & Close Smoothly',
-    desc: 'Schedule an accompanied site visit, review details directly with the owner, and close with complete transparency.',
+    title: 'Accompanied Inspection & Closing',
+    desc: 'Schedule private site viewings, meet verified owners directly, and complete documentation with total transparency.',
     tag: 'Direct Owner Introduction',
   },
 ];
 
-/* ── Stats ── */
+/* ── Institutional Stats ── */
 const STATS = [
-  { value: '17+', label: 'Curated Listings' },
-  { value: '3',   label: 'Direct Lines' },
-  { value: '7',   label: 'Days Open' },
-  { value: '0',   label: 'Hidden Fees' },
+  { value: '100%', label: 'Private Advisory' },
+  { value: '3',    label: 'Dedicated Desks' },
+  { value: '20+',  label: 'Jaipur Hubs' },
+  { value: '0',    label: 'Hidden Fees' },
 ];
 
 export default function Home() {
   usePageMeta({
-    title: 'Jaipur Estates | Buy & Sell · Rent & Lease · Airbnb Management',
+    title: 'Jaipur Estates | Bespoke Real Estate & Airbnb Advisory',
     description:
-      'Jaipur property showcase for Buy & Sell, commercial Rent & Lease, and turnkey Airbnb vacation homes. Direct owner connections. Open 7 days.',
+      'Private real estate & Airbnb advisory firm in Jaipur. Discreet off-market sourcing, direct owner introductions, commercial leasing, and turnkey hosting operations.',
   });
 
-  const navigate = useNavigate();
-  const [activeTab,     setActiveTab]     = useState('buy');
-  const [locality,      setLocality]      = useState('');
-  const [propertyType,  setPropertyType]  = useState('');
-  const [stayType,      setStayType]      = useState('');
-  const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
-  const [modalVertical,    setModalVertical]    = useState('buy');
-
-  const openInquiryModal = (vert = 'buy') => {
-    setModalVertical(vert);
-    setInquiryModalOpen(true);
-  };
+  const { openInquiry } = useInquiry();
+  const [activeTab,    setActiveTab]    = useState('buy');
+  const [locality,     setLocality]     = useState('');
+  const [propertyType, setPropertyType] = useState('');
+  const [stayType,     setStayType]     = useState('');
 
   const primaryPhone = CONTACT_NUMBERS[0];
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const q = new URLSearchParams();
-    if (locality) q.append('locality', locality);
-    if (activeTab === 'buy') {
-      if (propertyType) q.append('propertyType', propertyType);
-      navigate(`/buy?${q}`);
-    } else if (activeTab === 'stay') {
-      if (stayType) q.append('stayType', stayType);
-      navigate(`/stay?${q}`);
-    } else {
-      navigate(`/invest?${q}`);
-    }
+    const chosenType =
+      activeTab === 'buy'
+        ? propertyType || 'Luxury Villa / Apartment'
+        : activeTab === 'stay'
+        ? stayType || 'Heritage Haveli / Villa'
+        : 'Corporate Office Plate';
+
+    openInquiry(activeTab === 'invest' ? 'rent' : activeTab, {
+      locality: locality || 'Vaishali Nagar / C-Scheme',
+      propertyType: chosenType,
+    });
   };
 
   return (
@@ -172,7 +155,7 @@ export default function Home() {
             <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400
                              bg-emerald-950/50 border border-emerald-900/60 px-3 py-1.5 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Open 7 Days · 9 AM – 6 PM
+              Open 7 Days · 9 AM – 6 PM IST
             </span>
           </div>
 
@@ -182,32 +165,36 @@ export default function Home() {
                            text-5xl sm:text-6xl lg:text-[5.5rem]">
               Jaipur's Premier
               <br />
-              <span className="text-terracotta-400 italic">Property</span>
+              <span className="text-terracotta-400 italic">Private Property</span>
               {' '}Advisory.
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-stone-400 font-normal leading-relaxed max-w-2xl">
-              Buy, Sell, Rent &amp; manage Airbnb — a curated, read-only directory with
-              estimated market prices and direct owner connections.
+              Bespoke real estate &amp; Airbnb advisory for Jaipur — discreet off-market sourcing,
+              direct owner introductions, and turnkey hospitality management.
             </p>
           </div>
 
           {/* CTA buttons */}
           <div className="flex flex-wrap items-center gap-3 mb-14">
-            <Link to="/buy"
-                  className="inline-flex items-center gap-2 bg-terracotta-700 hover:bg-terracotta-600
-                             text-white font-bold text-sm px-8 py-4 rounded-2xl
-                             transition-all duration-300 shadow-glow-terracotta hover:scale-105">
-              Browse Properties <ArrowRight size={16} />
-            </Link>
             <button
               type="button"
-              onClick={() => openInquiryModal('buy')}
+              onClick={() => openInquiry('buy')}
+              className="inline-flex items-center gap-2 bg-terracotta-700 hover:bg-terracotta-600
+                         text-white font-bold text-sm px-8 py-4 rounded-2xl
+                         transition-all duration-300 shadow-glow-terracotta hover:scale-105 cursor-pointer"
+            >
+              <Sparkles size={16} /> Request Sourcing Consultation <ArrowRight size={16} />
+            </button>
+            <a
+              href={primaryPhone.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/14
                          text-white font-bold text-sm px-8 py-4 rounded-2xl border border-white/15
                          transition-all duration-300 backdrop-blur-sm cursor-pointer"
             >
-              <MessageSquare size={16} /> Inquire with Advisory Desk
-            </button>
+              <MessageSquare size={16} /> WhatsApp Advisory Desk
+            </a>
           </div>
 
           {/* Stats row */}
@@ -221,7 +208,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── Search Bar — transitions seamlessly into page ── */}
+        {/* ── Search Bar — Direct Sourcing Request ── */}
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-t-3xl p-6 sm:p-8 shadow-deep border-x border-t border-stone-200">
             {/* Tabs */}
@@ -236,7 +223,7 @@ export default function Home() {
                   type="button"
                   onClick={() => setActiveTab(id)}
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold
-                               whitespace-nowrap transition-all duration-200 ${
+                               whitespace-nowrap transition-all duration-200 cursor-pointer ${
                     activeTab === id
                       ? 'bg-[#161513] text-white shadow-sm'
                       : 'text-stone-500 hover:text-stone-800'
@@ -249,19 +236,19 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Search fields */}
+            {/* Sourcing fields */}
             <form onSubmit={handleSearch}
                   className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
               <div className="sm:col-span-5">
                 <label className="block text-xs font-bold text-stone-600 mb-1.5 uppercase tracking-wider">
-                  Locality
+                  Target Jaipur Locality
                 </label>
                 <select
                   value={locality}
                   onChange={(e) => setLocality(e.target.value)}
                   className="input-field"
                 >
-                  <option value="">All Jaipur Localities</option>
+                  <option value="">All Prime Jaipur Localities</option>
                   {JAIPUR_LOCALITIES.map((loc) => (
                     <option key={loc} value={loc}>{loc}</option>
                   ))}
@@ -271,7 +258,7 @@ export default function Home() {
               {activeTab === 'buy' && (
                 <div className="sm:col-span-4">
                   <label className="block text-xs font-bold text-stone-600 mb-1.5 uppercase tracking-wider">
-                    Property Type
+                    Property Asset Type
                   </label>
                   <select
                     value={propertyType}
@@ -279,10 +266,11 @@ export default function Home() {
                     className="input-field"
                   >
                     <option value="">All Residential Types</option>
-                    <option value="Apartment/Flat">Apartment / Flat</option>
-                    <option value="Independent House/Villa">Independent House / Villa</option>
-                    <option value="Penthouse">Penthouse</option>
-                    <option value="Commercial Office/Shop">Commercial Office / Shop</option>
+                    <option value="Apartment / Flat">Apartment / Flat</option>
+                    <option value="Independent Luxury Villa">Independent Luxury Villa</option>
+                    <option value="Penthouse / Duplex">Penthouse / Duplex</option>
+                    <option value="Residential Plot / Land">Residential Plot / Land</option>
+                    <option value="Commercial Office / Shop">Commercial Office / Shop</option>
                   </select>
                 </div>
               )}
@@ -290,7 +278,7 @@ export default function Home() {
               {activeTab === 'stay' && (
                 <div className="sm:col-span-4">
                   <label className="block text-xs font-bold text-stone-600 mb-1.5 uppercase tracking-wider">
-                    Airbnb Type
+                    Airbnb Stay Category
                   </label>
                   <select
                     value={stayType}
@@ -298,10 +286,10 @@ export default function Home() {
                     className="input-field"
                   >
                     <option value="">All Airbnb Stays</option>
-                    <option value="Airbnb Haveli">Turnkey Airbnb Haveli</option>
-                    <option value="Airbnb Homestay">Boutique Airbnb Homestay</option>
-                    <option value="Airbnb Luxury Villa">Luxury Airbnb Villa</option>
-                    <option value="Airbnb Studio Apartment">Airbnb Studio Apartment</option>
+                    <option value="Restored Heritage Haveli">Restored Heritage Haveli</option>
+                    <option value="Luxury Private Pool Villa">Luxury Private Pool Villa</option>
+                    <option value="Boutique Homestay (4–8 Keys)">Boutique Homestay</option>
+                    <option value="Serviced Studio Flat">Serviced Studio Flat</option>
                   </select>
                 </div>
               )}
@@ -309,7 +297,7 @@ export default function Home() {
               {activeTab === 'invest' && (
                 <div className="sm:col-span-4">
                   <label className="block text-xs font-bold text-stone-600 mb-1.5 uppercase tracking-wider">
-                    Category
+                    Commercial Vertical
                   </label>
                   <div className="input-field bg-stone-50 text-stone-600 cursor-default">
                     Commercial Offices, Retail &amp; Land Leases
@@ -318,9 +306,11 @@ export default function Home() {
               )}
 
               <div className="sm:col-span-3">
-                <button type="submit"
-                        className="btn-terracotta w-full !py-3 text-base">
-                  <Search size={16} /> Search
+                <button
+                  type="submit"
+                  className="btn-terracotta w-full !py-3 text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:scale-[1.01] transition-transform"
+                >
+                  <Sparkles size={16} /> Request Sourcing
                 </button>
               </div>
             </form>
@@ -328,32 +318,24 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* ══════════════════════════════════════════════════════
           THREE SERVICES — Luxury card grid
       ══════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <div className="max-w-xl">
-            <span className="section-label mb-3">Three Clear Services</span>
-            <h2 className="section-title">
-              Built for buyers, sellers,<br className="hidden sm:block" />
-              tenants &amp; Airbnb hosts.
-            </h2>
-            <p className="section-subtitle">
-              Transparent market estimates, direct owner introductions, and
-              turnkey Airbnb setup — zero guesswork.
-            </p>
-          </div>
-          <Link to="/buy"
-                className="inline-flex items-center gap-2 text-sm font-bold text-terracotta-700
-                           hover:text-terracotta-800 self-start md:self-auto transition-colors shrink-0">
-            View All Listings <ArrowRight size={15} />
-          </Link>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28" id="services">
+        <div className="max-w-2xl mb-16">
+          <span className="section-label mb-3">Three Core Advisory Verticals</span>
+          <h2 className="section-title">
+            Bespoke advisory for buyers, sellers,<br className="hidden sm:block" />
+            corporate tenants &amp; Airbnb hosts.
+          </h2>
+          <p className="section-subtitle">
+            Discreet off-market sourcing, direct owner introductions, and
+            turnkey hospitality management — zero guesswork.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {SERVICES.map(({ id, icon: Icon, eyebrow, title, description, features, catalogTo, catalogLabel, accentColor, iconBg }) => (
+          {SERVICES.map(({ id, icon: Icon, eyebrow, title, description, features, accentColor, iconBg }) => (
             <div key={title}
                  className="group relative bg-white rounded-3xl border border-stone-200 overflow-hidden
                             shadow-card hover:shadow-card-hover hover:-translate-y-2
@@ -378,11 +360,9 @@ export default function Home() {
                 }`}>
                   {eyebrow}
                 </span>
-                <Link to={catalogTo}
-                      className="font-serif text-2xl text-stone-900 mb-3 hover:text-terracotta-700
-                                 transition-colors duration-200 block">
+                <h3 className="font-serif text-2xl text-stone-900 mb-3">
                   {title}
-                </Link>
+                </h3>
                 <p className="text-sm text-stone-500 leading-relaxed mb-6">{description}</p>
 
                 <ul className="space-y-2.5 border-t border-stone-100 pt-5 mb-8">
@@ -397,21 +377,14 @@ export default function Home() {
                 </ul>
               </div>
 
-              <div className="p-8 pt-0 space-y-2.5">
+              <div className="p-8 pt-0">
                 <button
                   type="button"
-                  onClick={() => openInquiryModal(id)}
+                  onClick={() => openInquiry(id)}
                   className="btn-terracotta w-full justify-center text-sm font-semibold flex items-center gap-2 shadow-sm hover:scale-[1.01] transition-transform cursor-pointer"
                 >
                   <MessageSquare size={16} /> Inquire Now
                 </button>
-                <Link
-                  to={catalogTo}
-                  className="inline-flex items-center justify-center gap-1.5 w-full text-xs font-semibold text-stone-500 hover:text-terracotta-700 transition-colors pt-1"
-                >
-                  <span>{catalogLabel}</span>
-                  <ArrowRight size={13} />
-                </Link>
               </div>
             </div>
           ))}
@@ -419,16 +392,16 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          PROPERTY CALCULATOR
+          PROPERTY CALCULATOR (id="calculator")
       ══════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28" id="calculator">
         <PropertyCalculator />
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          HOW IT WORKS — Editorial dark section
+          HOW IT WORKS (id="process")
       ══════════════════════════════════════════════════════ */}
-      <section className="bg-[#161513] py-32 relative overflow-hidden">
+      <section className="bg-[#161513] py-32 relative overflow-hidden" id="process">
         <div className="absolute inset-0 bg-hero-pattern opacity-100 pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px]
                         bg-terracotta-900/15 blur-[120px] pointer-events-none" />
@@ -445,7 +418,7 @@ export default function Home() {
               <span className="text-terracotta-400">Advisory Works</span>
             </h2>
             <p className="text-stone-400 text-lg mt-5 leading-relaxed">
-              Simple, transparent, and direct. No hidden steps, no upfront listing fees.
+              Simple, transparent, and direct. No open broker spam, no upfront listing fees.
             </p>
           </div>
 
@@ -509,14 +482,14 @@ export default function Home() {
                 a property on Airbnb?
               </h2>
               <p className="text-stone-400 text-base leading-relaxed">
-                Connect directly with our advisory desk. We feature your property to genuine buyers,
+                Connect directly with our advisory desk. We connect your asset to genuine buyers,
                 corporate tenants, and homestay travellers across Jaipur through an accompanied, transparent process.
               </p>
             </div>
             <div className="lg:col-span-5 flex flex-col gap-3">
               <button
                 type="button"
-                onClick={() => openInquiryModal('buy')}
+                onClick={() => openInquiry('buy')}
                 className="btn-terracotta text-center justify-center !py-4 text-sm flex items-center gap-2 cursor-pointer shadow-md hover:scale-[1.01] transition-transform"
               >
                 <MessageSquare size={16} /> Inquire with Advisory Desk <ArrowRight size={15} />
@@ -534,16 +507,16 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          DIRECT CONTACT — Premium cards with top gradient
+          DIRECT CONTACT (id="contact")
       ══════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28" id="contact">
         <div className="text-center mb-14">
           <span className="section-label mb-3 block text-center">Direct Communication</span>
           <h2 className="section-title mx-auto">
             Speak directly with our<br />Jaipur coordinators
           </h2>
           <p className="section-subtitle mx-auto text-center">
-            Direct phone &amp; WhatsApp for Buy &amp; Sell, Rent &amp; Lease, and Airbnb inquiries.
+            Dedicated calling &amp; WhatsApp desks for Buy &amp; Sell, Rent &amp; Lease, and Airbnb inquiries.
           </p>
           <div className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-700
                           bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-full mt-5">
@@ -599,22 +572,15 @@ export default function Home() {
         <div className="border border-stone-200 bg-white/70 rounded-2xl px-6 py-5 text-xs
                         text-stone-500 leading-relaxed backdrop-blur-sm">
           <strong className="text-stone-700 block mb-1 font-semibold">
-            Information &amp; Advisory Notice
+            Institutional Advisory &amp; Confidentiality Notice
           </strong>
-          JaipurEstates is an inquiry-driven, read-only property showcase for Jaipur, Rajasthan.
-          All property specifications, rental figures, and prices displayed are estimated benchmarks
-          ("Est.") for reference only. Final pricing, agreement terms, and transaction conditions
-          are mutually agreed upon directly between buyers, sellers, tenants, and owners during
-          on-site inspections.
+          JaipurEstates operates as a private real estate &amp; Airbnb advisory firm for Jaipur, Rajasthan.
+          We do not maintain an open self-serve public catalog. All property matches, pricing benchmarks, and
+          site visits are coordinated privately and directly with verified owners, corporate landlords,
+          and hospitality partners. All market valuations displayed or communicated are estimated benchmarks
+          ("Est. ₹") for reference during private consultation.
         </div>
       </section>
-
-      {/* Interactive Qualification Inquiry Modal */}
-      <InquiryModal
-        isOpen={inquiryModalOpen}
-        onClose={() => setInquiryModalOpen(false)}
-        initialVertical={modalVertical}
-      />
     </div>
   );
 }
