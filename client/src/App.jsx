@@ -14,6 +14,22 @@ import Home from './pages/Home';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 
+// Buy Module
+import BuyListings from './pages/buy/BuyListings';
+import PropertyDetail from './pages/buy/PropertyDetail';
+import SubmitProperty from './pages/buy/SubmitProperty';
+
+// Stay Module
+import StayListings from './pages/stay/StayListings';
+import StayDetail from './pages/stay/StayDetail';
+import HostSubmitStay from './pages/stay/HostSubmitStay';
+
+// Invest Module
+import InvestListings from './pages/invest/InvestListings';
+import InvestmentDetail from './pages/invest/InvestmentDetail';
+import InvestorCriteria from './pages/invest/InvestorCriteria';
+import InvestorMatches from './pages/invest/InvestorMatches';
+
 // Admin Operations Dashboard & Poster
 import AdminDashboard from './pages/admin/AdminDashboard';
 import Poster from './pages/Poster';
@@ -45,13 +61,49 @@ export default function App() {
                 <Route path="/auth/login" element={<Login />} />
                 <Route path="/auth/register" element={<Register />} />
 
-                {/* ── Legacy Catalog Route Protection & Redirection ── */}
-                <Route path="/buy" element={<Navigate to="/#services" replace />} />
-                <Route path="/buy/*" element={<Navigate to="/#services" replace />} />
-                <Route path="/invest" element={<Navigate to="/#services" replace />} />
-                <Route path="/invest/*" element={<Navigate to="/#services" replace />} />
-                <Route path="/stay" element={<Navigate to="/#services" replace />} />
-                <Route path="/stay/*" element={<Navigate to="/#services" replace />} />
+                {/* Buy Property Module */}
+                <Route path="/buy" element={<BuyListings />} />
+                <Route path="/buy/:id" element={<PropertyDetail />} />
+                <Route
+                  path="/buy/submit"
+                  element={
+                    <ProtectedRoute>
+                      <SubmitProperty />
+                    </ProtectedRoute>
+                  }
+                />
+
+                {/* Stay / Short-Term Accommodations Module */}
+                <Route path="/stay" element={<StayListings />} />
+                <Route path="/stay/:id" element={<StayDetail />} />
+                <Route
+                  path="/stay/host/submit"
+                  element={
+                    <ProtectedRoute>
+                      <HostSubmitStay />
+                    </ProtectedRoute>
+                  }
+                />
+
+                {/* Invest in Property Module */}
+                <Route path="/invest" element={<InvestListings />} />
+                <Route path="/invest/:id" element={<InvestmentDetail />} />
+                <Route
+                  path="/invest/criteria"
+                  element={
+                    <ProtectedRoute>
+                      <InvestorCriteria />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/invest/matches"
+                  element={
+                    <ProtectedRoute>
+                      <InvestorMatches />
+                    </ProtectedRoute>
+                  }
+                />
 
                 {/* Admin Operations Dashboard */}
                 <Route

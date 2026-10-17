@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   MapPin, ArrowRight, Check, Building, Home as HomeIcon, BedDouble,
   Phone, MessageSquare, Clock, Sparkles, CalendarCheck, Compass,
@@ -19,6 +20,8 @@ const SERVICES = [
     accentColor: 'terracotta',
     eyebrow: 'Residential & Commercial Sourcing',
     title: 'Buy & Sell Advisory',
+    catalogTo: '/buy',
+    catalogLabel: 'Browse Buy & Sell Catalog',
     description:
       'Private sourcing and seller representation for luxury villas, builder floors, high-rise penthouses, and commercial plots across Jaipur with verified market benchmarks.',
     features: [
@@ -35,6 +38,8 @@ const SERVICES = [
     accentColor: 'sage',
     eyebrow: 'Corporate Offices, Retail & Land',
     title: 'Rent & Lease Advisory',
+    catalogTo: '/invest',
+    catalogLabel: 'View Rent & Lease Catalog',
     description:
       'Corporate office plates, pre-leased banking assets, high-street retail showrooms, and industrial warehousing across Tonk Road, Sitapura, and Malviya Nagar corridors.',
     features: [
@@ -51,6 +56,8 @@ const SERVICES = [
     accentColor: 'rose',
     eyebrow: 'Havelis, Villas & Full Hosting',
     title: 'Airbnb Turnkey & Management',
+    catalogTo: '/stay',
+    catalogLabel: 'Explore Airbnb Properties',
     description:
       'Acquisition of high-yield courtyard havelis, luxury pool villas, and boutique homestays in prime tourist belts, backed by full 360° turnkey hosting operations.',
     features: [
@@ -103,6 +110,7 @@ export default function Home() {
       'Private real estate & Airbnb advisory firm in Jaipur. Discreet off-market sourcing, direct owner introductions, commercial leasing, and turnkey hosting operations.',
   });
 
+  const navigate = useNavigate();
   const { openInquiry } = useInquiry();
   const [activeTab,    setActiveTab]    = useState('buy');
   const [locality,     setLocality]     = useState('');
@@ -113,17 +121,17 @@ export default function Home() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const chosenType =
-      activeTab === 'buy'
-        ? propertyType || 'Luxury Villa / Apartment'
-        : activeTab === 'stay'
-        ? stayType || 'Heritage Haveli / Villa'
-        : 'Corporate Office Plate';
-
-    openInquiry(activeTab === 'invest' ? 'rent' : activeTab, {
-      locality: locality || 'Vaishali Nagar / C-Scheme',
-      propertyType: chosenType,
-    });
+    const q = new URLSearchParams();
+    if (locality) q.append('locality', locality);
+    if (activeTab === 'buy') {
+      if (propertyType) q.append('propertyType', propertyType);
+      navigate(`/buy?${q}`);
+    } else if (activeTab === 'stay') {
+      if (stayType) q.append('stayType', stayType);
+      navigate(`/stay?${q}`);
+    } else {
+      navigate(`/invest?${q}`);
+    }
   };
 
   return (
@@ -176,14 +184,22 @@ export default function Home() {
 
           {/* CTA buttons */}
           <div className="flex flex-wrap items-center gap-3 mb-14">
+            <Link
+              to="/buy"
+              className="inline-flex items-center gap-2 bg-terracotta-700 hover:bg-terracotta-600
+                         text-white font-bold text-sm px-8 py-4 rounded-2xl
+                         transition-all duration-300 shadow-glow-terracotta hover:scale-105"
+            >
+              Browse Properties <ArrowRight size={16} />
+            </Link>
             <button
               type="button"
               onClick={() => openInquiry('buy')}
-              className="inline-flex items-center gap-2 bg-terracotta-700 hover:bg-terracotta-600
-                         text-white font-bold text-sm px-8 py-4 rounded-2xl
-                         transition-all duration-300 shadow-glow-terracotta hover:scale-105 cursor-pointer"
+              className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/14
+                         text-white font-bold text-sm px-8 py-4 rounded-2xl border border-white/15
+                         transition-all duration-300 backdrop-blur-sm cursor-pointer"
             >
-              <Sparkles size={16} /> Request Sourcing Consultation <ArrowRight size={16} />
+              <Sparkles size={16} /> Request Sourcing / Inquire
             </button>
             <a
               href={primaryPhone.whatsapp}
@@ -310,7 +326,8 @@ export default function Home() {
                   type="submit"
                   className="btn-terracotta w-full !py-3 text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:scale-[1.01] transition-transform"
                 >
-                  <Sparkles size={16} /> Request Sourcing
+                  <span>Search Properties</span>
+                  <ArrowRight size={16} />
                 </button>
               </div>
             </form>
@@ -335,7 +352,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {SERVICES.map(({ id, icon: Icon, eyebrow, title, description, features, accentColor, iconBg }) => (
+          {SERVICES.map(({ id, icon: Icon, eyebrow, title, description, features, catalogTo, catalogLabel, accentColor, iconBg }) => (
             <div key={title}
                  className="group relative bg-white rounded-3xl border border-stone-200 overflow-hidden
                             shadow-card hover:shadow-card-hover hover:-translate-y-2
@@ -360,9 +377,12 @@ export default function Home() {
                 }`}>
                   {eyebrow}
                 </span>
-                <h3 className="font-serif text-2xl text-stone-900 mb-3">
+                <Link
+                  to={catalogTo}
+                  className="font-serif text-2xl text-stone-900 mb-3 hover:text-terracotta-700 transition-colors duration-200 block"
+                >
                   {title}
-                </h3>
+                </Link>
                 <p className="text-sm text-stone-500 leading-relaxed mb-6">{description}</p>
 
                 <ul className="space-y-2.5 border-t border-stone-100 pt-5 mb-8">
@@ -377,7 +397,7 @@ export default function Home() {
                 </ul>
               </div>
 
-              <div className="p-8 pt-0">
+              <div className="p-8 pt-0 space-y-2.5">
                 <button
                   type="button"
                   onClick={() => openInquiry(id)}
@@ -385,6 +405,13 @@ export default function Home() {
                 >
                   <MessageSquare size={16} /> Inquire Now
                 </button>
+                <Link
+                  to={catalogTo}
+                  className="inline-flex items-center justify-center gap-1.5 w-full text-xs font-semibold text-stone-600 hover:text-terracotta-700 transition-colors pt-1"
+                >
+                  <span>{catalogLabel}</span>
+                  <ArrowRight size={13} />
+                </Link>
               </div>
             </div>
           ))}
