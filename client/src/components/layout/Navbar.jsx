@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
   Menu, X, LayoutDashboard, LogOut, Phone, ChevronDown, MessageSquare, Sparkles,
 } from 'lucide-react';
@@ -8,11 +8,11 @@ import { useInquiry } from '../../context/InquiryContext';
 import Logo from '../ui/Logo';
 import { CONTACT_NUMBERS, OFFICE_HOURS } from '../../utils/contact';
 
-const NAV_ITEMS = [
-  { label: 'Advisory Verticals', hash: '#services' },
-  { label: 'How It Works',       hash: '#process' },
-  { label: 'Stamp Duty Tool',    hash: '#calculator' },
-  { label: 'Direct Desks',       hash: '#contact' },
+const NAV_LINKS = [
+  { to: '/buy',         label: 'Buy & Sell' },
+  { to: '/invest',      label: 'Rent & Lease' },
+  { to: '/stay',        label: 'Airbnb & Stays' },
+  { to: '/#calculator', label: 'Stamp Duty Tool', isAnchor: true },
 ];
 
 export default function Navbar() {
@@ -47,14 +47,16 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handler);
   }, [phoneOpen]);
 
-  const handleNavClick = (hash) => {
+  const handleNavClick = (to, isAnchor) => {
     setMenuOpen(false);
-    if (location.pathname !== '/') {
-      navigate(`/${hash}`);
-    } else {
-      const el = document.querySelector(hash);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+    if (isAnchor) {
+      if (location.pathname !== '/') {
+        navigate(to);
+      } else {
+        const el = document.querySelector('#calculator');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
   };
@@ -77,20 +79,36 @@ export default function Navbar() {
             <Logo variant="dark" />
           </Link>
 
-          {/* ── Desktop Nav Links (Anchor Navigation) ── */}
+          {/* ── Desktop Nav Links (Buy, Rent, Stay & Tools) ── */}
           <nav className="hidden lg:flex items-center gap-1 shrink-0">
-            {NAV_ITEMS.map(({ label, hash }) => (
-              <button
-                key={hash}
-                type="button"
-                onClick={() => handleNavClick(hash)}
-                className="h-10 inline-flex items-center px-3.5 rounded-xl text-sm font-medium
-                           text-stone-300 hover:text-white hover:bg-stone-800/70
-                           transition-all duration-200 cursor-pointer"
-              >
-                {label}
-              </button>
-            ))}
+            {NAV_LINKS.map(({ to, label, isAnchor }) =>
+              isAnchor ? (
+                <button
+                  key={to}
+                  type="button"
+                  onClick={() => handleNavClick(to, isAnchor)}
+                  className="h-10 inline-flex items-center px-3.5 rounded-xl text-sm font-medium
+                             text-stone-300 hover:text-white hover:bg-stone-800/70
+                             transition-all duration-200 cursor-pointer"
+                >
+                  {label}
+                </button>
+              ) : (
+                <NavLink
+                  key={to}
+                  to={to}
+                  className={({ isActive }) =>
+                    `h-10 inline-flex items-center px-3.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
+                      isActive
+                        ? 'bg-stone-800 text-white shadow-sm font-semibold'
+                        : 'text-stone-300 hover:text-white hover:bg-stone-800/70'
+                    }`
+                  }
+                >
+                  {label}
+                </NavLink>
+              )
+            )}
           </nav>
 
           {/* ── Desktop Right Zone ── */}
@@ -251,17 +269,34 @@ export default function Navbar() {
 
           {/* Nav Links */}
           <nav className="space-y-1">
-            {NAV_ITEMS.map(({ label, hash }) => (
-              <button
-                key={hash}
-                type="button"
-                onClick={() => handleNavClick(hash)}
-                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold
-                           text-stone-300 hover:bg-stone-800/50 hover:text-white transition-colors"
-              >
-                {label}
-              </button>
-            ))}
+            {NAV_LINKS.map(({ to, label, isAnchor }) =>
+              isAnchor ? (
+                <button
+                  key={to}
+                  type="button"
+                  onClick={() => handleNavClick(to, isAnchor)}
+                  className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold
+                             text-stone-300 hover:bg-stone-800/50 hover:text-white transition-colors"
+                >
+                  {label}
+                </button>
+              ) : (
+                <NavLink
+                  key={to}
+                  to={to}
+                  onClick={() => setMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `block px-4 py-3 rounded-xl text-sm font-semibold transition-colors ${
+                      isActive
+                        ? 'bg-stone-800 text-white font-bold'
+                        : 'text-stone-400 hover:bg-stone-800/50 hover:text-white'
+                    }`
+                  }
+                >
+                  {label}
+                </NavLink>
+              )
+            )}
           </nav>
 
           {/* Direct lines */}
