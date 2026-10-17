@@ -8,13 +8,14 @@ import {
 import { JAIPUR_LOCALITIES } from '../utils/formatters';
 import { CONTACT_NUMBERS, OFFICE_HOURS, OFFICE_ADDRESS } from '../utils/contact';
 import { usePageMeta } from '../utils/usePageMeta';
-import FeaturedShowcase from '../components/home/FeaturedShowcase';
+import InquiryModal from '../components/inquiry/InquiryModal';
 import PropertyCalculator from '../components/tools/PropertyCalculator';
 import HomeFAQ from '../components/home/HomeFAQ';
 
 /* ── Service Cards Data ── */
 const SERVICES = [
   {
+    id: 'buy',
     icon: HomeIcon,
     accentColor: 'terracotta',
     eyebrow: 'Residential & Commercial',
@@ -33,6 +34,7 @@ const SERVICES = [
     iconBg: 'bg-terracotta-700',
   },
   {
+    id: 'rent',
     icon: Building,
     accentColor: 'sage',
     eyebrow: 'Offices, Retail & Land',
@@ -51,6 +53,7 @@ const SERVICES = [
     iconBg: 'bg-sage-700',
   },
   {
+    id: 'stay',
     icon: BedDouble,
     accentColor: 'rose',
     eyebrow: 'Vacation Homes & Hosting',
@@ -115,6 +118,13 @@ export default function Home() {
   const [locality,      setLocality]      = useState('');
   const [propertyType,  setPropertyType]  = useState('');
   const [stayType,      setStayType]      = useState('');
+  const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
+  const [modalVertical,    setModalVertical]    = useState('buy');
+
+  const openInquiryModal = (vert = 'buy') => {
+    setModalVertical(vert);
+    setInquiryModalOpen(true);
+  };
 
   const primaryPhone = CONTACT_NUMBERS[0];
 
@@ -189,13 +199,15 @@ export default function Home() {
                              transition-all duration-300 shadow-glow-terracotta hover:scale-105">
               Browse Properties <ArrowRight size={16} />
             </Link>
-            <a href={`https://wa.me/${primaryPhone.cleanNumber}?text=Hello%20Jaipur%20Estates%2C%20I%27d%20like%20to%20inquire`}
-               target="_blank" rel="noopener noreferrer"
-               className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/14
-                          text-white font-bold text-sm px-8 py-4 rounded-2xl border border-white/15
-                          transition-all duration-300 backdrop-blur-sm">
-              <MessageSquare size={16} /> WhatsApp Us
-            </a>
+            <button
+              type="button"
+              onClick={() => openInquiryModal('buy')}
+              className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/14
+                         text-white font-bold text-sm px-8 py-4 rounded-2xl border border-white/15
+                         transition-all duration-300 backdrop-blur-sm cursor-pointer"
+            >
+              <MessageSquare size={16} /> Inquire with Advisory Desk
+            </button>
           </div>
 
           {/* Stats row */}
@@ -316,10 +328,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          FEATURED SHOWCASE
-      ══════════════════════════════════════════════════════ */}
-      <FeaturedShowcase />
 
       {/* ══════════════════════════════════════════════════════
           THREE SERVICES — Luxury card grid
@@ -345,7 +353,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {SERVICES.map(({ icon: Icon, eyebrow, title, description, features, catalogTo, catalogLabel, phone, waMessage, accentColor, iconBg }) => (
+          {SERVICES.map(({ id, icon: Icon, eyebrow, title, description, features, catalogTo, catalogLabel, accentColor, iconBg }) => (
             <div key={title}
                  className="group relative bg-white rounded-3xl border border-stone-200 overflow-hidden
                             shadow-card hover:shadow-card-hover hover:-translate-y-2
@@ -390,14 +398,13 @@ export default function Home() {
               </div>
 
               <div className="p-8 pt-0 space-y-2.5">
-                <a
-                  href={`https://wa.me/${phone.cleanNumber}?text=${encodeURIComponent(waMessage)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-terracotta w-full justify-center text-sm font-semibold flex items-center gap-2 shadow-sm"
+                <button
+                  type="button"
+                  onClick={() => openInquiryModal(id)}
+                  className="btn-terracotta w-full justify-center text-sm font-semibold flex items-center gap-2 shadow-sm hover:scale-[1.01] transition-transform cursor-pointer"
                 >
                   <MessageSquare size={16} /> Inquire Now
-                </a>
+                </button>
                 <Link
                   to={catalogTo}
                   className="inline-flex items-center justify-center gap-1.5 w-full text-xs font-semibold text-stone-500 hover:text-terracotta-700 transition-colors pt-1"
@@ -507,11 +514,13 @@ export default function Home() {
               </p>
             </div>
             <div className="lg:col-span-5 flex flex-col gap-3">
-              <a href={`https://wa.me/${primaryPhone.cleanNumber}?text=Hello%20Jaipur%20Estates%2C%20I%20am%20a%20property%20owner%20looking%20to%20sell%20or%20lease%20a%20property%20in%20Jaipur.`}
-                 target="_blank" rel="noopener noreferrer"
-                 className="btn-terracotta text-center justify-center !py-4 text-sm flex items-center gap-2">
-                <MessageSquare size={16} /> Inquire Now on WhatsApp <ArrowRight size={15} />
-              </a>
+              <button
+                type="button"
+                onClick={() => openInquiryModal('buy')}
+                className="btn-terracotta text-center justify-center !py-4 text-sm flex items-center gap-2 cursor-pointer shadow-md hover:scale-[1.01] transition-transform"
+              >
+                <MessageSquare size={16} /> Inquire with Advisory Desk <ArrowRight size={15} />
+              </button>
               <a href={primaryPhone.tel}
                  className="inline-flex items-center justify-center gap-2 text-sm font-semibold
                             text-stone-200 bg-stone-800 border border-stone-700
@@ -599,6 +608,13 @@ export default function Home() {
           on-site inspections.
         </div>
       </section>
+
+      {/* Interactive Qualification Inquiry Modal */}
+      <InquiryModal
+        isOpen={inquiryModalOpen}
+        onClose={() => setInquiryModalOpen(false)}
+        initialVertical={modalVertical}
+      />
     </div>
   );
 }
