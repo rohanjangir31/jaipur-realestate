@@ -9,6 +9,7 @@ import Logo from '../ui/Logo';
 import { CONTACT_NUMBERS, OFFICE_HOURS } from '../../utils/contact';
 
 const NAV_LINKS = [
+  { to: '/',            label: 'Home' },
   { to: '/buy',         label: 'Buy & Sell' },
   { to: '/invest',      label: 'Rent & Lease' },
   { to: '/stay',        label: 'Airbnb & Stays' },
@@ -97,6 +98,7 @@ export default function Navbar() {
                 <NavLink
                   key={to}
                   to={to}
+                  end={to === '/'}
                   className={({ isActive }) =>
                     `h-10 inline-flex items-center px-3.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
                       isActive
@@ -284,6 +286,7 @@ export default function Navbar() {
                 <NavLink
                   key={to}
                   to={to}
+                  end={to === '/'}
                   onClick={() => setMenuOpen(false)}
                   className={({ isActive }) =>
                     `block px-4 py-3 rounded-xl text-sm font-semibold transition-colors ${
