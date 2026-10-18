@@ -8,8 +8,6 @@ import { CONTACT_NUMBERS, OFFICE_ADDRESS, CONTACT_EMAIL, OFFICE_HOURS } from '..
 const ADVISORY_PRACTICES = {
   'Buy & Sell Advisory': {
     vertical: 'buy',
-    catalogPath: '/buy',
-    catalogLabel: 'Browse Buy & Sell Catalog →',
     items: [
       { label: 'Independent Luxury Villas', action: 'buy' },
       { label: 'High-Rise Penthouses & Flats', action: 'buy' },
@@ -24,8 +22,6 @@ const ADVISORY_PRACTICES = {
   },
   'Rent & Lease Advisory': {
     vertical: 'rent',
-    catalogPath: '/invest',
-    catalogLabel: 'View Rent & Lease Catalog →',
     items: [
       { label: 'Corporate Office Floor Plates', action: 'rent' },
       { label: 'High-Street Retail Showrooms', action: 'rent' },
@@ -40,8 +36,6 @@ const ADVISORY_PRACTICES = {
   },
   'Airbnb & Hospitality': {
     vertical: 'stay',
-    catalogPath: '/stay',
-    catalogLabel: 'Explore Airbnb Properties →',
     items: [
       { label: 'Turnkey Restored Havelis', action: 'stay' },
       { label: 'Luxury Private Pool Villas', action: 'stay' },
@@ -188,13 +182,13 @@ export default function Footer() {
                   </li>
                 ))}
                 <li className="pt-2">
-                  <Link
-                    to={config.catalogPath}
-                    onClick={scrollToTop}
-                    className="text-xs text-stone-300 hover:text-white font-semibold inline-flex items-center gap-1 transition-colors"
+                  <button
+                    type="button"
+                    onClick={() => openInquiry(config.vertical)}
+                    className="text-xs text-terracotta-400 hover:text-terracotta-300 font-semibold inline-flex items-center gap-1 transition-colors cursor-pointer"
                   >
-                    {config.catalogLabel}
-                  </Link>
+                    <Sparkles size={11} /> Register Sourcing Inquiry →
+                  </button>
                 </li>
                 <li>
                   <a

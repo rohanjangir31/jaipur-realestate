@@ -61,49 +61,13 @@ export default function App() {
                 <Route path="/auth/login" element={<Login />} />
                 <Route path="/auth/register" element={<Register />} />
 
-                {/* Buy Property Module */}
-                <Route path="/buy" element={<BuyListings />} />
-                <Route path="/buy/:id" element={<PropertyDetail />} />
-                <Route
-                  path="/buy/submit"
-                  element={
-                    <ProtectedRoute>
-                      <SubmitProperty />
-                    </ProtectedRoute>
-                  }
-                />
-
-                {/* Stay / Short-Term Accommodations Module */}
-                <Route path="/stay" element={<StayListings />} />
-                <Route path="/stay/:id" element={<StayDetail />} />
-                <Route
-                  path="/stay/host/submit"
-                  element={
-                    <ProtectedRoute>
-                      <HostSubmitStay />
-                    </ProtectedRoute>
-                  }
-                />
-
-                {/* Invest in Property Module */}
-                <Route path="/invest" element={<InvestListings />} />
-                <Route path="/invest/:id" element={<InvestmentDetail />} />
-                <Route
-                  path="/invest/criteria"
-                  element={
-                    <ProtectedRoute>
-                      <InvestorCriteria />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/invest/matches"
-                  element={
-                    <ProtectedRoute>
-                      <InvestorMatches />
-                    </ProtectedRoute>
-                  }
-                />
+                {/* ── Direct Advisory Routing (No Public Catalog) ── */}
+                <Route path="/buy" element={<Navigate to="/#services" replace />} />
+                <Route path="/buy/*" element={<Navigate to="/#services" replace />} />
+                <Route path="/invest" element={<Navigate to="/#services" replace />} />
+                <Route path="/invest/*" element={<Navigate to="/#services" replace />} />
+                <Route path="/stay" element={<Navigate to="/#services" replace />} />
+                <Route path="/stay/*" element={<Navigate to="/#services" replace />} />
 
                 {/* Admin Operations Dashboard */}
                 <Route

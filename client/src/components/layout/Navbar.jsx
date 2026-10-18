@@ -9,11 +9,11 @@ import Logo from '../ui/Logo';
 import { CONTACT_NUMBERS, OFFICE_HOURS } from '../../utils/contact';
 
 const NAV_LINKS = [
-  { to: '/',            label: 'Home' },
-  { to: '/buy',         label: 'Buy & Sell' },
-  { to: '/invest',      label: 'Rent & Lease' },
-  { to: '/stay',        label: 'Airbnb & Stays' },
-  { to: '/#calculator', label: 'Land ROI Calculator', isAnchor: true },
+  { label: 'Home',                type: 'home',    to: '/' },
+  { label: 'Buy & Sell',         type: 'inquiry', vertical: 'buy' },
+  { label: 'Rent & Lease',        type: 'inquiry', vertical: 'rent' },
+  { label: 'Airbnb & Stays',     type: 'inquiry', vertical: 'stay' },
+  { label: 'Land ROI Calculator', type: 'anchor',  to: '/#calculator' },
 ];
 
 export default function Navbar() {
@@ -48,11 +48,24 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handler);
   }, [phoneOpen]);
 
-  const handleNavClick = (to, isAnchor) => {
+  const handleNavClick = (link) => {
     setMenuOpen(false);
-    if (isAnchor) {
+    if (link.type === 'home') {
+      if (location.pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/');
+      }
+    } else if (link.type === 'inquiry') {
       if (location.pathname !== '/') {
-        navigate(to);
+        navigate('/');
+        setTimeout(() => openInquiry(link.vertical), 100);
+      } else {
+        openInquiry(link.vertical);
+      }
+    } else if (link.type === 'anchor') {
+      if (location.pathname !== '/') {
+        navigate(link.to);
       } else {
         const el = document.querySelector('#calculator');
         if (el) {
@@ -82,23 +95,12 @@ export default function Navbar() {
 
           {/* ── Desktop Nav Links (Buy, Rent, Stay & Tools) ── */}
           <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2.5 shrink-0">
-            {NAV_LINKS.map(({ to, label, isAnchor }) =>
-              isAnchor ? (
-                <button
-                  key={to}
-                  type="button"
-                  onClick={() => handleNavClick(to, isAnchor)}
-                  className="h-10 inline-flex items-center px-3.5 xl:px-4 rounded-xl text-sm font-medium
-                             text-stone-300 hover:text-white hover:bg-stone-800/70
-                             transition-all duration-200 cursor-pointer"
-                >
-                  {label}
-                </button>
-              ) : (
+            {NAV_LINKS.map((link) =>
+              link.type === 'home' ? (
                 <NavLink
-                  key={to}
-                  to={to}
-                  end={to === '/'}
+                  key={link.label}
+                  to="/"
+                  end
                   className={({ isActive }) =>
                     `h-10 inline-flex items-center px-3.5 xl:px-4 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
                       isActive
@@ -107,8 +109,19 @@ export default function Navbar() {
                     }`
                   }
                 >
-                  {label}
+                  {link.label}
                 </NavLink>
+              ) : (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={() => handleNavClick(link)}
+                  className="h-10 inline-flex items-center px-3.5 xl:px-4 rounded-xl text-sm font-medium
+                             text-stone-300 hover:text-white hover:bg-stone-800/70
+                             transition-all duration-200 cursor-pointer"
+                >
+                  {link.label}
+                </button>
               )
             )}
           </nav>
@@ -271,35 +284,17 @@ export default function Navbar() {
 
           {/* Nav Links */}
           <nav className="space-y-1">
-            {NAV_LINKS.map(({ to, label, isAnchor }) =>
-              isAnchor ? (
-                <button
-                  key={to}
-                  type="button"
-                  onClick={() => handleNavClick(to, isAnchor)}
-                  className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold
-                             text-stone-300 hover:bg-stone-800/50 hover:text-white transition-colors"
-                >
-                  {label}
-                </button>
-              ) : (
-                <NavLink
-                  key={to}
-                  to={to}
-                  end={to === '/'}
-                  onClick={() => setMenuOpen(false)}
-                  className={({ isActive }) =>
-                    `block px-4 py-3 rounded-xl text-sm font-semibold transition-colors ${
-                      isActive
-                        ? 'bg-stone-800 text-white font-bold'
-                        : 'text-stone-400 hover:bg-stone-800/50 hover:text-white'
-                    }`
-                  }
-                >
-                  {label}
-                </NavLink>
-              )
-            )}
+            {NAV_LINKS.map((link) => (
+              <button
+                key={link.label}
+                type="button"
+                onClick={() => handleNavClick(link)}
+                className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold
+                           text-stone-300 hover:bg-stone-800/50 hover:text-white transition-colors cursor-pointer"
+              >
+                {link.label}
+              </button>
+            ))}
           </nav>
 
           {/* Direct lines */}
