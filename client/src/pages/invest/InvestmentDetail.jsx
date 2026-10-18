@@ -148,7 +148,7 @@ export default function InvestmentDetail() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
         {/* Navigation */}
         <div className="mb-6">
           <Link to="/invest" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-emerald-700">

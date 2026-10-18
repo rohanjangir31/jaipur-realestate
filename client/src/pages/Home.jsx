@@ -151,7 +151,7 @@ export default function Home() {
                         bg-gold-500/5 blur-[100px] pointer-events-none" />
 
         {/* ── Hero Content ── */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 md:pt-32 md:pb-16">
+        <div className="relative w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 pt-20 pb-12 md:pt-32 md:pb-16">
 
           {/* Eyebrow badges */}
           <div className="flex flex-wrap items-center gap-2 mb-8">
@@ -225,7 +225,7 @@ export default function Home() {
         </div>
 
         {/* ── Search Bar — Direct Sourcing Request ── */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
           <div className="bg-white rounded-t-3xl p-6 sm:p-8 shadow-deep border-x border-t border-stone-200">
             {/* Tabs */}
             <div className="flex gap-1 p-1 bg-stone-100 rounded-2xl w-fit mb-6">
@@ -338,7 +338,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════
           THREE SERVICES — Luxury card grid
       ══════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28" id="services">
+      <section className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 py-28" id="services">
         <div className="max-w-2xl mb-16">
           <span className="section-label mb-3">Three Core Advisory Verticals</span>
           <h2 className="section-title">
@@ -421,7 +421,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════
           PROPERTY CALCULATOR (id="calculator")
       ══════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28" id="calculator">
+      <section className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 pb-28" id="calculator">
         <PropertyCalculator />
       </section>
 
@@ -433,7 +433,7 @@ export default function Home() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px]
                         bg-terracotta-900/15 blur-[120px] pointer-events-none" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
           <div className="max-w-2xl mb-24">
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em]
                              text-terracotta-400 bg-terracotta-950/60 border border-terracotta-900/60
@@ -536,7 +536,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════
           DIRECT CONTACT (id="contact")
       ══════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-28" id="contact">
+      <section className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 pb-28" id="contact">
         <div className="text-center mb-14">
           <span className="section-label mb-3 block text-center">Direct Communication</span>
           <h2 className="section-title mx-auto">
@@ -595,7 +595,7 @@ export default function Home() {
       <HomeFAQ />
 
       {/* Advisory Notice */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <section className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 pb-16">
         <div className="border border-stone-200 bg-white/70 rounded-2xl px-6 py-5 text-xs
                         text-stone-500 leading-relaxed backdrop-blur-sm">
           <strong className="text-stone-700 block mb-1 font-semibold">

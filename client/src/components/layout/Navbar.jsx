@@ -72,8 +72,8 @@ export default function Navbar() {
       className={`sticky top-0 z-50 bg-[#161513] text-stone-100 border-b border-stone-800
         transition-shadow duration-300 ${scrolled ? 'shadow-[0_4px_24px_-4px_rgba(0,0,0,0.5)]' : ''}`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[68px] gap-4">
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
+        <div className="flex items-center justify-between h-[68px] gap-4 lg:gap-8">
 
           {/* ── Brand Logo ── */}
           <Link to="/" className="flex items-center gap-2 shrink-0 group">
@@ -81,14 +81,14 @@ export default function Navbar() {
           </Link>
 
           {/* ── Desktop Nav Links (Buy, Rent, Stay & Tools) ── */}
-          <nav className="hidden lg:flex items-center gap-1 shrink-0">
+          <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2.5 shrink-0">
             {NAV_LINKS.map(({ to, label, isAnchor }) =>
               isAnchor ? (
                 <button
                   key={to}
                   type="button"
                   onClick={() => handleNavClick(to, isAnchor)}
-                  className="h-10 inline-flex items-center px-3.5 rounded-xl text-sm font-medium
+                  className="h-10 inline-flex items-center px-3.5 xl:px-4 rounded-xl text-sm font-medium
                              text-stone-300 hover:text-white hover:bg-stone-800/70
                              transition-all duration-200 cursor-pointer"
                 >
@@ -100,7 +100,7 @@ export default function Navbar() {
                   to={to}
                   end={to === '/'}
                   className={({ isActive }) =>
-                    `h-10 inline-flex items-center px-3.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
+                    `h-10 inline-flex items-center px-3.5 xl:px-4 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
                       isActive
                         ? 'bg-stone-800 text-white shadow-sm font-semibold'
                         : 'text-stone-300 hover:text-white hover:bg-stone-800/70'
@@ -114,7 +114,7 @@ export default function Navbar() {
           </nav>
 
           {/* ── Desktop Right Zone ── */}
-          <div className="hidden md:flex items-center gap-2 shrink-0">
+          <div className="hidden md:flex items-center gap-2.5 xl:gap-3.5 shrink-0">
 
             {/* Request Sourcing Intake Modal Trigger */}
             <button

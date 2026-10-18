@@ -46,7 +46,7 @@ export default function HomeFAQ() {
 
   return (
     <section className="py-24 bg-[#FAF8F5] border-t border-stone-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
 
         {/* Two-column layout: header + accordion */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">

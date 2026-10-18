@@ -80,7 +80,7 @@ export default function Footer() {
     <footer className="bg-[#0f0e0d] text-stone-400 border-t border-stone-900 mt-auto">
 
       {/* ── Main Footer Body ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
 
           {/* Column 1: Brand + Contact (span 4) */}
@@ -215,7 +215,7 @@ export default function Footer() {
 
       {/* ── Bottom Bar ── */}
       <div className="border-t border-stone-800 bg-[#0a0908]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6
+        <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 py-6
                         flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-stone-400 text-center md:text-left">
             © {new Date().getFullYear()} Jaipur Estates. Direct property &amp; Airbnb advisory in Jaipur, Rajasthan.
@@ -244,7 +244,7 @@ export default function Footer() {
               onClick={() => handleNavAnchor('#calculator')}
               className="hover:text-terracotta-400 transition-colors cursor-pointer"
             >
-              Stamp Duty Tool
+              Land ROI Calculator
             </button>
             <button
               type="button"
