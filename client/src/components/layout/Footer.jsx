@@ -83,8 +83,7 @@ export default function Footer() {
               <Logo variant="dark" />
             </Link>
             <p className="text-stone-400 text-sm leading-relaxed max-w-sm mb-6">
-              Jaipur's bespoke property advisory — off-market sourcing, direct owner introductions,
-              commercial leasing, and turnkey Airbnb hospitality management. Zero public catalog clutter.
+              Your trusted property partner in Jaipur. We help you buy, sell, rent, and manage Airbnb properties with direct owner connections and complete peace of mind.
             </p>
 
             {/* Live Status Pill */}
@@ -118,7 +117,7 @@ export default function Footer() {
             {/* Phone Numbers */}
             <div className="border-t border-stone-800 pt-6">
               <span className="text-[10px] font-bold uppercase tracking-widest text-terracotta-500 block mb-4">
-                Direct Coordinator Desks
+                Direct Phone Lines
               </span>
               <div className="space-y-2.5">
                 {CONTACT_NUMBERS.map(({ number, tel, whatsapp }) => (
@@ -224,7 +223,14 @@ export default function Footer() {
               onClick={() => handleNavAnchor('#services')}
               className="hover:text-terracotta-400 transition-colors cursor-pointer"
             >
-              Advisory Verticals
+              Services
+            </button>
+            <button
+              type="button"
+              onClick={() => handleNavAnchor('#locations')}
+              className="hover:text-terracotta-400 transition-colors cursor-pointer"
+            >
+              Locations
             </button>
             <button
               type="button"
@@ -238,14 +244,14 @@ export default function Footer() {
               onClick={() => handleNavAnchor('#calculator')}
               className="hover:text-terracotta-400 transition-colors cursor-pointer"
             >
-              Land ROI Calculator
+              ROI Calculator
             </button>
             <button
               type="button"
               onClick={() => handleNavAnchor('#contact')}
               className="hover:text-terracotta-400 transition-colors cursor-pointer"
             >
-              Direct Desks
+              Contact Us
             </button>
             <Link
               to="/poster"

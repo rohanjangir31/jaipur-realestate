@@ -4,39 +4,39 @@ import { CONTACT_NUMBERS } from '../../utils/contact';
 
 const FAQS = [
   {
-    question: 'What fees or advisory charges apply?',
+    question: 'Do you charge any upfront fees or registration charges?',
     answer:
-      'We operate with complete fee transparency on successfully completed transactions only. There are zero upfront listing charges, zero subscription fees, and no hidden markups.',
+      'No. There are zero upfront listing fees, zero registration charges, and no hidden costs. We operate with complete transparency and only work on successfully completed deals.',
   },
   {
-    question: 'How do you assist with Buy & Sell across Jaipur?',
+    question: 'How do you help with buying or selling property in Jaipur?',
     answer:
-      'For buyers, we curate verified residential flats, duplex villas, and plots across top Jaipur localities — Vaishali Nagar, Jagatpura, Mansarovar, and C-Scheme. For owners and sellers, we showcase your property to vetted buyers and coordinate site visits directly, without intermediary confusion.',
+      'For buyers, we find verified houses, flats, villas, and land plots based on your requirements. For property owners and sellers, we connect your property directly with genuine buyers and arrange site visits without any middlemen confusion.',
   },
   {
-    question: 'Can I buy a property and run it on Airbnb with your help?',
+    question: 'Can I buy a property and earn rental income on Airbnb?',
     answer:
-      'Yes. Jaipur is one of India\'s highest-demand tourism markets. We curate turnkey Airbnb-ready villas, heritage havelis, and studio apartments. You can buy the asset, and our team connects you with professional homestay management to handle guest hosting, housekeeping, and calendar operations.',
+      'Yes. Jaipur has strong tourist demand throughout the year. We help you find villas, heritage havelis, and apartments that are ideal for Airbnb. We can also connect you with experienced local teams to handle guest check-ins, cleaning, and day-to-day hosting.',
   },
   {
-    question: 'How does Rent & Lease work for commercial spaces?',
+    question: 'How does Rent and Lease work for commercial offices and shops?',
     answer:
-      'We provide verified market estimates for commercial offices, retail high-street shops, and warehouses. We assist both property owners and prospective tenants with direct introductions, property walkthroughs, and clear lease deed documentation.',
+      'We help businesses find offices, shops, and commercial spaces with fair market rates. For property owners, we connect you with reliable tenants and assist with complete rent agreement paperwork.',
   },
   {
-    question: 'Are all prices on the website final or estimated?',
+    question: 'Are the property prices shown on the website final?',
     answer:
-      'All figures shown on the website are estimated market prices ("Est."). These serve as reliable reference benchmarks. Final figures are always finalized directly between the buyer and owner during inspection and mutually agreed paperwork.',
+      'All prices shown on the website are estimated market prices based on current Jaipur rates. The final price is always agreed directly between buyer and seller during property inspection.',
   },
   {
-    question: 'How do I schedule a site visit or speak with your team?',
+    question: 'How do I arrange a property visit or speak with your team?',
     answer:
-      'Our direct calling lines and WhatsApp are open all 7 days of the week from 9:00 AM to 6:00 PM IST. Click "Inquire Now" on any property or call us directly to schedule a convenient viewing time.',
+      'Our team is available all 7 days a week from 9:00 AM to 6:00 PM IST. You can click "Inquire Now" or call/WhatsApp our direct coordinator numbers to schedule a visit.',
   },
   {
-    question: 'Is this a booking platform or a property directory?',
+    question: 'Can I make payments or book properties directly on this website?',
     answer:
-      'JaipurEstates is a read-only property directory and advisory platform. We do not process payments or bookings online. All transactions, pricing negotiations, and agreements happen directly between the buyer, seller, owner, or tenant — facilitated by our local coordinators.',
+      'No. This website is for direct consultation and inquiries. We do not collect online payments. All deals, paperwork, and payments happen directly between the buyer, seller, owner, or tenant, with our team guiding you at every step.',
   },
 ];
 
@@ -58,8 +58,7 @@ export default function HomeFAQ() {
               Frequently Asked Questions
             </h2>
             <p className="text-stone-500 text-base leading-relaxed mb-8">
-              Clear, honest answers about our direct advisory, Buy &amp; Sell, Airbnb management,
-              and Rent &amp; Lease in Jaipur.
+              Clear and simple answers to help you with buying, selling, renting, or Airbnb in Jaipur.
             </p>
 
             {/* Contact prompt */}

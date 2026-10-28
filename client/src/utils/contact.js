@@ -26,7 +26,7 @@ export const CONTACT_NUMBERS = [
   },
 ];
 
-export const OFFICE_ADDRESS = 'Civil Lines & C-Scheme, Jaipur, Rajasthan 302001';
+export const OFFICE_ADDRESS = 'Bani Park, Jaipur, Rajasthan 302016';
 export const OFFICE_HOURS = 'Open All 7 Days (Mon–Sun, 9:00 AM – 6:00 PM IST)';
 export const CONTACT_EMAIL = 'inquiries@jaipurestates.in';
 export const LISTING_COMMISSION = 'Direct Property & Airbnb Advisory';

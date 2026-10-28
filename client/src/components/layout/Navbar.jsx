@@ -13,7 +13,7 @@ const NAV_LINKS = [
   { label: 'Buy & Sell',         type: 'inquiry', vertical: 'buy' },
   { label: 'Rent & Lease',        type: 'inquiry', vertical: 'rent' },
   { label: 'Airbnb & Stays',     type: 'inquiry', vertical: 'stay' },
-  { label: 'Land ROI Calculator', type: 'anchor',  to: '/#calculator' },
+  { label: 'ROI Calculator',     type: 'anchor',  to: '/#calculator' },
 ];
 
 export default function Navbar() {
@@ -67,7 +67,8 @@ export default function Navbar() {
       if (location.pathname !== '/') {
         navigate(link.to);
       } else {
-        const el = document.querySelector('#calculator');
+        const selector = link.to.replace('/#', '#');
+        const el = document.querySelector(selector);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth' });
         }
@@ -129,7 +130,7 @@ export default function Navbar() {
           {/* ── Desktop Right Zone ── */}
           <div className="hidden md:flex items-center gap-2.5 xl:gap-3.5 shrink-0">
 
-            {/* Request Sourcing Intake Modal Trigger */}
+            {/* Register Requirement Modal Trigger */}
             <button
               type="button"
               onClick={() => openInquiry('buy')}
@@ -138,7 +139,7 @@ export default function Navbar() {
                          hover:shadow-glow-terracotta transition-all duration-200 cursor-pointer"
             >
               <Sparkles size={13} />
-              <span>Request Sourcing</span>
+              <span>Register Requirement</span>
             </button>
 
             {/* Phone Popover */}
@@ -151,7 +152,7 @@ export default function Navbar() {
                            hover:border-terracotta-700 hover:text-white transition-all duration-200"
               >
                 <Phone size={13} className="text-terracotta-400" />
-                <span>Direct Desks</span>
+                <span>Contact Us</span>
                 <ChevronDown
                   size={12}
                   className={`text-stone-400 transition-transform duration-200 ${phoneOpen ? 'rotate-180' : ''}`}
@@ -163,7 +164,7 @@ export default function Navbar() {
                                 rounded-2xl shadow-elevated p-4 z-50 animate-fadeIn">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[10px] font-bold uppercase tracking-widest text-terracotta-400">
-                      Direct Coordinator Lines
+                      Direct Phone Lines
                     </span>
                     <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400
                                      bg-emerald-950/60 border border-emerald-900/60 px-2 py-0.5 rounded-full">
@@ -279,7 +280,7 @@ export default function Navbar() {
             className="w-full h-11 inline-flex items-center justify-center gap-2 rounded-xl text-sm font-bold
                        bg-terracotta-700 hover:bg-terracotta-600 text-white shadow-sm"
           >
-            <Sparkles size={15} /> Request Sourcing Consultation
+            <Sparkles size={15} /> Register Property Requirement
           </button>
 
           {/* Nav Links */}

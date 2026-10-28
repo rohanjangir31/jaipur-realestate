@@ -10,6 +10,7 @@ import { CONTACT_NUMBERS, OFFICE_HOURS, OFFICE_ADDRESS } from '../utils/contact'
 import { usePageMeta } from '../utils/usePageMeta';
 import { useInquiry } from '../context/InquiryContext';
 import PropertyCalculator from '../components/tools/PropertyCalculator';
+import HomeLocations from '../components/home/HomeLocations';
 import HomeFAQ from '../components/home/HomeFAQ';
 
 /* ── Service Cards Data ── */
@@ -18,14 +19,14 @@ const SERVICES = [
     id: 'buy',
     icon: HomeIcon,
     accentColor: 'terracotta',
-    eyebrow: 'Residential & Commercial Sourcing',
-    title: 'Buy & Sell Advisory',
+    eyebrow: 'Residential & Commercial Deals',
+    title: 'Buy & Sell Properties',
     description:
-      'Private sourcing and seller representation for luxury villas, builder floors, high-rise penthouses, and commercial plots across Jaipur with verified market benchmarks.',
+      'We help you buy or sell luxury villas, independent houses, builder floors, flats, and land plots across Jaipur with verified market rates.',
     features: [
-      'Discreet off-market sourcing & verified inventory',
-      'Realistic market valuation benchmarks (Est. ₹)',
-      'Accompanied private viewings & direct owner introductions',
+      'Verified properties directly from genuine owners',
+      'Realistic estimated market prices (Est. ₹)',
+      'Accompanied property visits & direct owner meetings',
     ],
     phone: CONTACT_NUMBERS[0],
     iconBg: 'bg-terracotta-700',
@@ -34,14 +35,14 @@ const SERVICES = [
     id: 'rent',
     icon: Building,
     accentColor: 'sage',
-    eyebrow: 'Corporate Offices, Retail & Land',
+    eyebrow: 'Offices, Shops & Warehouses',
     title: 'Rent & Lease Advisory',
     description:
-      'Corporate office plates, pre-leased banking assets, high-street retail showrooms, and industrial warehousing across Tonk Road, Sitapura, and Malviya Nagar corridors.',
+      'Find corporate offices, retail shops, showrooms, and warehouse spaces on rent across prime commercial areas like Tonk Road, Sitapura, and Malviya Nagar.',
     features: [
-      'Commercial lease appraisal with verified terms',
-      'Pre-leased spaces with verified rental track records',
-      'Direct lease deed structuring with institutional landlords',
+      'Fair market rent with transparent terms',
+      'Pre-leased shops & offices with regular rental income',
+      'Complete help with rental agreements and paperwork',
     ],
     phone: CONTACT_NUMBERS[1],
     iconBg: 'bg-sage-700',
@@ -51,13 +52,13 @@ const SERVICES = [
     icon: BedDouble,
     accentColor: 'rose',
     eyebrow: 'Havelis, Villas & Full Hosting',
-    title: 'Airbnb Turnkey & Management',
+    title: 'Airbnb Properties & Management',
     description:
-      'Acquisition of high-yield courtyard havelis, luxury pool villas, and boutique homestays in prime tourist belts, backed by full 360° turnkey hosting operations.',
+      'Buy high-earning heritage havelis, luxury pool villas, and apartments for Airbnb, backed by our complete local hosting and property management.',
     features: [
-      'Curated properties primed for high seasonal Airbnb occupancy',
-      'Complete host operations — guest concierge, linen, revenue management',
-      'Prime heritage Jaipur locations with proven tourism demand',
+      'Selected properties with high tourist demand on Airbnb',
+      'Full hosting service — guest check-in, cleaning, and bookings',
+      'Prime heritage Jaipur locations with proven year-round demand',
     ],
     phone: CONTACT_NUMBERS[2],
     iconBg: 'bg-rose-700',
@@ -69,39 +70,39 @@ const STEPS = [
   {
     num: '01',
     icon: Compass,
-    title: 'Define Your Mandate',
-    desc: 'Share your exact acquisition, leasing, or Airbnb objectives through our private client intake questionnaire.',
-    tag: 'Bespoke Intake Questionnaire',
+    title: 'Tell Us What You Need',
+    desc: 'Share your property requirements, budget, and preferred location by filling out our simple inquiry form.',
+    tag: 'Simple Requirement Form',
   },
   {
     num: '02',
     icon: MessageSquare,
-    title: 'Private Sourcing & Matching',
-    desc: 'Our dedicated coordinators scour verified off-market inventory and owner networks tailored to your criteria.',
-    tag: 'Direct Desk Coordination',
+    title: 'We Find Matching Properties',
+    desc: 'Our team searches verified listings and connects you directly with genuine owners that match your needs.',
+    tag: 'Direct Personal Support',
   },
   {
     num: '03',
     icon: CalendarCheck,
-    title: 'Accompanied Inspection & Closing',
-    desc: 'Schedule private site viewings, meet verified owners directly, and complete documentation with total transparency.',
-    tag: 'Direct Owner Introduction',
+    title: 'Property Visit & Direct Deal',
+    desc: 'Visit the property in person, speak directly with the owner, and complete the paperwork with complete transparency.',
+    tag: 'Direct Owner Meeting',
   },
 ];
 
-/* ── Institutional Stats ── */
+/* ── Clear Stats ── */
 const STATS = [
-  { value: '100%', label: 'Private Advisory' },
-  { value: '3',    label: 'Dedicated Desks' },
-  { value: '20+',  label: 'Jaipur Hubs' },
-  { value: '0',    label: 'Hidden Fees' },
+  { value: '100%', label: 'Verified Deals' },
+  { value: '3',    label: 'Direct Phone Lines' },
+  { value: '20+',  label: 'Jaipur Areas' },
+  { value: '0',    label: 'Hidden Charges' },
 ];
 
 export default function Home() {
   usePageMeta({
-    title: 'Jaipur Estates | Bespoke Real Estate & Airbnb Advisory',
+    title: 'Jaipur Estates | Trusted Real Estate & Airbnb Advisory',
     description:
-      'Private real estate & Airbnb advisory firm in Jaipur. Discreet off-market sourcing, direct owner introductions, commercial leasing, and turnkey hosting operations.',
+      'Direct real estate and Airbnb guidance in Jaipur. Verified residential properties, commercial leasing, and turnkey homestay management.',
   });
 
   const navigate = useNavigate();
@@ -165,8 +166,8 @@ export default function Home() {
               {' '}Advisory.
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-stone-400 font-normal leading-relaxed max-w-2xl">
-              Bespoke real estate &amp; Airbnb advisory for Jaipur — discreet off-market sourcing,
-              direct owner introductions, and turnkey hospitality management.
+              Direct real estate and Airbnb guidance in Jaipur — verified properties from direct owners,
+              commercial leasing, and complete hosting management.
             </p>
           </div>
 
@@ -179,7 +180,7 @@ export default function Home() {
                          text-white font-bold text-sm px-8 py-4 rounded-2xl
                          transition-all duration-300 shadow-glow-terracotta hover:scale-105 cursor-pointer"
             >
-              <Sparkles size={16} /> Register Advisory Requirement
+              <Sparkles size={16} /> Register Property Requirement
             </button>
             <button
               type="button"
@@ -191,7 +192,7 @@ export default function Home() {
                          text-white font-bold text-sm px-8 py-4 rounded-2xl border border-white/15
                          transition-all duration-300 backdrop-blur-sm cursor-pointer"
             >
-              <span>Explore Advisory Verticals</span> <ArrowRight size={16} />
+              <span>Explore Services</span> <ArrowRight size={16} />
             </button>
             <a
               href={primaryPhone.whatsapp}
@@ -201,7 +202,7 @@ export default function Home() {
                          text-white font-bold text-sm px-8 py-4 rounded-2xl border border-white/15
                          transition-all duration-300 backdrop-blur-sm cursor-pointer"
             >
-              <MessageSquare size={16} /> WhatsApp Advisory Desk
+              <MessageSquare size={16} /> Chat on WhatsApp
             </a>
           </div>
 
@@ -319,7 +320,7 @@ export default function Home() {
                   className="btn-terracotta w-full !py-3 text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:scale-[1.01] transition-transform"
                 >
                   <Sparkles size={16} />
-                  <span>Register Sourcing Request</span>
+                  <span>Submit Property Requirement</span>
                 </button>
               </div>
             </form>
@@ -328,18 +329,18 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          THREE SERVICES — Luxury card grid
+          THREE SERVICES — Clean card grid
       ══════════════════════════════════════════════════════ */}
       <section className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 py-28" id="services">
         <div className="max-w-2xl mb-16">
-          <span className="section-label mb-3">Three Core Advisory Verticals</span>
+          <span className="section-label mb-3">Our Core Services</span>
           <h2 className="section-title">
-            Bespoke advisory for buyers, sellers,<br className="hidden sm:block" />
-            corporate tenants &amp; Airbnb hosts.
+            Personal guidance for buyers, sellers,<br className="hidden sm:block" />
+            business tenants &amp; Airbnb hosts.
           </h2>
           <p className="section-subtitle">
-            Discreet off-market sourcing, direct owner introductions, and
-            turnkey hospitality management — zero guesswork.
+            Direct connections with verified owners, honest market pricing, and
+            turnkey hosting management — simple and transparent.
           </p>
         </div>
 
@@ -392,7 +393,7 @@ export default function Home() {
                   onClick={() => openInquiry(id)}
                   className="btn-terracotta w-full justify-center text-sm font-semibold flex items-center gap-2 shadow-sm hover:scale-[1.01] transition-transform cursor-pointer !py-3.5"
                 >
-                  <Sparkles size={16} /> Inquire Now / Register Sourcing
+                  <Sparkles size={16} /> Inquire Now / Register Requirement
                 </button>
                 <div className="flex items-center justify-between text-xs text-stone-500 pt-1 border-t border-stone-100">
                   <span className="font-medium">Direct Coordinator:</span>
@@ -407,9 +408,14 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          PROPERTY CALCULATOR (id="calculator")
+          LOCATIONS WE COVER IN JAIPUR (id="locations")
       ══════════════════════════════════════════════════════ */}
-      <section className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 pb-28" id="calculator">
+      <HomeLocations />
+
+      {/* ══════════════════════════════════════════════════════
+          INVESTMENT ROI CALCULATOR (id="calculator")
+      ══════════════════════════════════════════════════════ */}
+      <section className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 py-24" id="calculator">
         <PropertyCalculator />
       </section>
 
@@ -428,12 +434,12 @@ export default function Home() {
                              px-3 py-1.5 rounded-full mb-6">
               <Zap size={11} /> Straightforward Process
             </span>
-            <h2 className="text-5xl sm:text-6xl font-serif text-white font-normal leading-tight">
-              How Our Direct<br />
-              <span className="text-terracotta-400">Advisory Works</span>
+            <h2 className="text-4xl sm:text-5xl font-serif text-white font-normal leading-tight">
+              How We Help You<br />
+              <span className="text-terracotta-400">Step by Step</span>
             </h2>
-            <p className="text-stone-400 text-lg mt-5 leading-relaxed">
-              Simple, transparent, and direct. No open broker spam, no upfront listing fees.
+            <p className="text-stone-400 text-base sm:text-lg mt-4 leading-relaxed">
+              Simple, transparent, and direct. No broker spam, no upfront charges.
             </p>
           </div>
 
@@ -443,7 +449,7 @@ export default function Home() {
               <div key={num}
                    className="relative p-10 sm:p-12 bg-[#161513] hover:bg-[#1C1A18]
                               transition-colors duration-300 group">
-                {/* Giant editorial background number */}
+                {/* Giant background number */}
                 <div className="absolute top-6 right-6 font-serif font-bold text-[7rem] leading-none
                                 text-stone-800/60 select-none group-hover:text-stone-700/60
                                 transition-colors duration-500">
@@ -497,8 +503,8 @@ export default function Home() {
                 a property on Airbnb?
               </h2>
               <p className="text-stone-400 text-base leading-relaxed">
-                Connect directly with our advisory desk. We connect your asset to genuine buyers,
-                corporate tenants, and homestay travellers across Jaipur through an accompanied, transparent process.
+                Connect directly with our local team. We connect your property to genuine buyers,
+                corporate tenants, and homestay travellers across Jaipur through an easy and transparent process.
               </p>
             </div>
             <div className="lg:col-span-5 flex flex-col gap-3">
@@ -507,14 +513,14 @@ export default function Home() {
                 onClick={() => openInquiry('buy')}
                 className="btn-terracotta text-center justify-center !py-4 text-sm flex items-center gap-2 cursor-pointer shadow-md hover:scale-[1.01] transition-transform"
               >
-                <MessageSquare size={16} /> Inquire with Advisory Desk <ArrowRight size={15} />
+                <MessageSquare size={16} /> Inquire with Our Team <ArrowRight size={15} />
               </button>
               <a href={primaryPhone.tel}
                  className="inline-flex items-center justify-center gap-2 text-sm font-semibold
                             text-stone-200 bg-stone-800 border border-stone-700
                             hover:border-stone-600 hover:bg-stone-700
                             px-6 py-4 rounded-xl transition-all duration-200">
-                <Phone size={14} /> Call Coordinator Desk ({primaryPhone.number})
+                <Phone size={14} /> Call Our Direct Line ({primaryPhone.number})
               </a>
             </div>
           </div>
@@ -526,12 +532,12 @@ export default function Home() {
       ══════════════════════════════════════════════════════ */}
       <section className="w-full max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 pb-28" id="contact">
         <div className="text-center mb-14">
-          <span className="section-label mb-3 block text-center">Direct Communication</span>
+          <span className="section-label mb-3 block text-center">Contact Us</span>
           <h2 className="section-title mx-auto">
-            Speak directly with our<br />Jaipur coordinators
+            Speak directly with our<br />Jaipur team
           </h2>
           <p className="section-subtitle mx-auto text-center">
-            Dedicated calling &amp; WhatsApp desks for Buy &amp; Sell, Rent &amp; Lease, and Airbnb inquiries.
+            Dedicated calling &amp; WhatsApp lines for Buy &amp; Sell, Rent &amp; Lease, and Airbnb inquiries.
           </p>
           <div className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-700
                           bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-full mt-5">
@@ -587,13 +593,12 @@ export default function Home() {
         <div className="border border-stone-200 bg-white/70 rounded-2xl px-6 py-5 text-xs
                         text-stone-500 leading-relaxed backdrop-blur-sm">
           <strong className="text-stone-700 block mb-1 font-semibold">
-            Institutional Advisory &amp; Confidentiality Notice
+            Important Property Notice
           </strong>
-          JaipurEstates operates as a private real estate &amp; Airbnb advisory firm for Jaipur, Rajasthan.
-          We do not maintain an open self-serve public catalog. All property matches, pricing benchmarks, and
-          site visits are coordinated privately and directly with verified owners, corporate landlords,
-          and hospitality partners. All market valuations displayed or communicated are estimated benchmarks
-          ("Est. ₹") for reference during private consultation.
+          JaipurEstates is a direct property advisory and consultation service for Jaipur, Rajasthan.
+          We connect you directly with verified property owners, corporate landlords, and Airbnb partners.
+          All prices shown are estimated market rates ('Est. ₹') for your reference. Final prices are always
+          decided directly between you and the owner during property inspection.
         </div>
       </section>
     </div>

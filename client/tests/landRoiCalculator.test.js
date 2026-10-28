@@ -93,6 +93,48 @@ function calculateSubDivision({ parcelSizeGaj, rawLandRateGaj, infraCostPerGaj =
 }
 
 describe('Land Investment & Development ROI Calculator Tests', () => {
+  describe('Project Investment ROI Calculator (20% Annual ROI Co-working Project)', () => {
+    function calculateProjectReturns(investmentAmount, roiRate = 20) {
+      const validAmount = Number(investmentAmount) || 0;
+      const annualReturn = Math.round(validAmount * (roiRate / 100));
+      const monthlyReturn = Math.round(annualReturn / 12);
+      const threeYearReturn = annualReturn * 3;
+      const fiveYearReturn = annualReturn * 5;
+      const totalWealthFiveYears = validAmount + fiveYearReturn;
+
+      return {
+        investment: validAmount,
+        annualReturn,
+        monthlyReturn,
+        threeYearReturn,
+        fiveYearReturn,
+        totalWealthFiveYears,
+      };
+    }
+
+    it('accurately computes 20% annual return on standard ₹10 Lakh investment', () => {
+      const res = calculateProjectReturns(1000000, 20);
+      assert.equal(res.investment, 1000000);
+      assert.equal(res.annualReturn, 200000); // ₹2,00,000 per year
+      assert.equal(res.monthlyReturn, 16667); // ₹16,667 per month
+      assert.equal(res.threeYearReturn, 600000); // ₹6,00,000 over 3 years
+      assert.equal(res.fiveYearReturn, 1000000); // ₹10,00,000 (doubles initial capital)
+      assert.equal(res.totalWealthFiveYears, 2000000); // ₹20,00,000 total wealth
+    });
+
+    it('accurately scales calculations for custom presets (₹5L, ₹25L, ₹50L, ₹1Cr)', () => {
+      const res5L = calculateProjectReturns(500000, 20);
+      assert.equal(res5L.annualReturn, 100000);
+
+      const res25L = calculateProjectReturns(2500000, 20);
+      assert.equal(res25L.annualReturn, 500000);
+
+      const res1Cr = calculateProjectReturns(10000000, 20);
+      assert.equal(res1Cr.annualReturn, 2000000);
+      assert.equal(res1Cr.monthlyReturn, 166667);
+    });
+  });
+
   describe('Strategy 1: Buy & Hold (Land Appreciation)', () => {
     it('accurately calculates base land cost and total capital deployed', () => {
       const res = calculateBuyAndHold({
