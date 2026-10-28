@@ -499,8 +499,7 @@ export default function Home() {
                 Property Owners &amp; Sellers
               </span>
               <h2 className="text-4xl sm:text-5xl font-serif text-white font-normal leading-tight mb-5">
-                Want to sell, lease, or list<br className="hidden sm:block" />
-                a property on Airbnb?
+                Want to sell, rent, or host on Airbnb?
               </h2>
               <p className="text-stone-400 text-base leading-relaxed">
                 Connect directly with our local team. We connect your property to genuine buyers,

@@ -94,42 +94,76 @@ function calculateSubDivision({ parcelSizeGaj, rawLandRateGaj, infraCostPerGaj =
 
 describe('Land Investment & Development ROI Calculator Tests', () => {
   describe('Project Investment ROI Calculator (20% Annual ROI Co-working Project)', () => {
-    function calculateProjectReturns(investmentAmount, roiRate = 20) {
+    function calculateProjectReturns(investmentAmount, years = 5, roiRate = 20) {
       const validAmount = Number(investmentAmount) || 0;
+      const validYears = Math.max(1, Number(years) || 1);
       const annualReturn = Math.round(validAmount * (roiRate / 100));
       const monthlyReturn = Math.round(annualReturn / 12);
-      const threeYearReturn = annualReturn * 3;
-      const fiveYearReturn = annualReturn * 5;
-      const totalWealthFiveYears = validAmount + fiveYearReturn;
+      const totalReturns = Math.round(annualReturn * validYears);
+      const totalMaturity = validAmount + totalReturns;
+      const totalRoiPercent = Math.round((totalReturns / (validAmount || 1)) * 100);
 
       return {
         investment: validAmount,
+        years: validYears,
         annualReturn,
         monthlyReturn,
-        threeYearReturn,
-        fiveYearReturn,
-        totalWealthFiveYears,
+        totalReturns,
+        totalMaturity,
+        totalRoiPercent,
       };
     }
 
-    it('accurately computes 20% annual return on standard ₹10 Lakh investment', () => {
-      const res = calculateProjectReturns(1000000, 20);
+    it('accurately computes 20% annual return on standard ₹10 Lakh investment for default 5 years', () => {
+      const res = calculateProjectReturns(1000000, 5, 20);
       assert.equal(res.investment, 1000000);
       assert.equal(res.annualReturn, 200000); // ₹2,00,000 per year
       assert.equal(res.monthlyReturn, 16667); // ₹16,667 per month
-      assert.equal(res.threeYearReturn, 600000); // ₹6,00,000 over 3 years
-      assert.equal(res.fiveYearReturn, 1000000); // ₹10,00,000 (doubles initial capital)
-      assert.equal(res.totalWealthFiveYears, 2000000); // ₹20,00,000 total wealth
+      assert.equal(res.totalReturns, 1000000); // ₹10,00,000 over 5 years
+      assert.equal(res.totalMaturity, 2000000); // ₹20,00,000 total payout
+      assert.equal(res.totalRoiPercent, 100); // 100% ROI
+    });
+
+    it('accurately models flexible user-selected year durations (1, 3, 7, 10, 20 years)', () => {
+      // 1 Year duration
+      const res1Yr = calculateProjectReturns(1000000, 1, 20);
+      assert.equal(res1Yr.totalReturns, 200000);
+      assert.equal(res1Yr.totalMaturity, 1200000);
+      assert.equal(res1Yr.totalRoiPercent, 20);
+
+      // 3 Years duration
+      const res3Yr = calculateProjectReturns(1000000, 3, 20);
+      assert.equal(res3Yr.totalReturns, 600000);
+      assert.equal(res3Yr.totalMaturity, 1600000);
+      assert.equal(res3Yr.totalRoiPercent, 60);
+
+      // 7 Years duration
+      const res7Yr = calculateProjectReturns(1000000, 7, 20);
+      assert.equal(res7Yr.totalReturns, 1400000);
+      assert.equal(res7Yr.totalMaturity, 2400000);
+      assert.equal(res7Yr.totalRoiPercent, 140);
+
+      // 10 Years duration (triples capital)
+      const res10Yr = calculateProjectReturns(1000000, 10, 20);
+      assert.equal(res10Yr.totalReturns, 2000000);
+      assert.equal(res10Yr.totalMaturity, 3000000);
+      assert.equal(res10Yr.totalRoiPercent, 200);
+
+      // 20 Years long-term duration
+      const res20Yr = calculateProjectReturns(1000000, 20, 20);
+      assert.equal(res20Yr.totalReturns, 4000000);
+      assert.equal(res20Yr.totalMaturity, 5000000);
+      assert.equal(res20Yr.totalRoiPercent, 400);
     });
 
     it('accurately scales calculations for custom presets (₹5L, ₹25L, ₹50L, ₹1Cr)', () => {
-      const res5L = calculateProjectReturns(500000, 20);
+      const res5L = calculateProjectReturns(500000, 5, 20);
       assert.equal(res5L.annualReturn, 100000);
 
-      const res25L = calculateProjectReturns(2500000, 20);
+      const res25L = calculateProjectReturns(2500000, 5, 20);
       assert.equal(res25L.annualReturn, 500000);
 
-      const res1Cr = calculateProjectReturns(10000000, 20);
+      const res1Cr = calculateProjectReturns(10000000, 5, 20);
       assert.equal(res1Cr.annualReturn, 2000000);
       assert.equal(res1Cr.monthlyReturn, 166667);
     });
